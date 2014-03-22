@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="/Public/img/favicon.ico" type="image/x-icon" />
+
+  <script>var isDebug = false;</script>
+  @Styles.Render("~/Public/css/base-css")
+  @*@if (HttpContext.Current.IsDebuggingEnabled) {
+    <script>isDebug = true;</script>*@
+    @Styles.Render("~/Public/css/mobile-css")
+  @*}*@
+</head>
+<body>
+  
+  <!--[if lt IE 7]> <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> <![endif]-->
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button id="burger" class="navbar-toggle" type="button" data-navigation="toggle" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="@Url.Action("index", "public")" class="navbar-brand">MINI</a>
+      @RenderSection("PageTitle", false)
+    </div>
+    @{ Html.RenderAction("RenderNavigation", "Navigation", new { lang = @MINI.App.Lang, showNav = true });}
+  </div>
+</header>
+  
+  <div class="container">
+
+    @RenderBody()
+
+    @{ Html.RenderPartial("_Footer");}
+
+    @{ Html.RenderPartial("_DebugInfo");}
+  </div>
+
+@if (HttpContext.Current.IsDebuggingEnabled) {
+  @Scripts.Render("~/bundles/mobile-js")
+} else {
+  <script async src="@Scripts.Url("~/bundles/mobile-js")"></script>
+}
+  <script>
+    $(function () {
+      //if (!isDebug) $("<link rel='stylesheet' type='text/css' href='@Styles.Url("~/Public/css/mobile-css")'>").appendTo($('head'));
+
+      @RenderSection("AdditionalScripts", false)
+    });
+  </script>
+  </body>
+</html>

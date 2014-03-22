@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SettingsLayout.cshtml";
+}
+
+
+<div class="error-container clearfix">
+    <div class="error-500-left">
+        <img src="@Url.ContentVersioned("~/Public/img/error/500.jpg")" width="780" height="435" />
+    </div>
+    <div class="error-500-right">
+        <h1 class="red">@MvcHtmlString.Create(MINI.Resources.Error.Error500.PageTitle)</h1>
+        <h2 class="grey">@MvcHtmlString.Create(MINI.Resources.Error.Error500.Body)</h2>
+
+        <ul class="list-unstyled list-return">
+            <li><a href="/">@MINI.Resources.Error.Shared.BackHomeLinkLabel</a></li>
+            <li><a href="javascript:history.go(-1);">@MINI.Resources.Error.Shared.BackLinkLabel</a></li>
+        </ul>
+    </div>
+</div>

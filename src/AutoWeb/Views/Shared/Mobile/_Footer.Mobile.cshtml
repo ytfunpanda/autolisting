@@ -1,0 +1,18 @@
+﻿<footer>
+  <ul class="list-inline clearfix">
+    <li>@Html.ActionLink(MINI.Resources.Footer.ConnectTitle, "contact", "about")</li>
+    <li><a href="#">@MINI.Resources.Footer.LegalLabel</a></li>
+    <li><a href="#">@MINI.Resources.Footer.SiteMapLabel</a></li>
+    <li><a href="#">@MINI.Resources.Footer.BMWLabel</a></li>
+    <li><a href="#">@MINI.Resources.Footer.DesktopLabel</a></li>
+  </ul>
+
+  <p>&copy @DateTime.Now.Year @MINI.Resources.Footer.Copyright</p>
+
+            <ul class="list-inline">
+            <li><img src="@Url.ContentVersioned("~/Public/img/ico/yt.png")" width="24" height="24" /></li>
+            <li><img src="@Url.ContentVersioned("~/Public/img/ico/tw.png")" width="24" height="24" /></li>
+            <li><img src="@Url.ContentVersioned("~/Public/img/ico/fb.png")" width="24" height="24" /></li>
+            <li class="last"><img src="@Url.ContentVersioned("~/Public/img/ico/mspace.png")" width="24" height="24" /></li>
+          </ul>
+</footer>

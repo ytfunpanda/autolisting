@@ -1,0 +1,67 @@
+﻿@model List<MINI.Models.RetailerViewModel>
+@{
+    ViewBag.Title = MINI.Resources.Retailers.Index.BrowserTitle;
+}
+<div id="findretailer-page">
+    <div class="left-offset left-indent">
+        <h1>@MINI.Resources.Retailers.Index.PageTitle</h1>
+        <h5>@MINI.Resources.Retailers.Index.SubTitle</h5>
+    </div>
+    <div id="find" class="left-offset">
+        <div id="search-ui">
+            @{ Html.RenderPartial("_SearchBar", new MINI.Models.FindRetailerSearchViewModel());}
+            <div id="search-results">
+                <div id="map-canvas">
+                </div>
+                <div id="results">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{ Html.RenderAction("ServiceAppointmentModal", "Form", new { lang = @MINI.App.Lang });}
+@section AdditionalMapsScripts {
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxI2u34Gzuzd2aTWVBtxKu3FteqyAYUuY&sensor=true"
+        type="text/javascript"></script>
+    <script src="@Url.Content("~/Public/js/vendor/infobox_packed.js")"></script>
+    <script src="@Url.Content("~/Public/js/vendor/markerclusterer_packed.js")"></script>
+    <script>
+
+    
+        function initialize() {
+            var strings = {
+                'bookTestDriveLbl':'@MINI.Resources.Homepage.Index.BookTestQL',
+                'directionsLbl': '@MINI.Resources.About.RetailerContact.DirectionsLbl',
+                'serviceLbl': '@MINI.Resources.Owners.Service.ToGoBtnLbn',
+                'dealerSiteLbl': '@MINI.Resources.Retailers.Index.DealerWebsiteLbl',
+                'closeLbl':'@MINI.Resources.Forms.Index.CloseLbl'
+            };
+            FindRetailer.init({ 'province': '@CookieHelpers.UserProvince()', 'data': '@Html.Raw(Model.ToJson())', 'strings':strings, 'lang':'@MINI.App.CurrentUserLanguage.ToUpperInvariant()', 'type':'RETAILER' });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+
+    </script>
+    @{
+        string KMToHappiness = @MINI.Resources.Retailers.Index.KMToHappiness;
+    }
+    <script type="text/template" id="result-template">
+
+  <div id="r-<%= data.InternalRetailerID %>" data-id="<%= counter %>" class="results-item clearfix">
+    <div class="content">
+    <a href="#" id="r-<%= counter %>" data-id="<%= data.InternalRetailerID %>">
+      <h4><%= data.Name %></h4>
+      <p class="white">
+        <%= data.Address %><br />
+        <%= data.City %>, <%= data.Province %>, <%= data.Postal %><br />
+      </p>
+       <% if(data.DistanceFrom) { %>
+        <p class="red"><%= data.DistanceFrom %> @KMToHappiness</p>
+       <% } %>
+    </a>
+    </div>
+  </div>
+    </script>
+}

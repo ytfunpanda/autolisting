@@ -1,0 +1,308 @@
+﻿@model MINI.Models.ModelIndexViewModel
+
+<div class="modal fade modal-vertical-centered" id="BuildAndPriceModal" tabindex="-1" role="dialog" aria-labelledby="ConfiguratorLabel" aria-hidden="true">
+
+
+<div class="modal-dialog" style="width:1170px !important;height:695px !important;">
+
+
+<div id="build-price-modal"> 
+	
+	   <div id="build-modal-inner">
+	   
+	   
+	     <div id="conflict-window">
+		    
+		    <div id="conflict-innner">
+			<h2></h2>
+			<h5></h5>
+			<p></p>
+			
+			 <div id="conflict-options-wrapper"></div>
+	  
+			 
+			 <div id="form-error">You are required to make a selection above:</div>
+			 
+			 <div class="cancel-option"><a class="btn btn-primary gradient-grey shadow ico-btn" href="#">
+             <img height="23" src="/Public/img/ico/buttons/clearall.png" width="26"/>
+             @MINI.Resources.Vehicle.BuildAndPrice.CancelTitle
+             </a></div>
+			 
+			 <div class="add-option"><a class="btn btn-primary gradient-grey shadow ico-btn" href="#">
+             <img height="23" src="/Public/img/ico/buttons/submit.png" width="26"/>
+             @MINI.Resources.Vehicle.BuildAndPrice.AddAcceptionTitle
+             </a></div>
+			 
+			</div>
+		 
+		     
+		 </div><!-- END CONFLICT WINDOW -->
+		 
+		 
+		 <div id="review-popup">
+		   
+		      <div id="review-popup-inner">
+			  <div id="review-popup-close" class="close"> <div class="close-text">@MINI.Resources.Vehicle.BuildAndPrice.Close</div> <span class="large-close-x">×</span> </div>    
+			  
+			  <div class="review-option-title">
+			  <h2>TITLE</h2>
+			  <h4>$100.00</h4>
+			  </div>
+			  
+			  <div class="review-popup-image"><img src="~/Public/img/v/F56/build-and-price/Icons/2E8.jpg"/></div>
+			  <div class="review-popup-copy">dev copy </div>
+			  
+			  
+			  </div><!-- END POPUP INNER -->
+		    
+		 
+		 </div><!-- END REVIEW POPUP -->
+		 
+	   
+	     <div id="build-modal-header">
+		    <div id="modal-header-top">
+			<img src="~/Public/img/logo-s.png"/>
+			<div id="build-modal-close" class="close"> <div class="close-text">@MINI.Resources.Vehicle.BuildAndPrice.Close</div> <span class="large-close-x">×</span> </div>
+			</div>
+		   
+		  <div id="build-modal-sub-nav">
+		  <h4 class="pull-left"><a class="build-trigger buildHandler" href="@MINI.Resources.Vehicle.BuildAndPrice.BuildLink">@MINI.Resources.Vehicle.BuildAndPrice.BuildAnotherMini</a></h4>
+		  <ul class="nav nav-pills pull-right">
+          <li id="1"><a class="selected" href="exterior"><img class="list-chev" src="~/Public/img/double-chevron-right.png"/>@MINI.Resources.Vehicle.BuildAndPrice.Exterior</a></li>
+          <li id="2"><a href="package"><img class="list-chev" src="~/Public/img/double-chevron-right.png"/>@MINI.Resources.Vehicle.BuildAndPrice.Packages</a></li>
+          <li id="3"><a href="interior"><img class="list-chev" src="~/Public/img/double-chevron-right.png"/>@MINI.Resources.Vehicle.BuildAndPrice.Interior</a></li>
+          <li id="4"><a href="wheels"><img class="list-chev" src="~/Public/img/double-chevron-right.png"/>@MINI.Resources.Vehicle.BuildAndPrice.Wheels</a></li>
+          <li id="5"><a href="options"><img class="list-chev" src="~/Public/img/double-chevron-right.png"/>@MINI.Resources.Vehicle.BuildAndPrice.Options</a></li>
+		  <li id="6"><a href="review"><img class="list-chev" src="~/Public/img/double-chevron-right.png"/>@MINI.Resources.Vehicle.BuildAndPrice.Review</a></li>
+		  <li id="7"><a href="startOver"><img class="list-chev" src="~/Public/img/double-chevron-right.png"/>@MINI.Resources.Vehicle.BuildAndPrice.StartOver</a></li>
+          </ul>
+		  </div><!-- END SUB NAV -->	
+		 
+		 </div><!-- END MODAL HEADER -->
+		  
+		 
+		  <div id="review-view"><!-- REVIEW VIEW -->
+		     
+		    
+		   <div id="review-header">
+			   
+		        <div id="review-vehicle-view"></div> 
+		        <div id="review-price-holder">
+				
+				<div id="build-modal-title-review"><h2></h2></div>   
+				
+			    <div class="base-price">
+			    <div class="starting-from">@MINI.Resources.Vehicle.BuildAndPrice.StartingFrom: <span class="price"></span></div>
+			    </div>
+				
+				<div class="configured-price">
+			    <div class="starting-from">@MINI.Resources.Vehicle.BuildAndPrice.ConfiguredPrice: <span class="price"></span></div>
+			    </div>
+			   
+			    </div><!-- PRICE REVIEW END -->
+			   
+			   
+			    <div id="review-site-links">
+			     
+			    <div id="build-modal-share-buttons">
+				
+			    <a class="btn btn-primary gradient-grey shadow ico-btn btn-md pull-right testDriveLink" data-backdrop="static" data-keyboard="false" data-retailer-number-value="" data-toggle="modal" data-value="" href="#BuildAndPriceTestDrive">
+				
+                <img height="23" src="/Public/img/ico/buttons/testdrive.png" width="26"/>
+                @MINI.Resources.Vehicle.BuildAndPrice.BookTestDrive
+                </a>
+			 
+			    <a class="btn btn-primary gradient-grey shadow ico-btn btn-md pull-right" data-backdrop="static" data-keyboard="false" data-retailer-number-value="" data-toggle="modal" data-value="" href="#BuildAndSendToRetailer">
+                <img height="23" src="/Public/img/ico/buttons/sendToRetailer.png" width="26"/>
+                 @MINI.Resources.Vehicle.BuildAndPrice.SendToRetailer
+                </a>
+			 
+			   <a class="btn btn-primary gradient-grey shadow ico-btn btn-md pull-right downloadPrint" target="_blank" href="#">
+               <img height="23" src="/Public/img/ico/buttons/download.png" width="26"/>
+               @MINI.Resources.Vehicle.BuildAndPrice.DownloadPrint
+               </a>
+			  
+			   <a class="back-to-the-build" href="#"><img src="~/Public/img/double-chevron-left.png"/> @MINI.Resources.Vehicle.BuildAndPrice.FewMoreTweaks</a>
+			  
+		     </div> <!-- END SITE LINKS -->
+
+			 </div><!-- END REVIEW SITE LINKS -->
+			   
+			 </div><!-- END REVIEW HEADER -->
+			
+			 <div id="review-list-options"></div> 
+			 
+		  
+		  </div><!-- END REVIEW VIEW -->
+		 
+		  
+		  <div id="list-holder">
+		  
+		  <div id="exterior-list-items" >
+		  
+	      <div id="build-colours" class="content-list" >
+          <h4 class="cat-title">@MINI.Resources.Vehicle.Index.AvailableColoursTitle</h4>
+		  <div class="list-content-wrapper"></div>
+          </div>
+		  
+		  <div id="roofs" class="content-list" >
+          <h4 class="cat-title">@MINI.Resources.Vehicle.BuildAndPrice.Roofs</h4>
+		  <div class="list-content-wrapper"></div>
+          </div>
+		  
+		  <div id="stripes" class="content-list" >
+          <h4 class="cat-title">@MINI.Resources.Vehicle.BuildAndPrice.Stripes</h4>
+		  <div class="list-content-wrapper"></div>
+          </div>
+		  
+		  </div><!-- END EXTERIOR LIST ITEMS -->
+		  
+		  <div id="package-list-items" >
+		  
+		  <div id="packages" class="content-list">
+          <h4 class="cat-title">@MINI.Resources.Vehicle.BuildAndPrice.Packages</h4>
+		  <div class="package-list-wrapper"></div>
+          </div>
+		  
+		  </div><!-- END PACKAGE LIST ITEMS -->
+		  
+		  <div id="interior-list-items" >
+		  
+		  <div id="interiors" class="content-list">
+		  
+          
+		  <div class="interior-list-holder">
+		  
+		  <div id="uplolstery">
+		  <h5>@MINI.Resources.Vehicle.BuildAndPrice.Interior</h5>
+		  <div class="interior-list-wrapper"></div>
+		  </div>
+		  
+		  <div id="colour-lines">
+		  <h5>COLOUR LINES</h5>
+		  <div class="interior-list-wrapper"></div>
+		  </div>
+		  
+		  
+		  <div id="trim-colours">
+		  <h5>TRIM COLOURS</h5>
+		  <div class="interior-list-wrapper"></div>
+		  </div>
+		  
+		  
+		  </div><!-- END LIST HOLDER -->
+		  </div><!-- END LIST CONTENT -->
+		  </div><!-- END INTERIOR LIST ITMES -->
+		  
+		  <div id="wheels-list-items">
+		  
+		  <div id="wheels" class="content-list">
+          <h4 class="cat-title">@MINI.Resources.Vehicle.BuildAndPrice.Wheels</h4>
+		  <div class="package-list-wrapper"></div>
+          </div>
+		  
+		  </div><!-- END WHEELS LIST ITEMS -->
+		  
+		  <div id="options-list-items" >
+		  
+		  <div id="options" class="content-list">
+          <h4 class="cat-title">@MINI.Resources.Vehicle.BuildAndPrice.Options</h4>
+		  <div class="package-list-wrapper"></div>
+          </div>
+		  
+		  </div><!-- END OPTIONS LIST ITEMS -->
+		  
+		  
+		  <div id="modal-list-navigation">
+		   <a class="previous-button" href="#"><img class="left-chevron" src="~/Public/img/double-chevron-left.png" />@MINI.Resources.Vehicle.BuildAndPrice.Previous</a>   <a class="next-button" href="#">@MINI.Resources.Vehicle.BuildAndPrice.Next<img class="right-chevron" src="~/Public/img/double-chevron-right.png" /></a> 
+		  </div>
+		  
+		  <div id="modal-view-selector">
+		   @MINI.Resources.Vehicle.BuildAndPrice.View
+		   <img data-id="#rear-view" src="~/Public/img/v/F56/build-and-price/Icons/rear-view.png">
+		   <img data-id="#front-view" src="~/Public/img/v/F56/build-and-price/Icons/exterior-view.png">
+		   <img data-id="#interior-view" src="~/Public/img/v/F56/build-and-price/Icons/interior-view.png">
+		  </div>
+		   
+		  
+		  
+		    <div id="build-modal-share-buttons-home">
+            @{string RetailerID = MINI.App.CurrentRetailerSite != null ? MINI.App.CurrentRetailerSite.Retailer.InternalRetailerID.ToString() : "0";}
+			<a class="btn btn-primary gradient-grey shadow ico-btn btn-md pull-right testDriveLink" data-backdrop="static" data-keyboard="false" data-retailer-number-value="@RetailerID" data-toggle="modal" data-value="" href="#BuildAndPriceTestDrive">
+            <img height="23" src="/Public/img/ico/buttons/testdrive.png" width="26"/>
+            @MINI.Resources.Vehicle.BuildAndPrice.BookTestDrive
+            </a>
+			 
+			<a class="btn btn-primary gradient-grey shadow ico-btn btn-md pull-right" data-backdrop="static" data-keyboard="false" data-retailer-number-value="@RetailerID" data-toggle="modal" data-value="14HB" href="#BuildAndSendToRetailer">
+            <img height="23" src="/Public/img/ico/buttons/sendToRetailer.png" width="26"/>
+            @MINI.Resources.Vehicle.BuildAndPrice.SendToRetailer
+            </a>
+			 
+		    <a class="btn btn-primary gradient-grey shadow ico-btn btn-md pull-right downloadPrint" target="_blank"  href="#">
+
+            <img height="23" src="/Public/img/ico/buttons/download.png" width="26"/>
+            @MINI.Resources.Vehicle.BuildAndPrice.DownloadPrint
+            </a>
+			</div><!-- BUILD MODAL LINKS  -->
+		  
+		  
+		  
+		  </div><!-- END LIST HOLDER -->
+		  
+		  
+		  <div id="build-modal-left-container">
+		     <div id="build-modal-title">
+			 <h2></h2>
+			 <div class="switch-model-button"><img src="~/Public/img/double-chevron-right.png"/> @MINI.Resources.Vehicle.BuildAndPrice.SwitchToTitle <span class="switch-model-name"> mini cooper s</span></div>
+			 </div>   
+		      
+			 <div class="base-price">
+			   <div class="legal-pop">*</div><div class="starting-from">@MINI.Resources.Vehicle.BuildAndPrice.StartingFrom: <span class="price"></span></div>
+			 </div>
+			 
+			 <div class="configured-price">
+			   <div class="starting-from">@MINI.Resources.Vehicle.BuildAndPrice.ConfiguredPrice: <span class="price"><span class="dollar-sign">$</span> <div class="odometer"></div></span></div>
+			 </div>
+			 
+			 
+		  </div>
+		  
+		  
+		  <div id="build-component-wrapper">
+          
+		  <div id="build-loader"><div id="build-loading-text">LOADING...</div></div>
+		  
+		  <div id="front-view">
+		  <div id="package-options"></div>
+		  <div id="view-options"></div>
+		  <div id="stripe-options"></div>
+		  <div id="view-wheels"></div>
+		  <div id="main-car-image"></div>
+		  
+		  </div>
+		  
+          <div id="rear-view">
+		  
+		  <div id="view-options"></div>
+		  <div id="view-wheels"></div>
+		  <div id="main-car-image"></div>
+		  
+		  </div>
+		  
+		  <div id="interior-view">
+		  <div id="interior-trim"></div>
+		  <div id="interior-option"></div>
+		  <div id="interior-main-image"></div>
+		  
+		  </div>
+		  
+		  
+          </div>
+		  
+		  
+		</div><!-- END MODAL INNER -->
+	
+	</div><!-- END BUILD MODAL -->
+	
+	</div>
+	</div>

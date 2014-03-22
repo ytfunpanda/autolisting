@@ -1,0 +1,15 @@
+﻿@{
+    string pageTitle = MINI.Resources.About.Sitemap.PageTitle + ' ' + MINI.Resources.About.Sitemap.PageSubTitle;
+    ViewBag.Title = pageTitle;
+}
+
+
+<div id="sitemap-intro" class="content-intro content-offset content-indent">
+    <div class="box white">
+        <h2>@MvcHtmlString.Create(MINI.Resources.About.Sitemap.PageSubTitle)</h2>
+    </div>
+</div>
+
+<div id="sitemap-info" class="content-section content-offset content-indent white">
+    @{Html.RenderAction("SitemapLinks", "Navigation");}    
+</div>

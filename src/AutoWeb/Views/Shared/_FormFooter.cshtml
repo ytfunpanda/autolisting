@@ -1,0 +1,2 @@
+﻿@{ string disclaimerText = string.Format(MINI.Resources.Forms.Index.DisclaimerText, Url.Action("index", "static", new { @lang = MINI.App.CurrentUserLanguage, pathInfo = "about/legal" })); }
+<p>@MvcHtmlString.Create(disclaimerText)</p>

@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = MINI.Resources.Shopping.MININext.HeadTitle;
+}
+@{
+    List<MINI.Models.FloatingNavViewModel> model = new List<MINI.Models.FloatingNavViewModel>();
+    model.Add(new MINI.Models.FloatingNavViewModel() { Label = MINI.Resources.Shopping.MININext.SearchTitle, Target = "#next-main" });
+
+    ViewData["NavTitle"] = MINI.Resources.Shopping.MININext.InfoTitle;
+
+    Html.RenderPartial("_ContentFloatingNav", model);
+}
+<div id="mininext-intro" class="content-intro content-offset content-indent">
+    <div id="next-ci" class="box box-white">
+        <h2>@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.PageTitle)</h2>
+        <p>@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.PageIntro)</p>
+    </div>
+</div>
+@{ Html.RenderPartial("_InPageNav", "next-main"); }
+
+<div id="next-main" class="content-section-content">
+    <h1>@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.SearchBigTitle)</h1>
+    <p>@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.SearchIntro)</p>
+    @{ Html.RenderAction("Main", "Next", new { lang = @MINI.App.CurrentUserLanguage, Status = "USED" });}
+</div>
+
+@section AdditionalScripts {
+    @{
+        int retailerID = 0;
+        try { retailerID = @MINI.App.CurrentRetailerSite.Retailer.InternalRetailerID; }
+        catch { }
+        string defaultProvince = "";
+        try { defaultProvince = @MINI.App.CurrentUserProvince; }
+        catch { }
+        string loadingText = @MINI.Resources.Shopping.MININext.Loading;
+
+    }
+    $('.read-more').readmore({maxHeight: 75}); 
+    var contentPage = new MINI.ContentPage({lang: '@MINI.App.CurrentUserLanguage',containers:'#next-main'}); 
+    var nextPage = new MINI.MININext({ RetailerID: '@retailerID',DefaultProvince: '@defaultProvince',LoadingText: '@loadingText'});
+}

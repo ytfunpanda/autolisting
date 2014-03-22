@@ -1,0 +1,232 @@
+﻿@model MINI.Models.ModelIndexViewModel
+
+@{
+  ViewBag.Title = Model.ModelFamily.Name;
+}
+
+@{Html.RenderPartial("_VehicleNav");}
+
+<div id="model-page">
+  <!-- model jumbotron! -->
+  <div id="model-@Model.ModelFamily.ECode-intro" class="wide-body-image-header">
+    
+    
+    <div class="intro">
+        <h2>@DisplayHelpers.ModelNameWithYear(Model)</h2>
+        <h2 class="subtitle">@MvcHtmlString.Create(Model.ModelFamily.Tagline)</h2>
+        <h5><small>@MINI.Resources.Vehicle.Index.FromLabel</small> @VehicleHelpers.PriceForDisplay(Model.ModelFamily, Model.Vehicles[1], MINI.App.CurrentUserProvince)</h5>
+        @Html.ButtonLink(HtmlHelperExtensions.ButtonLinkType.BUILD, Html.GenerateConfigUrl(Model.ModelFamily.ModelSlug, Model.Vehicles[1].UrlSlug), MINI.Resources.Vehicle.Index.BuildPriceBtnLabel, "btn-md build-trigger pull-left", new { })
+        @Html.ButtonLink(HtmlHelperExtensions.ButtonLinkType.TESTDRIVE, "#TestDrive", MINI.Resources.Vehicle.Index.BookTestDriveBtnLabel, "btn-md pull-right", new {data_toggle = "modal", data_value=Model.Vehicles[0].CACode, data_retailer_number_value=LinkHelpers.GenerateRetailerDataValue() })
+    </div>
+    
+	<div class="jumbo-mask">
+	<div class="jumbo-wrapper"></div>
+    </div> 
+	@if (Model.ModelFamily.ECode != "F56") {
+    <div id="mini-config">
+
+      <div id="config-actions" class="clearfix">
+        <div id="colours">
+          <h5>@MINI.Resources.Vehicle.Index.AvailableColoursTitle</h5>
+          @{ int count = 0;}
+          @foreach (var item in Model.Vehicles[1].Colours) {
+              
+            <a href="#"><img src="@Url.ContentVersioned(string.Format("~/Public/img/v/ico/colour/{0}.png", item.Code))" data-trigger="hover"  placement="top" rel="popover" data-content="" data-original-title="@DisplayHelpers.ColourDescription(item)"  width="30" height="30" /></a>
+              if (count == 4) {
+              @:<br />
+              count = 0;
+              } else {
+                  count++;
+              }
+          }
+        </div>
+        
+        <div id="wheels">
+          <h5>@MINI.Resources.Vehicle.Index.AvailableWheelsTitle</h5>
+          @{  count = 0;}
+          @foreach (var item in Model.Vehicles[1].Options) {
+              if (item != null && item.Category == "WHEEL") {
+            <a href="#"><img data-item="@item.Code" src="@Url.ContentVersioned(string.Format("~/Public/img/v/ico/wheel/{0}.png", item.Code))" data-trigger="hover"  placement="top" rel="popover" data-content="" data-original-title="@DisplayHelpers.OptionDescription(item)"  width="30" height="30" /></a>
+                  if (count == 3) {
+                @:<br />
+                count = 0;
+                  } else {
+                      count++;
+                  }
+              }
+          }
+        </div>
+		
+
+		
+      </div>
+		  <div id="rotate">
+		    <h5><a href="">@MINI.Resources.Vehicle.Index.ClickHere360Lbl</a></h5>
+            <a href=""><img src="@Url.ContentVersioned(string.Format("~/Public/img/model/360-{0}.png", MINI.App.CurrentUserLanguage))" /></a>
+      </div>       
+    </div>
+    }
+  </div>
+
+  <div id="model-nav" class="left-offset left-indent">
+    <ul class="nav">
+      <li><a href="#model-@Model.ModelFamily.ECode-gallery" class="oneline">@MINI.Resources.VehicleNavigation.GalleryLabel</a></li>
+      <li><a href="#model-@Model.ModelFamily.ECode-variants">@MINI.Resources.VehicleNavigation.VariantsLabel</a></li>
+      <li><a href="#vehicleFeatures" id="vehicleFeaturesLink" data-toggle="modal" data-backdrop="static" data-keyboard="false">@MINI.Resources.VehicleNavigation.FeaturesLabel</a></li>
+      <li><a href="#model-@Model.ModelFamily.ECode-highlights" class="oneline">@MINI.Resources.VehicleNavigation.HighlightsLabel</a></li>
+      <li class="last"><a href="#model-@Model.ModelFamily.ECode-build">@MINI.Resources.VehicleNavigation.BuildLabel</a></li>
+    </ul>
+  </div>
+
+  <div id="model-@Model.ModelFamily.ECode-gallery" class="wide-body-image gallery light-text">
+    <div class="component-left">
+      <h3 class="mt0 white">@MINI.Resources.Vehicle.Index.GalleryTitle <a href="#" data-trigger="hover" placement="bottom" rel="popover" data-content="@MINI.Resources.Vehicle.Index.InPageLegal" data-original-title="">*</a></h3>
+      <ul id="gallery-nav" class="nav">
+        <li><a id="show-exterior" class="selected" href="#">@MINI.Resources.Vehicle.Index.ExteriorLabel</a></li>
+        <li><a id="show-interior" href="#">@MINI.Resources.Vehicle.Index.InteriorLabel</a></li>
+      </ul>
+    </div>
+        
+    <div class="component-right">
+      
+      @{ Html.RenderPartial("_Gallery", new MINI.Models.VehicleGalleryViewModel() { GalleryType = "exterior", ECode = Model.ModelFamily.ECode }); }
+      @{ Html.RenderPartial("_Gallery", new MINI.Models.VehicleGalleryViewModel() { GalleryType = "interior", ECode = Model.ModelFamily.ECode }); }
+      
+    </div>
+  </div>
+
+  <div id="model-@Model.ModelFamily.ECode-variants" class="wide-body-image variant light-text">
+    
+      <div class="component-left border-right">
+        <h3 class="mt0 white">@MINI.Resources.Vehicle.Index.VariantTitle</h3>
+      </div>
+        
+	    <div id="variant-mask">
+        <div class="component-right clearfix">
+          <!-- variant content here -->
+          @foreach (var item in Model.Vehicles) {
+            <div class="column">
+              <div class="title">
+                <h3 class="white">@item.TrimName</h3>
+              </div>
+              <img data-item="@item.CACode" src="@Url.ContentVersioned(string.Format("~/Public/img/v/{0}/{1}_{2}.png", @Model.ModelFamily.ECode, @Model.ModelFamily.ECode, @item.CACode))" width="248" height="139" style="margin-top:10px;margin-bottom:10px;margin-left:-20px;" />
+              <div class="short-specs">
+                <h4><small>@MINI.Resources.Vehicle.Index.FromLabel</small> @item.Price.ToString("c0")</h4>
+                <ul id="vehicle-specs" class="list-unstyled">
+                  <li>@MINI.Resources.Models.VehicleSpecsViewModelStrings.OutputLabel: @item.Specs.Output</li>
+                  <li>@MINI.Resources.Vehicle.Index.FuelEfficiencyLabel: @item.Specs.FuelConsumptionCombined</li>
+                  <li>@MINI.Resources.Vehicle.Index.CargoSpaceLabel.: @item.Specs.BootSpace</li>
+                  <li>@MINI.Resources.Vehicle.Index.TopSpeedLbl: @item.Specs.TopSpeed</li>
+                  <li>@MINI.Resources.Vehicle.Index.AccelLbl: @item.Specs.Acceleration (0-100km/h)</li>
+                </ul>
+              </div>
+              <div class="button-container">
+                @Html.ButtonLink(HtmlHelperExtensions.ButtonLinkType.BUILD, Html.GenerateConfigUrl(Model.ModelFamily.ModelSlug, item.UrlSlug), MINI.Resources.Vehicle.Index.BuildPriceBtnLabel, "btn-sm btn-block build-trigger", new {  })
+                @Html.ButtonLink(HtmlHelperExtensions.ButtonLinkType.TESTDRIVE, "#TestDrive", MINI.Resources.Vehicle.Index.BookTestDriveBtnLabel, "btn-sm btn-block", new {data_toggle = "modal", data_value=item.CACode, data_retailer_number_value=LinkHelpers.GenerateRetailerDataValue() })
+                @Html.ButtonLink(HtmlHelperExtensions.ButtonLinkType.HIGHLIGHTS, "#model-"  + Model.ModelFamily.ECode + "-highlights", MINI.Resources.Vehicle.Index.HighlightsLabel, "highlights-action btn-sm btn-block", null)
+              </div>
+            </div>
+          }            
+          
+        </div>
+        
+	    </div>
+        <div class="variant-indent">
+        <p class="note" style="margin-top:0px;">@MvcHtmlString.Create(MINI.Resources.Vehicle.Index.AutoManNote)</p>
+            <a href="#vehicleFeatures" data-toggle="modal"  data-backdrop="static" data-keyboard="false" style="margin-top:10px;" class="btn btn-lg btn-primary gradient-grey shadow"><img src="@Url.ContentVersioned("~/Public/img/ico/buttons/compare.png")" width="31" height="26" /> @MINI.Resources.Vehicle.Index.ViewFeaturesSpecsLabel</a>
+        </div>
+
+      
+  </div>
+
+  <div id="model-@Model.ModelFamily.ECode-highlights" class="wide-body-image highlights">
+    <div class="component-left transparent" style="width:260px;padding:20px 10px 0px 10px;">
+      <h3 class="white">@MINI.Resources.Vehicle.Index.HighlightsTitle  <a href="#" data-trigger="hover" placement="bottom" rel="popover" data-content="@MINI.Resources.Vehicle.Index.InPageLegal" data-original-title="">*</a></h3>
+	  <div id="main-nav"><ul></ul></div>
+	  <div id="sub-nav"><ul></ul></div>
+    </div>
+        
+    <div class="component-right">
+      <div id="copy-holder">
+	  <div class="item-copy-box">
+	  <h4></h4>
+	  <p></p>
+	  </div>
+	  </div>
+      
+	  <div id="hotspots"></div>
+	  <div class="roll-over-holder"></div>
+	  <div class="item-bg"> </div>
+	  
+	  <div class="highlight-cover-titles">
+		<div id="t-6" class="c-title" >@MINI.Resources.Vehicle.Index.ExteriorTitle</div>
+		<div id="t-2" class="c-title" >@MINI.Resources.Vehicle.Index.InteriorTitle</div>
+		<div id="t-7" class="c-title" >@MINI.Resources.Vehicle.Index.SafetyTitle</div>
+		<div id="t-5" class="c-title">@MINI.Resources.Vehicle.Index.FuelTitle</div>
+		<div id="t-4" class="c-title">@MINI.Resources.Vehicle.Index.PerformanceTitle</div>
+		<div id="t-8" class="c-title">@MINI.Resources.Vehicle.Index.ConnectedTitle</div>
+	  </div>
+	  
+
+      <nav class="specs-actions"><a href="#" class="share">@MINI.Resources.Vehicle.Index.ShareLabel</a><a href="#" class="big-arrow" style="border:none;">@MINI.Resources.Vehicle.Index.CompareSpecsLabel</a></nav>
+    </div>
+
+  </div>
+
+  <div id="model-@Model.ModelFamily.ECode-build" class="wide-body-image build">
+    <div class="component-left transparent">
+      <h3 class="white">@MINI.Resources.Vehicle.Index.BuildTitle</h3>
+
+      @foreach (var item in Model.Vehicles) {
+        <div class="build-entry clearfix">
+          <h4 class="white">@item.TrimName</h4>
+          <img src="@Url.ContentVersioned(string.Format("~/Public/img/v/{0}/build_{1}.png", Model.ModelFamily.ECode, item.CACode))" style="float:right;" width="157" height="100" />
+          <h5><small>@MINI.Resources.Vehicle.Index.FromLabel</small> @item.Price.ToString("c0")</h5>
+          @Html.ButtonLink(HtmlHelperExtensions.ButtonLinkType.BUILD, Html.GenerateConfigUrl(Model.ModelFamily.ModelSlug, item.UrlSlug), MINI.Resources.Vehicle.Index.BuildPriceBtnLabel, "btn-md build-trigger", new { })
+        </div>
+      }
+    </div>
+        
+    <div class="component-right">
+      <!-- variant content here -->
+      <div class="ad">
+        <h2>@MINI.Resources.Vehicle.Index.AdTextStart @Model.ModelFamily.Name</h2>
+        <h2>@MvcHtmlString.Create(MINI.Resources.Vehicle.Index.AdTextEnd)</h2>
+      </div>
+    </div>
+
+  </div>
+  
+  
+  
+ </div>
+
+<div id="inpage-legal" class="left-offset left-indent">
+    @MINI.Resources.Vehicle.Index.InPageLegal
+</div>
+
+
+
+
+
+
+@{Html.RenderPartial("_Features", Model);}
+
+@if (Model != null) {
+  @section AdditionalScripts {
+    var vehicle = window.VehicleData = window.VehicleData || {};
+    vehicle.Data = {};
+    vehicle.Data.ModelFamily = {};
+    vehicle.Data.ModelFamily.ECode = '@Model.ModelFamily.ECode';
+    vehicle.Data.ModelFamily.ModelHighlights = JSON.parse('@Html.Raw(Json.Encode(Model.ModelFamily.Highlights))');
+    var vehicleData = JSON.parse('@Html.Raw(Json.Encode(Model.Vehicles[1]))');
+    
+    var p = ModelPage.init({data:vehicle.Data, vehicle: '@Model.Vehicles[1].CACode', vehicleData: vehicleData, lang:'@MINI.App.CurrentUserLanguage'});
+
+    $('.highlights-action').on('click', function(e) {
+        e.preventDefault();
+        _mini.Animate.toContainer($(this).attr('href').slice(1), 104);
+    });
+    @{Html.RenderPartial("_GalleryInitScript");}
+  }
+}

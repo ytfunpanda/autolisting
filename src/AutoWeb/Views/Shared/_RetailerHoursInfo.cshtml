@@ -1,0 +1,46 @@
+﻿@model MINI.Models.RetailerSiteViewModel
+<div class="contact-info">
+    <h4>
+        @MINI.Resources.About.RetailerContact.InformationTitle</h4>
+    <address>
+        @Model.Retailer.Address<br />
+        @Model.Retailer.City, @Model.Retailer.Postal<br />
+        <br />
+        @MINI.Resources.About.RetailerContact.PhoneLbl: @Model.Retailer.RetailPhone<br />
+        @MINI.Resources.About.RetailerContact.SalesLbl: @Model.Retailer.SalesPhone<br />
+        @MINI.Resources.About.RetailerContact.ServiceLbl: @Model.Retailer.ServicePhone<br />
+        <br />
+        @{
+            string email = MINI.App.CurrentUserLanguage.ToUpperInvariant() == "FR" ? Model.Retailer.Email_Fr : Model.Retailer.Email;
+        }
+        @MINI.Resources.About.RetailerContact.EmailLbl: <a href="mailto:@email">@email</a><br />
+        @{
+            string fullAddress = string.Format("{0},{1},{2}", Model.Retailer.Address, Model.Retailer.City, Model.Retailer.ProvinceShort);
+            string directionsLink = string.Format("https://maps.google.com/maps?saddr=&daddr={0},+Canada&hl=en&z=14", Server.UrlEncode(fullAddress));
+        }
+        @MINI.Resources.About.RetailerContact.DirectionsLabel: @{if (MINI.App.Lang == "fr"){<br />}}<a href="@directionsLink" target="directions">@MINI.Resources.About.RetailerContact.DirectionsLabel</a>
+    </address>
+</div>
+<div class="contact-hours">
+    <h4>@MINI.Resources.About.RetailerContact.HoursTitle</h4>
+    @{
+        if (MINI.App.Lang == "en")
+        {
+        @MvcHtmlString.Create(Model.Hours)
+        }
+        else
+        {
+        @MvcHtmlString.Create(
+                Model.Hours
+                .Replace("Monday", "Lundi")
+                .Replace("Tuesday", "Mardi")
+                .Replace("Wednesday", "Mercredi")
+                .Replace("Thursday", "Jeudi")
+                .Replace("Friday", "Vendredi")
+                .Replace("Saturday", "Samedi")
+                .Replace("Sunday", "Dimanche")
+                .Replace("Closed", "Fermé")
+        )
+        }
+    }
+</div>

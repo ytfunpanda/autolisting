@@ -1,0 +1,65 @@
+﻿@model MINI.Models.FormSubmissionViewModel
+
+@using (Html.BeginForm("SavePreownedLocator", "Form", FormMethod.Post, new { id = "formSavePreownedLocator" }))
+{
+    @Html.HiddenFor(m => m.VIN);
+    @Html.HiddenFor(m => m.HiddenRetailerID);
+    @Html.HiddenFor(m => m.RetailerNumber);
+    <div class="next-request-info-form">
+        <div class="alert alert-danger" style="display:none;">
+            <div id="ResultMsg">
+            </div>
+        </div>
+        <fieldset id="fields">
+            <div class="col">
+                <div class="form-group">
+                    <div class="testdrive-select required">
+                        @Html.DropDownListFor(m => m.Salutation, Model.Salutations, MINI.Resources.Forms.Index.SalutationLbl, new { id = "ddlSalutation", @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group required">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control generalinquory-input next-FirstName", @placeholder = @MINI.Resources.Forms.Index.FirstNameLbl })
+                </div>
+                <div class="form-group required">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control generalinquory-input next-LastName", @placeholder = @MINI.Resources.Forms.Index.LastNameLbl })
+                </div>
+                <div class="form-group">
+                    <div class="testdrive-select" style="width: 300px">
+                        @foreach (var phoneType in Model.PhoneTypes)
+                        {
+                            <div class="radio-inline">
+                                <label>@Html.RadioButtonFor(m => m.PhoneType, phoneType.Value) @phoneType.Text</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="form-group required">
+                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control generalinquory-input", @placeholder = @MINI.Resources.Forms.Index .PhoneNumberLbl})
+                </div>
+                <div class="form-group required">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control generalinquory-input", @placeholder = @MINI.Resources.Forms.Index.EmailAddressLbl })
+                </div>
+                <div class="form-group">
+                    <div class="testdrive-select required">
+                        @Html.DropDownListFor(m => m.PreferredContactMethod, Model.PreferredContactMethods, MINI.Resources.Forms.Index.PreferredContactMethodLbl, new { id = "ddlPreferredContactMethod", @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="testdrive-select required">
+                        @Html.DropDownListFor(m => m.PreferredContactTime, Model.PreferredContactTimes, MINI.Resources.Forms.Index.PreferredContactTimeLbl, new { id = "ddlPreferredContactTime", @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group required">
+                    @Html.TextAreaFor(m => m.Comments, new { @class = "form-control generalinquory-input more-info-comment", @placeholder = @MINI.Resources.Forms.Index.CommentsLbl, @rows = "4" })
+                </div>
+                <br />
+                <div class="pull-left">
+                @Html.ButtonLink(HtmlHelperExtensions.ButtonLinkType.SUBMIT, MINI.Resources.Forms.Index.SubmitLbl, null, null)
+                    <div class="reqmsg">@Html.Raw(MINI.Resources.Forms.Index.AllFieldsMarkedRequired)</div>
+                </div>
+            </div>
+        </fieldset>
+
+        @{Html.RenderPartial("_FormFooter");}
+    </div>
+}

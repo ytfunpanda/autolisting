@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SettingsLayout.cshtml";
+}
+
+<div class="error-container clearfix">
+    <div class="error-404-left">
+        <h1 class="red">@MvcHtmlString.Create(MINI.Resources.Error.Error404.PageTitle)</h1>
+        <h2 class="grey">@MvcHtmlString.Create(MINI.Resources.Error.Error404.Body)</h2>
+
+        <ul class="list-unstyled list-return">
+            <li><a href="/">@MINI.Resources.Error.Shared.BackHomeLinkLabel</a></li>
+            <li><a href="javascript:history.go(-1);">@MINI.Resources.Error.Shared.BackLinkLabel</a></li>
+        </ul>
+        
+    </div>
+    <div class="error-404-right">
+        <img src="@Url.ContentVersioned("~/Public/img/error/404.jpg")" width="975" height="498" />
+    </div>
+</div>    

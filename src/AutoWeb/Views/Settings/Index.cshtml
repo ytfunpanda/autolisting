@@ -1,0 +1,53 @@
+﻿@model MINI.Models.SettingsViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SettingsLayout.cshtml";
+}
+<div id="settings-page">
+
+@{
+    if(Model.ShowProvince==false)
+    {
+        <style type="text/css">
+            #select-english .province-select{ display:none}
+            #select-french .province-select{ display:none}
+            #settings-page form{width:200px !important}
+        </style>
+    }
+}
+  <div class="settings-intro left-offset left-indent">
+  
+  <div class="intro">
+    <h1>@MvcHtmlString.Create(MINI.Resources.Settings.Index.Headline)</h1>
+    <h3 class="grey">@MvcHtmlString.Create(MINI.Resources.Settings.Index.Byline)</h3>
+    <p>@MvcHtmlString.Create(MINI.Resources.Settings.Index.Text)</p>
+  </div>
+
+  <div id="select-english">
+    <h5>@MINI.Resources.Settings.Index.EnTitle</h5>
+    @using (Html.BeginForm("index", "settings", new {@id="en-form",@lang="en"}, FormMethod.Post, new { @class = "form" })) {
+      <div class="province-select">@Html.DropDownListFor(m => m.EnProvince, new SelectList(Model.EnProvinces, "value", "text"), @MINI.Resources.Settings.Index.EnSelectText, new { @class = "form-control" })</div>
+      <button value="submit" class="btn btn-primary" id="en-submit">@MINI.Resources.Settings.Index.EnSubmit</button>
+    }  
+  </div>
+
+  <div id="select-french">
+    <h5>@MINI.Resources.Settings.Index.FrTitle</h5>
+    @using (Html.BeginForm("index", "settings", new {@id="fr-form", @lang = "fr"}, FormMethod.Post, new { @class = "form" })) {
+      <div class="province-select">@Html.DropDownListFor(m => m.FrProvince, new SelectList(Model.FrProvinces, "value", "text"), @MINI.Resources.Settings.Index.FrSelectText, new { @class = "form-control" })</div>
+      <button value="submit" class="btn btn-primary" id="fr-submit">@MINI.Resources.Settings.Index.FrSubmit</button>
+    }  
+  </div>  
+  
+  
+  
+  
+  </div>
+
+</div>
+
+
+
+
+
+

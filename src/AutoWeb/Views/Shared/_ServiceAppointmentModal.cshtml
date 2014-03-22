@@ -1,0 +1,18 @@
+﻿@model MINI.Models.FormSubmissionViewModel
+
+<div class="modal fade" id="serviceAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="serviceAppointmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><div class="close-text">@MINI.Resources.Forms.Index.CloseLbl</div>&times;</button>
+                <h4 class="modal-title">@MINI.Resources.Forms.Index.ScheduleServiceModalTitle</h4>
+            </div>
+            <div class="modal-body" style="padding: 20px;">
+                @{ Html.RenderAction("ServiceAppointment", "Form", new { lang = @MINI.App.Lang });}
+            </div>
+            <div class="modal-footer">
+            @{Html.RenderPartial("_FormFooter");}
+            </div>
+        </div>
+    </div>
+</div>

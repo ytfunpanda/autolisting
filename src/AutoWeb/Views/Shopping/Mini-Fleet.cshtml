@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = MINI.Resources.Shopping.MINIFleet.PageTitle;
+}
+<div id="minifleet-intro" class="content-intro content-offset content-indent">
+    <div id="next-ci" class="box white">
+        <h1>@MvcHtmlString.Create(MINI.Resources.Shopping.MINIFleet.PageTitle)</h1>
+        <h2>@MvcHtmlString.Create(MINI.Resources.Shopping.MINIFleet.PageSubTitle)</h2>
+    </div>
+</div>
+<div id="fleet-info" class="content-section content-offset content-indent white">
+    @MvcHtmlString.Create(MINI.Resources.Shopping.MINIFleet.Body)
+</div>
+<div>
+    @{ Html.RenderAction("FleetForm", "Form", new { lang = @MINI.App.Lang });}
+</div>
+@section AdditionalScripts {
+    var miniFleet = new MINI.MINIFleet( {successMessage:'@MINI.Resources.Forms.Index.Success_Display_Msg_MINIFleet'}
+);
+}
