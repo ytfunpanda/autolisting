@@ -1,0 +1,9 @@
+﻿@model List<MINI.Models.FloatingNavViewModel>
+
+<nav id="content-nav" class="clearfix">
+  <ul class="nav">
+  @foreach (var item in Model) {
+    <li><a href="@item.Target">@item.Label</a><div class="downward-arrow"><img src="@Url.ContentVersioned("~/Public/img/arrow-alpha.png")" /></div></li>
+  }
+  </ul>
+</nav>

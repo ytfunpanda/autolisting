@@ -1,0 +1,39 @@
+﻿@{
+
+    
+    ViewBag.Title = MINI.Resources.About.Legal.PageTitle + " " + MINI.Resources.About.Legal.PageSubTitle;
+}
+
+<div id="legal-intro" class="content-intro content-offset content-indent">
+    <div class="box white">
+        <h2>@MvcHtmlString.Create(MINI.Resources.About.Legal.PageTitle)</h2>
+        <h2>@MvcHtmlString.Create(MINI.Resources.About.Legal.PageSubTitle)</h2>
+    </div>
+</div>
+
+<div id="legal-info" class="content-section content-offset content-indent white">
+
+    <div style="float:left;width:300px;margin-right: 20px;">
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.Intro)
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.PersonalInformation)
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.OptOut)
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.Collection)
+    </div>
+
+    <div style="float:left;width:300px;margin-right: 20px;">
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.CollectionNonIdentifiable)
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.SiteTraffic)
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.Cookies)
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.PersonalInfoAccess)
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.PersonalInfoUpdate)
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.PersonalInfoRetention)
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.Security)
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.SocialPlugins)
+    </div>
+
+    <div style="float:left;width:300px;margin-right: 20px;">
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.CollectionNonIdentifiable)
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.GettingAnswers)
+        @MvcHtmlString.Create(MINI.Resources.About.Legal.Copyright)
+    </div>
+</div>

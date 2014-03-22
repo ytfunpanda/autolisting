@@ -1,0 +1,109 @@
+﻿@model List<MINI.Models.SpecialOffersDisplayViewModel>
+@{
+    ViewBag.Title = MINI.Resources.SpecialOffers.Index.PageTitle;
+}
+
+@{
+    List<MINI.Models.FloatingNavViewModel> navModel = new List<MINI.Models.FloatingNavViewModel>();
+    navModel.Add(new MINI.Models.FloatingNavViewModel() { Label = MINI.Resources.SpecialOffers.RetailerIndex.NextNewLbl, Target = "#retailer-dag-" + @MINI.App.CurrentUserLanguage.ToUpperInvariant() });
+    navModel.Add(new MINI.Models.FloatingNavViewModel() { Label = MINI.Resources.SpecialOffers.RetailerIndex.NextLbl, Target = "#retailer-next" });
+    navModel.Add(new MINI.Models.FloatingNavViewModel() { Label = MINI.Resources.SpecialOffers.RetailerIndex.ServiceLbl, Target = "#retailer-service" });
+    navModel.Add(new MINI.Models.FloatingNavViewModel() { Label = MINI.Resources.SpecialOffers.RetailerIndex.PartsAccessoriesLbl, Target = "#retailer-partsaccessories" });
+    navModel.Add(new MINI.Models.FloatingNavViewModel() { Label = MINI.Resources.SpecialOffers.RetailerIndex.FinancialLbl, Target = "#retailer-financial" });
+    //navModel.Add(new MINI.Models.FloatingNavViewModel() { Label = MINI.Resources.SpecialOffers.RetailerIndex.OtherLbl, Target = "#retailer-other" });
+
+    ViewData["NavTitle"] = MINI.Resources.SpecialOffers.Index.PageTitle;
+    
+    Html.RenderPartial("_ContentFloatingNav", navModel);
+}
+
+<div id="retailer-specialoffers-page">
+    <div id="intro" class="left-offset left-indent  intro-bg-@MINI.App.CurrentUserLanguage.ToUpperInvariant()">
+        <div class="box white">
+            <h2 class="white">@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.PageTitle)</h2>
+            <h2 class="white">@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.PageSubTitle)</h2>
+        </div>
+    </div>
+
+    @{ Html.RenderPartial("_InPageNav", "retailer-dag-" + @MINI.App.CurrentUserLanguage.ToUpperInvariant()); }
+
+    <div id="retailer-dag-@MINI.App.CurrentUserLanguage.ToUpperInvariant()" class="retailer-specialoffer-item left-offset left-indent" style="position:relative;">
+@*        <a href="http://www.buildmymini.ca" data-toggle="modal" data-target="#Configurator" class="build-trigger" style="position:absolute;bottom:15px;right:463px;"><img src="@Url.ContentVersioned("~/Public/img/specialoffers/retailers/tmp-dag-build.gif")" /></a>
+        <a href="#TestDrive" data-toggle="modal" data-retailer-number-value="@LinkHelpers.GenerateRetailerDataValue()" style="position:absolute;bottom:15px;right:299px;"><img src="@Url.ContentVersioned("~/Public/img/specialoffers/retailers/tmp-dag-book.gif")" /></a>*@
+    </div>
+
+    <div id="retailer-next" class="retailer-specialoffer-item left-offset left-indent">
+        <div class="box white">
+            <h2>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.NextTitle)</h2>
+            <h2>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.NextSubTitle)</h2>
+            <p>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.NextBody)</p>
+            <a href="@Url.Action("index", "static", new { @lang = MINI.App.CurrentUserLanguage, pathInfo = "shopping/mini-next" })"" class="btn btn-md btn-primary gradient-grey shadow"><img src="@Url.ContentVersioned("~/Public/img/transp-shadow-double-chevron.png")" width="16" height="12" /> @MINI.Resources.SpecialOffers.RetailerIndex.PreOwnedActionLbl</a>
+        </div>
+    </div>
+    
+    <div id="retailer-service" class="retailer-specialoffer-item left-offset left-indent">
+        <div class="box grey">
+            <h2 class="with-subtitle">@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.ServiceTitle)</h2>
+            <h2>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.ServiceSubTitle)</h2>
+            <p>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.ServiceBody)</p>
+            <a href="#serviceAppointmentModal" data-toggle="modal" data-retailer-number-value="@MINI.App.CurrentRetailerSite.Retailer.InternalRetailerID" class="btn btn-md btn-primary gradient-grey shadow"><img src="@Url.ContentVersioned("~/Public/img/transp-shadow-double-chevron.png")" width="16" height="12" /> @MINI.Resources.SpecialOffers.RetailerIndex.ServiceActionLbl</a>
+        </div>
+    </div>
+
+    <div id="retailer-service-wheels" class="retailer-specialoffer-item left-offset left-indent">
+        <div class="box yellow">
+            <h2 class="with-subtitle">@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.ServiceWheelsTitle)</h2>
+            <h2>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.ServiceWheelsSubTitle)</h2>
+            <p>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.ServiceWheelsBody)</p>
+            @Html.ButtonLink(HtmlHelperExtensions.ButtonLinkType.SCHEDULESERVICE, "#serviceAppointmentModal", MINI.Resources.Owners.Service.ToGoBtnLbn, "btn-md pull-left", new { data_toggle = "modal" })
+        </div>
+    </div>
+
+    <div id="retailer-service-older" class="retailer-specialoffer-item left-offset left-indent">
+        <div class="box red">
+            <h2 class="with-subtitle">@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.ServiceOlderTitle)</h2>
+            <p>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.ServiceOlderBody)</p>
+            <a href="#serviceAppointmentModal" data-toggle="modal" data-retailer-number-value="@MINI.App.CurrentRetailerSite.Retailer.InternalRetailerID" class="btn btn-md btn-primary gradient-grey shadow"><img src="@Url.ContentVersioned("~/Public/img/transp-shadow-double-chevron.png")" width="16" height="12" /> @MINI.Resources.SpecialOffers.RetailerIndex.ServiceActionLbl</a>
+        </div>
+    </div>
+    
+    <div id="retailer-partsaccessories" class="retailer-specialoffer-item left-offset left-indent">
+        <div class="box yellow">
+            <h2 class="with-subtitle">@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.PartsAccessoriesTitle)</h2>
+            <h2>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.PartsAccessoriesSubTitle)</h2>
+            <p>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.PartsAccessoriesBody)</p>
+            <a href="#serviceAppointmentModal" data-toggle="modal" data-retailer-number-value="@MINI.App.CurrentRetailerSite.Retailer.InternalRetailerID" class="btn btn-md btn-primary gradient-grey shadow"><img src="@Url.ContentVersioned("~/Public/img/transp-shadow-double-chevron.png")" width="16" height="12" /> @MINI.Resources.SpecialOffers.RetailerIndex.ServiceActionLbl</a>
+        </div>
+    </div>
+
+    <div id="retailer-partsaccessories-original" class="retailer-specialoffer-item left-offset left-indent">
+        <div class="box white">
+            <h2 class="with-subtitle">@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.PartsAccessoriesOriginalTitle)</h2>
+            <h2>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.PartsAccessoriesOriginalSubTitle)</h2>
+            <p>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.PartsAccessoriesOrginalBody)</p>
+            <a href="#serviceAppointmentModal" data-toggle="modal" data-retailer-number-value="@MINI.App.CurrentRetailerSite.Retailer.InternalRetailerID" class="btn btn-md btn-primary gradient-grey shadow"><img src="@Url.ContentVersioned("~/Public/img/transp-shadow-double-chevron.png")" width="16" height="12" /> @MINI.Resources.SpecialOffers.RetailerIndex.ServiceActionLbl</a>
+        </div>
+    </div>
+
+    <div id="retailer-financial" class="retailer-specialoffer-item left-offset left-indent">
+        <div class="box brown">
+            <h2 class="with-subtitle">@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.FinancialTitle)</h2>
+            <h2>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.FinancialSubTitle)</h2>
+            <p>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.FinancialBody)</p>
+            <a href="@Url.Action("index", "static", new { @lang = MINI.App.CurrentUserLanguage, pathInfo = "shopping/financial-services" })" class="btn btn-md btn-primary gradient-grey shadow"><img src="@Url.ContentVersioned("~/Public/img/transp-shadow-double-chevron.png")" width="16" height="12" /> @MINI.Resources.SpecialOffers.RetailerIndex.FinancialActionLbl</a>
+            @*<a href="#" class="btn btn-md btn-primary gradient-grey shadow"><img src="@Url.ContentVersioned("~/Public/img/transp-shadow-double-chevron.png")" width="16" height="12" /> @MINI.Resources.SpecialOffers.RetailerIndex.LeasingActionLbl</a>*@
+        </div>
+    </div>
+
+    @*<div id="retailer-other" class="retailer-specialoffer-item left-offset left-indent">
+        <div class="box red">
+            <h2 class="with-subtitle">@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.OtherTitle)</h2>
+            <p>@MvcHtmlString.Create(MINI.Resources.SpecialOffers.RetailerIndex.OtherBody)</p>
+            <a href="#serviceAppointmentModal" data-toggle="modal" data-retailer-number-value="@MINI.App.CurrentRetailerSite.Retailer.InternalRetailerID" class="btn btn-md btn-primary gradient-grey shadow"><img src="@Url.ContentVersioned("~/Public/img/transp-shadow-double-chevron.png")" width="16" height="12" /> @MINI.Resources.SpecialOffers.RetailerIndex.ServiceActionLbl</a>
+        </div>
+    </div>*@
+</div>
+
+@section AdditionalScripts {
+  var retailerSpecialOffers = new MINI.ContentPage({containers:'@String.Join(",", navModel.Select(nm => nm.Target))'});
+}

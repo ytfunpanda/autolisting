@@ -1,0 +1,9 @@
+﻿@model List<MINI.Models.NextFilterViewModel>
+@foreach (var item in Model)
+{
+    <div class="filter-item">
+        @Html.CheckBoxFor(x => item.Checked, new { id = item.Name })
+        @Html.LabelFor(x => item.Checked, item.Name)
+        @Html.DisplayFor(x => item.CountLabel)
+    </div>
+}

@@ -1,0 +1,37 @@
+﻿@model MINI.Models.RetailerStarRatingViewModel
+<div id="star-rating-view">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>
+                <h5>@MINI.Resources.About.RetailerContact.SalesLbl</h5>
+            </td>
+            <td>
+                <h5>@MINI.Resources.About.RetailerContact.ServiceLbl</h5>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h6>
+                    @{ Html.RenderPartial("_StarRatingRetailer", Model.RatingAverageSalesModel);}
+                </h6>
+            </td>
+            <td>
+                <h6>
+                    @{ Html.RenderPartial("_StarRatingRetailer", Model.RatingAverageServiceModel);}
+                </h6>
+            </td>
+        </tr>
+        <tr>
+            <td>@Model.RatingAverageSalesModel.Count @MINI.Resources.About.RetailerContact.RatingsLbl,
+                @Model.RatingAverageSalesModel.CountComments
+                @MINI.Resources.About.RetailerContact.WithComments
+            </td>
+            <td>@Model.RatingAverageServiceModel.Count @MINI.Resources.About.RetailerContact.RatingsLbl,
+                @Model.RatingAverageServiceModel.CountComments
+                @MINI.Resources.About.RetailerContact.WithComments
+            </td>
+        </tr>
+    </table>
+    <br />
+    <span class="grey-chevrons"></span><a href="@MINI.App.Lang/about#ratings">@MINI.Resources.About.RetailerContact.MoreInformation</a>
+</div>

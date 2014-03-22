@@ -1,0 +1,102 @@
+﻿@model MINI.Models.RetailerStarRatingViewModel
+<div style="clear: both">
+</div>
+<h3>@MINI.Resources.About.RetailerContact.CustomerRatingLbl</h3>
+@MINI.Resources.About.RetailerContact.CustomerRatingInfo
+<div style="padding: 0 0 20px 0">
+    <h3>@*@MINI.Resources.About.RetailerContact.RatingFromCustomerLbl*@</h3>
+    @MINI.Resources.About.RetailerContact.RatingFromCustomerInfo @MINI.App.CurrentRetailerSite.Retailer.Name.
+</div>
+<div id="star-rating-page">
+    <table width="500px" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>
+                <h5>@MINI.Resources.About.RetailerContact.SalesLbl</h5>
+            </td>
+            <td>
+                <h5>@MINI.Resources.About.RetailerContact.ServiceLbl</h5>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h6>
+                    @{ Html.RenderPartial("_StarRatingRetailer", Model.RatingAverageSalesModel);}
+                </h6>
+            </td>
+            <td>
+                <h6>
+                    @{ Html.RenderPartial("_StarRatingRetailer", Model.RatingAverageServiceModel);}
+                </h6>
+            </td>
+        </tr>
+        <tr>
+            <td>@Model.RatingAverageSalesModel.Count @MINI.Resources.About.RetailerContact.RatingsLbl,
+                @Model.RatingAverageSalesModel.CountComments
+                @MINI.Resources.About.RetailerContact.WithComments
+            </td>
+            <td>@Model.RatingAverageServiceModel.Count @MINI.Resources.About.RetailerContact.RatingsLbl,
+                @Model.RatingAverageServiceModel.CountComments
+                @MINI.Resources.About.RetailerContact.WithComments
+            </td>
+        </tr>
+    </table>
+    <br />
+    <h5>@MINI.Resources.About.RetailerContact.InfoOnRatingSystemLbl <a href="#RatingSystem"
+        data-toggle="modal" class="single">
+        <img src="~/public/img/star-rating/i.png" alt="" /></a></h5>
+    <br />
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td valign="top">
+                <div class="comment-block-l">
+                    <h5>@MINI.Resources.About.RetailerContact.SalesLbl</h5>
+                    @{
+                        foreach (var rating in Model.RatingAverageSalesModel.Ratings)
+                        {
+                        <div>
+                            <br />
+                            <h6>
+                                @{ Html.RenderPartial("_StarRatingCustomer", rating);}
+                            </h6>
+                        </div>
+                        @rating.CustomerComment
+                        }
+                    }
+                </div>
+            </td>
+            <td valign="top">
+                <div class="comment-block-r">
+                    <h5>@MINI.Resources.About.RetailerContact.ServiceLbl</h5>
+                    @{
+                        foreach (var rating in Model.RatingAverageServiceModel.Ratings)
+                        {
+                        <div>
+                            <br />
+                            <h6>
+                                @{ Html.RenderPartial("_StarRatingCustomer", rating);}
+                            </h6>
+                        </div>
+                        @rating.CustomerComment
+                        }
+                    }
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class="modal fade in" id="RatingSystem" tabindex="-1" role="dialog" aria-labelledby="starRatingLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header clearfix">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;</button>
+                <h4 class="modal-title">
+                </h4>
+            </div>
+            <div class="modal-body" style="text-align: left; padding: 20px;">
+            @Html.Raw(@MINI.Resources.About.RetailerContact.InfoOnRatingSystemModal)
+            </div>
+        </div>
+    </div>
+</div>
+</div>

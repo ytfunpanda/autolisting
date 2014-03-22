@@ -1,0 +1,192 @@
+﻿@model MINI.Models.AltFeaturesViewModel
+@using MINI.Resources.Vehicle
+
+<!-- Modal -->
+<div class="modal fade vehicleFeatures" id="vehicleFeatures-@Model.Vehicle.CACode" tabindex="-1" role="dialog" aria-labelledby="vehicleFeaturesLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header clearfix">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><div class="close-text">@MINI.Resources.Forms.Index.CloseLbl</div>&times;</button>
+        <div class="modal-utility-nav">
+          <ul class="list-inline">
+            <li class="print"><a href="@Url.Action("printalt", "vehicle", new {lang = @MINI.App.CurrentUserLanguage, model = Model.Vehicle.UrlSlug, vehicle=Model.Vehicle.UrlSlug})" target="print">@Features.PrintLabel</a></li>
+            <li class="download"><a href="@Url.Content(string.Format("~/Public/img/v/2013LineupBroch_Web_{0}.pdf", MINI.App.Lang))" target="_brochure">@Features.DownloadLabel</a></li>
+          </ul>
+        </div>
+        <div class="pull-left">
+          <h4 class="modal-title">@Model.Vehicle.Name</h4>
+        </div>
+
+      </div>
+      <div class="modal-nav">
+        <ul class="nav">
+          <li><a href="#specs">@Features.SpecLabel</a></li>
+          <li><a href="#features">@Features.StandardFeaturesLabel</a></li>
+          <li><a href="#package">@Features.PackagesLabel</a></li>
+        </ul>
+      </div>
+      <div class="modal-body">
+      <table class="table borderless mb0">
+        <thead>
+          <tr>
+            <th width="290" style="vertical-align:top">
+                <div id="features-legend" class="legend">
+                    <h4>@MINI.Resources.Vehicle.Features.LegendTitle</h4>
+                    <ul class="list-unstyled">
+                        <li><img src="@Url.ContentVersioned("~/Public/img/model/features/ico-standard.png")" width="16" height="16" /> @MINI.Resources.Vehicle.Features.StandardLbl</li>
+                        <li><img src="@Url.ContentVersioned("~/Public/img/model/features/ico-optional.png")" width="16" height="16" /> @MINI.Resources.Vehicle.Features.OptionalLbl</li>
+                    </ul>
+                </div>
+                <div id="package-legend" class="legend">
+                    <h4>@MINI.Resources.Vehicle.Features.LegendTitle</h4>
+                    <ul class="list-unstyled">
+                        <li><img src="@Url.ContentVersioned("~/Public/img/model/features/ico-standard.png")" width="16" height="16" /> @MINI.Resources.Vehicle.Features.PackageStandardLbl</li>
+                    </ul>
+                </div>            
+            
+            </th>
+            
+              <th width="195" style="text-align:center;">
+                @{ 
+                    string iconUrl = string.Format("~/Public/img/v/{0}/build_{1}.png", Model.Vehicle.ModelFamily.ECode, Model.Vehicle.CACode);
+                    string name = Model.Type.ToUpperInvariant() == "JCW" ? "John Cooper Works" : Model.Vehicle.ShortName.Remove(0, 5);
+                 }
+                <img src="@Url.ContentVersioned(iconUrl)" />
+                <h5 class="white">@Model.Vehicle.TrimName</h5>
+              </th>  
+            
+          </tr>
+        </thead>
+      </table>
+<div id="vehicleFeaturesBodyContainer">
+@{int count = 0;}        
+<div class="panel-group" id="specs-data">
+@foreach (var item in Model.SpecGroups) {
+    string sectionId = string.Format("collapse-{0}", item.Category.Replace(" ", ""));
+    string inClass = count == 0 ? "in" : "";
+    string icoClass = count == 0 ? "minus" : "plus";
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title @icoClass">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#@sectionId">
+          @DisplayHelpers.SpecCategory(item)
+        </a>
+      </h4>
+    </div>
+    <div id="@sectionId" class="panel-collapse collapse @inClass">
+      <div class="panel-body">
+        <table class="table">
+          <tbody>
+
+            @foreach (var specLabel in item.SpecLabels) {
+              <tr>
+                <td width="290">
+                  @DisplayHelpers.DisplayLabel(Model.Vehicle, specLabel)
+                </td>
+                <td width="195"  align="center">@DisplayHelpers.DisplayValue(Model.Vehicle, specLabel)</td>  
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  { count++; }
+}
+
+</div>
+
+<div class="panel-group" id="features-data">
+@{count = 0;}
+@foreach (var item in Model.Vehicle.GroupedStandardFeatures) {
+    string sectionId = string.Format("collapse-{0}", item.Category.Replace(" ", ""));
+    string inClass = count == 0 ? "in" : "";
+    string icoClass = count == 0 ? "minus" : "plus";
+    if (!string.IsNullOrEmpty(DisplayHelpers.DisplayFeatureValue(Model.Vehicle, item.StandardFeatures[0].Name, item.StandardFeatures[0].Code).ToString()))
+    {
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title @icoClass">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#@sectionId">
+          @DisplayHelpers.StandardFeatureCategory(item)
+        </a>
+      </h4>
+    </div>
+    <div id="@sectionId" class="panel-collapse collapse @inClass">
+      <div class="panel-body">
+        <table class="table">
+          <tbody>
+            @foreach (var featureLabel in item.StandardFeatures)
+            {
+                string value = DisplayHelpers.DisplayFeatureValue(Model.Vehicle, featureLabel.Name, featureLabel.Code).ToString();
+                if (!string.IsNullOrEmpty(value))
+                {
+              <tr>
+                <td width="290"> @DisplayHelpers.StandardFeatureName(featureLabel)</td>
+                  <td width="195"  align="center">
+                    @if (!string.IsNullOrEmpty(value))
+                    {
+                        <img src="@Url.ContentVersioned("~/Public/img/model/features/" + value)" width="16" height="16" />
+                    }
+                    else
+                    {
+                        @:&nbsp;
+                    }
+                  </td>
+              </tr>
+                }
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+    }
+  { count++; }
+}
+
+</div>
+<div class="panel-group" id="package-data">
+@{count = 0;}
+@foreach (var item in Model.Vehicle.Packages.OrderBy(p => p.FullName)) {
+    string sectionId = string.Format("collapse-{0}", item.Code.Replace(',','-'));
+    string inClass = count == 0 ? "in" : "";
+    string icoClass = count == 0 ? "minus" : "plus";
+  <div class="panel panel-default">
+    <div class="panel-heading clearfix">
+      <h4 class="panel-title @icoClass" style="float:left;">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#@sectionId" style="display:block;width:320px;">
+            @DisplayHelpers.PackageName(item)
+        </a>
+      </h4>
+      <div style="float:right;text-align:center;width:352px;padding:8px 0px;"><img src="@Url.ContentVersioned("~/Public/img/model/features/ico-standard.png")" /></div>
+    </div>
+    <div id="@sectionId" class="panel-collapse collapse @inClass">
+      <div class="panel-body">
+        <table class="table">
+          <tbody>
+            @foreach (var option in item.PackageOptions) {
+              <tr>
+                <td width="290">
+                    @DisplayHelpers.OptionName(option)
+                </td>
+                  <td width="185"align="center">
+                        <img src="@Url.ContentVersioned("~/Public/img/model/features/ico-standard.png")" />
+                  </td>  
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  { count++; }
+}
+</div>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

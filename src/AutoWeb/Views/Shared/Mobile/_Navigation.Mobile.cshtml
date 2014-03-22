@@ -1,0 +1,10 @@
+﻿@model List<MINI.Models.NavigationViewModel>
+<div class="collapse navbar-collapse bs-navbar-collapse">
+  <ul class="nav navbar-nav">
+    <li><a href="@Url.Action("index", "vehicle", new { @model = "mini-paceman", @lang = @MINI.App.Lang })">@MINI.Resources.Navigation.ModelLabel</a></li>
+    <li>@Html.ActionLink(@MINI.Resources.Navigation.ShoppingLabel, "index", "shopping")</li>
+    <li>@Html.ActionLink(@MINI.Resources.Navigation.NextLabel, "index", "preowned")</li>
+    <li>@Html.ActionLink(@MINI.Resources.Navigation.LoungeLabel, "index", "owners")</li>
+    <li>@Html.ActionLink(@MINI.Resources.Navigation.WhyLabel, "whymini", "about")</li>
+  </ul>
+</div>

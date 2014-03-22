@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Auto.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="AutoStoreContainer">
+          <EntitySet Name="Listing" EntityType="Auto.Store.Listing" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StatusType" EntityType="Auto.Store.StatusType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VehicleType" EntityType="Auto.Store.VehicleType" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Listing">
+          <Key>
+            <PropertyRef Name="ListingID" />
+          </Key>
+          <Property Name="ListingID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="DateAdd" Type="datetime" />
+          <Property Name="Title" Type="varchar" MaxLength="200" />
+          <Property Name="VIN" Type="int" />
+          <Property Name="Year" Type="int" />
+          <Property Name="MakeID" Type="int" />
+          <Property Name="ModelID" Type="int" />
+          <Property Name="Trim" Type="varchar" MaxLength="50" />
+          <Property Name="BodyStyleID" Type="int" />
+          <Property Name="TransmissionID" Type="int" />
+          <Property Name="ShowVIN" Type="bit" />
+          <Property Name="IsCertified" Type="bit" />
+          <Property Name="IsETested" Type="bit" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="Price" Type="decimal" />
+          <Property Name="KM" Type="int" />
+          <Property Name="BodyColorID" Type="int" />
+          <Property Name="InteriorColorID" Type="int" />
+          <Property Name="DoorCountID" Type="int" />
+          <Property Name="PassengerCountID" Type="int" />
+          <Property Name="DriveTrainID" Type="int" />
+          <Property Name="Engine" Type="varchar" MaxLength="50" />
+          <Property Name="CylinderCount" Type="int" />
+          <Property Name="FuelTypeID" Type="int" />
+          <Property Name="StatusTypeID" Type="int" />
+          <Property Name="Location" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StatusType">
+          <Key>
+            <PropertyRef Name="StatusTypeID" />
+          </Key>
+          <Property Name="StatusTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="VehicleType">
+          <Key>
+            <PropertyRef Name="VehicleTypeID" />
+          </Key>
+          <Property Name="VehicleTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Auto" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="AutoEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="StatusTypes" EntityType="Auto.StatusType" />
+          <EntitySet Name="VehicleTypes" EntityType="Auto.VehicleType" />
+          <EntitySet Name="Listings" EntityType="Auto.Listing" />
+        </EntityContainer>
+        <EntityType Name="StatusType">
+          <Key>
+            <PropertyRef Name="StatusTypeID" />
+          </Key>
+          <Property Type="Int32" Name="StatusTypeID" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VehicleType">
+          <Key>
+            <PropertyRef Name="VehicleTypeID" />
+          </Key>
+          <Property Type="Int32" Name="VehicleTypeID" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Listing">
+          <Key>
+            <PropertyRef Name="ListingID" />
+          </Key>
+          <Property Type="Int32" Name="ListingID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" />
+          <Property Type="DateTime" Name="DateAdd" Precision="3" />
+          <Property Type="String" Name="Title" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="VIN" />
+          <Property Type="Int32" Name="Year" />
+          <Property Type="Int32" Name="MakeID" />
+          <Property Type="Int32" Name="ModelID" />
+          <Property Type="String" Name="Trim" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="BodyStyleID" />
+          <Property Type="Int32" Name="TransmissionID" />
+          <Property Type="Boolean" Name="ShowVIN" />
+          <Property Type="Boolean" Name="IsCertified" />
+          <Property Type="Boolean" Name="IsETested" />
+          <Property Type="Int32" Name="StatusID" />
+          <Property Type="Decimal" Name="Price" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="KM" />
+          <Property Type="Int32" Name="BodyColorID" />
+          <Property Type="Int32" Name="InteriorColorID" />
+          <Property Type="Int32" Name="DoorCountID" />
+          <Property Type="Int32" Name="PassengerCountID" />
+          <Property Type="Int32" Name="DriveTrainID" />
+          <Property Type="String" Name="Engine" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CylinderCount" />
+          <Property Type="Int32" Name="FuelTypeID" />
+          <Property Type="Int32" Name="StatusTypeID" />
+          <Property Type="String" Name="Location" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AutoStoreContainer" CdmEntityContainer="AutoEntities">
+          <EntitySetMapping Name="StatusTypes">
+            <EntityTypeMapping TypeName="Auto.StatusType">
+              <MappingFragment StoreEntitySet="StatusType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StatusTypeID" ColumnName="StatusTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleTypes">
+            <EntityTypeMapping TypeName="Auto.VehicleType">
+              <MappingFragment StoreEntitySet="VehicleType">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="VehicleTypeID" ColumnName="VehicleTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Listings">
+            <EntityTypeMapping TypeName="Auto.Listing">
+              <MappingFragment StoreEntitySet="Listing">
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="StatusTypeID" ColumnName="StatusTypeID" />
+                <ScalarProperty Name="FuelTypeID" ColumnName="FuelTypeID" />
+                <ScalarProperty Name="CylinderCount" ColumnName="CylinderCount" />
+                <ScalarProperty Name="Engine" ColumnName="Engine" />
+                <ScalarProperty Name="DriveTrainID" ColumnName="DriveTrainID" />
+                <ScalarProperty Name="PassengerCountID" ColumnName="PassengerCountID" />
+                <ScalarProperty Name="DoorCountID" ColumnName="DoorCountID" />
+                <ScalarProperty Name="InteriorColorID" ColumnName="InteriorColorID" />
+                <ScalarProperty Name="BodyColorID" ColumnName="BodyColorID" />
+                <ScalarProperty Name="KM" ColumnName="KM" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="IsETested" ColumnName="IsETested" />
+                <ScalarProperty Name="IsCertified" ColumnName="IsCertified" />
+                <ScalarProperty Name="ShowVIN" ColumnName="ShowVIN" />
+                <ScalarProperty Name="TransmissionID" ColumnName="TransmissionID" />
+                <ScalarProperty Name="BodyStyleID" ColumnName="BodyStyleID" />
+                <ScalarProperty Name="Trim" ColumnName="Trim" />
+                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+                <ScalarProperty Name="MakeID" ColumnName="MakeID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ListingID" ColumnName="ListingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams />
+  </Designer>
+</edmx:Edmx>

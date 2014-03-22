@@ -1,0 +1,12 @@
+﻿@model List<MINI.Models.ModelHighlightViewModel>
+
+<div id="highlight-@Model[0].HighlightGroup" class="highlight-content" style="height:400px;">
+  @foreach (var item in Model) {
+    <div class="highlight-item" id="@item.ModelHighlightID" style="display:none;">
+      <h3 class="white">@item.Headline</h3>
+      <h4 class="white">@item.HighlightTitle</h4>
+      <p>@item.Highlight</p>
+     
+    </div>
+  }
+</div>

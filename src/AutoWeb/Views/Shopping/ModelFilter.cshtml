@@ -1,0 +1,241 @@
+﻿@model MINI.Models.ModelFilter.ModelFilterViewModel
+@{
+    ViewBag.Title = MINI.Resources.Shopping.ModelFilter.PageTitle;
+}
+
+<div id="model-filter-intro-@MINI.App.CurrentUserLanguage" class="content-intro content-offset content-indent">
+    <div class="box white intro-text">
+        <h1 class="white">@MINI.Resources.Shopping.ModelFilter.PageSubTitle</h1>
+       
+    </div>
+    
+</div>
+
+<div id="mini-model-filter">
+
+<h5>@MINI.Resources.Shopping.ModelFilter.FilterToFindLbl</h5>
+
+<div class="compare-button"><img class="icon" src="~/Public/img/content/model-filter/ico/compare.png"/> @MINI.Resources.Shopping.ModelFilter.CompareLabel</div>
+
+
+<div id="filter-items">
+
+<div id="slider-feilds">	
+
+    <div id="vehicle-price-slider" class="slider-obj">
+		<img class="icon" src="~/Public/img/content/model-filter/ico/price.png"/>
+		<h5>@MINI.Resources.Shopping.ModelFilter.PriceLabel</h5>
+        <div id="#slider-box" class="slide-wrapper ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header"></div><a  class="ui-slider-handle ui-state-default ui-corner-all" href="#"></a><a class="ui-slider-handle ui-state-default ui-corner-all ui-slider-handle-right" href="#"></a>
+    </div>
+   
+	<div class="min-box">
+    <span class="dollar-sign">$</span> 
+    <div class="min-value"><div class="odometer">0</div></div>
+    </div>
+	 
+    <div class="max-box">
+	<span class="dollar-sign-max">$</span> 
+    <div class="max-value"><div class="odometer">0</div></div>
+    </div>	 
+	
+	
+	</div><!-- END PRICE SLIDER -->
+	
+	
+	<div id="vehicle-output-slider" class="slider-obj">
+		<img class="icon" src="~/Public/img/content/model-filter/ico/engine.png"/>
+		<h5>@MINI.Resources.Shopping.ModelFilter.OutputLabel</h5>
+        <div id="#slider-box" class="slide-wrapper ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#"></a><a class="ui-slider-handle ui-state-default ui-corner-all ui-slider-handle-right" href="#"></a>
+    </div>
+   
+	<div class="min-box">
+    <div class="min-value"><div class="odometer">0</div></div>
+    </div>
+	 
+	<div class="slider-desc">(@MINI.Resources.Shopping.ModelFilter.HpLabel)</div>
+	
+    <div class="max-box">
+    <div class="max-value"><div class="odometer">0</div></div>
+    </div>	 
+	
+	
+	</div><!-- END OUTPUT SLIDER -->
+	
+	
+  
+	<div id="vehicle-acceleration-slider" class="slider-obj">
+		<img class="icon" src="~/Public/img/content/model-filter/ico/speed.png"/>
+		<h5>@MINI.Resources.Shopping.ModelFilter.AccelerationLabel</h5>
+        <div id="#slider-box" class="slide-wrapper ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#"></a><a class="ui-slider-handle ui-state-default ui-corner-all ui-slider-handle-right" href="#"></a>
+    </div>
+   
+	<div class="min-box">
+    <div class="min-value"><div class="odometer">0</div></div>
+    </div>
+	 
+	<div class="slider-desc">(S)</div>
+	
+    <div class="max-box">
+    <div class="max-value"><div class="odometer">0</div></div>
+    </div>	 
+	
+	
+	</div><!-- END ACCELERATION SLIDER -->
+	
+	<div id="vehicle-fuel-slider" class="slider-obj">
+		<img class="icon" src="~/Public/img/content/model-filter/ico/gas.png"/>
+		<h5>@MINI.Resources.Shopping.ModelFilter.ConsumptionLabel</h5>
+        <div id="#slider-box" class="slide-wrapper ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#"></a><a class="ui-slider-handle ui-state-default ui-corner-all ui-slider-handle-right" href="#"></a>
+    </div>
+   
+	<div class="min-box">
+    <div class="min-value"><div class="odometer">0</div></div>
+    </div>
+	
+	<div class="slider-desc">(L/100KM)</div>
+	
+    <div class="max-box">
+    <div class="max-value"><div class="odometer">0</div></div>
+    </div>	 
+
+	</div><!-- END FUEL SLIDER -->
+	
+	
+	<div id="vehicle-luggage-slider" class="slider-obj">
+		<img class="icon" src="~/Public/img/content/model-filter/ico/luggage.png"/>
+		<h5>@MINI.Resources.Shopping.ModelFilter.LuggageSpaceLabel</h5>
+        <div id="#slider-box" class="slide-wrapper ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"><div class="ui-slider-range ui-widget-header"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#"></a><a class="ui-slider-handle ui-state-default ui-corner-all ui-slider-handle-right" href="#"></a>
+    </div>
+   
+	<div class="min-box">
+    <div class="min-value"><div class="odometer">0</div></div>
+    </div>
+	
+	<div class="slider-desc">(L)</div>
+		
+    <div class="max-box">
+    <div class="max-value"><div class="odometer">0</div></div>
+    </div>	 
+
+	</div><!-- END LUGGAGE SLIDER -->
+	
+
+    </div><!-- END SLIDER FIELDS -->
+	
+	
+	<div id="check-box-fields">
+	  
+	    <div id="transmition" class="check-box-obj">
+		   <h5>@MINI.Resources.Shopping.ModelFilter.TransmissionLabel</h5>
+		   <div class="check-box">
+		   <div id="manual" class="check-toggle">
+		   <div class="check-mark"><img src="~/Public/img/content/model-filter/check-mark.png"/></div>
+		   <img src="~/Public/img/content/model-filter/toggle-bg.jpg"/>
+		   </div>
+		   <div class="check-text">@MINI.Resources.Shopping.ModelFilter.ManualLabel</div>
+		   </div>
+		   <div class="check-box">
+		   <div id="auto" class="check-toggle">
+		   <div class="check-mark"><img src="~/Public/img/content/model-filter/check-mark.png"/></div>
+		   <img src="~/Public/img/content/model-filter/toggle-bg.jpg"/>
+		   </div>
+		   <div class="check-text">@MINI.Resources.Shopping.ModelFilter.AutoLabel</div>
+		   </div>
+		   
+		</div><!-- END  transmition  -->
+		
+		
+		<div id="drive" class="check-box-obj">
+		   <h5>@MINI.Resources.Shopping.ModelFilter.DriveLabel</h5>
+		   <div class="check-box">
+		   <div id="twoWheel" class="check-toggle">
+		   <div class="check-mark"><img src="~/Public/img/content/model-filter/check-mark.png"/></div>
+		   <img src="~/Public/img/content/model-filter/toggle-bg.jpg"/>
+		   </div>
+		   <div class="check-text">@MINI.Resources.Shopping.ModelFilter.FWDLabel</div>
+		   </div>
+		   <div class="check-box">
+		   <div id="fourWheel" class="check-toggle">
+		   <div class="check-mark"><img src="~/Public/img/content/model-filter/check-mark.png"/></div>
+		   <img src="~/Public/img/content/model-filter/toggle-bg.jpg"/>
+		   </div>
+		   <div class="check-text">@MINI.Resources.Shopping.ModelFilter.FourWDLabel</div>
+		   </div>
+		   
+		</div><!-- END  drive  -->
+		
+		
+		<div id="doors" class="check-box-obj">
+		   <h5>@MINI.Resources.Shopping.ModelFilter.DoorsLabel</h5>
+		   <div class="check-box">
+		   <div id="twoDoor" class="check-toggle">
+		   <div class="check-mark"><img src="~/Public/img/content/model-filter/check-mark.png"/></div>
+		   <img src="~/Public/img/content/model-filter/toggle-bg.jpg"/>
+		   </div>
+		   <div class="check-text">@MINI.Resources.Shopping.ModelFilter.TwoDoorLabel</div>
+		   </div>
+		   <div class="check-box">
+		   <div id="fourDoor" class="check-toggle">
+		   <div class="check-mark"><img src="~/Public/img/content/model-filter/check-mark.png"/></div>
+		   <img src="~/Public/img/content/model-filter/toggle-bg.jpg"/>
+		   </div>
+		   <div class="check-text">@MINI.Resources.Shopping.ModelFilter.FourDoorLabel</div>
+		   </div>
+		   
+		</div><!-- END  drive  -->
+		
+		
+		<div id="convertible" class="check-box-obj">
+		   <h5>@MINI.Resources.Shopping.ModelFilter.RoofLabel</h5>
+		   <div class="check-box">
+		   <div id="hardtop" class="check-toggle">
+		   <div class="check-mark"><img src="~/Public/img/content/model-filter/check-mark.png"/></div>
+		   <img src="~/Public/img/content/model-filter/toggle-bg.jpg"/>
+		   </div>
+		   <div class="check-text">@MINI.Resources.Shopping.ModelFilter.HardtopLabel</div>
+		   </div>
+		   <div class="check-box">
+		   <div id="topless" class="check-toggle">
+		   <div class="check-mark"><img src="~/Public/img/content/model-filter/check-mark.png"/></div>
+		   <img src="~/Public/img/content/model-filter/toggle-bg.jpg"/>
+		   </div>
+		   <div class="check-text">@MINI.Resources.Shopping.ModelFilter.ToplessLabel</div>
+		   </div>
+		   
+		</div><!-- END  convertible  -->
+		
+		<div id="page-view-selectors">
+		<div id="reset-btn"><img id="reset-btn-img" data-id="resetView" src="~/Public/img/content/model-filter/reset.png"/> @MINI.Resources.Shopping.ModelFilter.ResetFilterLabel</div>
+		<img id="block-view-btn" data-id="blockView" src="~/Public/img/content/model-filter/box-icon-on.png" data-trigger="hover"  placement="top" rel="popover" data-content="" data-original-title="@MINI.Resources.Shopping.ModelFilter.GridViewLabel" />
+		<img id="list-view-btn" data-id="listView" src="~/Public/img/content/model-filter/list-icon.png" data-trigger="hover"  placement="top" rel="popover" data-content="" data-original-title="@MINI.Resources.Shopping.ModelFilter.ListViewLabel"/>
+		</div>
+		
+	</div><!-- END CHECK BOX FIELDS -->
+	
+	
+</div>
+
+<div id="vehicle-display-wrapper-block-view">
+	
+	  <div id="full-range" class="block-item">
+	   <h5>@MINI.Resources.Shopping.ModelFilter.FullRangeLabel</h5>
+	   <div class="block-sub-title">@MINI.Resources.Shopping.ModelFilter.SeeEveryLabel</div>
+	   <div class="block-price"><span class="dark-grey">@MINI.Resources.Shopping.ModelFilter.FromLabel</span> </div>
+	   <div class="block-image"><img src="~/Public/img/content/model-filter/full-range-thumb.png"/></div>
+	  </div>
+	
+ </div>
+
+ <div id="vehicle-display-wrapper-list-view">  </div><!-- END LIST VIEW -->
+ 
+ 
+ </div><!-- END mini-model-filter -->
+ 
+ 
+  @section AdditionalScripts {
+
+    var strings = JSON.parse('@Html.Raw(Json.Encode(ResourceHelpers.GetModelFilterTranslations()))');
+    var data = JSON.parse('@Html.Raw(Json.Encode(Model))');
+    
+    _mini.Filter.init(data, strings,'@MINI.App.CurrentUserLanguage');
+  }

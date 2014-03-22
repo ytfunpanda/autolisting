@@ -1,0 +1,125 @@
+﻿@model MINI.Models.ModelIndexViewModel
+
+@{
+  ViewBag.Title = @Model.ModelFamily.Name;
+}
+
+@section PageTitle {
+  <h1>@Model.ModelFamily.Name</h1>
+}
+
+<div id="@Model.ModelFamily.ECode-header" class="model-panel modelbg-height">
+  <div class="intro">
+    <h3>@Model.ModelFamily.Name</h3>
+    <h1>@Model.ModelFamily.Tagline</h1>
+  </div>
+
+  <img src="@Url.ContentVersioned("~/Public/img/m/v/R61/R61_intro_car.png")" class="car" />
+</div>
+<div class="in-page-nav">
+  <ul class="list-inline">
+    <li><a href="#bookTestDrive" data-toggle="modal" class="mr3em">@MINI.Resources.Vehicle.Index.BookTestDriveBtnLabel</a></li>
+    <li><a href="#findRetailer" data-toggle="modal" class="ml3em">@MINI.Resources.Vehicle.Index.FindRetailerBtnLabel</a></li>
+  </ul>
+</div>
+<div id="@Model.ModelFamily.ECode-gallery" class="model-panel">
+  <div class="panel-title">
+    <h6 class="ml3em">@MINI.Resources.Vehicle.Index.GalleryTitle</h6>
+  </div>
+
+  <div id="carousel-gallery" class="carousel slide">
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-gallery" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-gallery" data-slide-to="1"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="item active"><img src="@Url.ContentVersioned("~/Public/img/m/v/R61/R61_gallery_holder.jpg")" class="img-responsive" /></div>
+      <div class="item"><img src="@Url.ContentVersioned("~/Public/img/m/v/R61/R61_gallery_holder.jpg")" class="img-responsive" /></div>
+    </div>
+    <a class="left carousel-control" href="#carousel-gallery" data-slide="prev"><span class="icon-prev"></span></a>
+    <a class="right carousel-control" href="#carousel-gallery" data-slide="next"><span class="icon-next"></span></a>
+  </div>
+</div>
+ 
+</div>
+
+<div class="in-page-nav">
+  <ul class="list-inline">
+    <li><a href="#bookTestDrive" data-toggle="modal" class="mr3em">@MINI.Resources.Vehicle.Index.InteriorLabel</a></li>
+    <li><a href="#findRetailer" data-toggle="modal" class="ml3em">@MINI.Resources.Vehicle.Index.ExteriorLabel</a></li>
+  </ul>
+</div>
+
+<div id="@Model.ModelFamily.ECode-variant" class="model-panel">
+  <div class="panel-title">
+    <h6 class="ml3em">@MINI.Resources.Vehicle.Index.VariantTitle</h6>
+  </div>
+
+  <div id="carousel-variant" class="carousel slide">
+    <div class="carousel-inner">
+      @{ int count = 0;}
+      @foreach (var item in Model.Vehicles) {
+        var img = string.Format("~/Public/img/m/v/{0}/{1}_{2}_variant_bg.jpg", Model.ModelFamily.ECode, Model.ModelFamily.ECode, item.CACode);
+        var cssClass = count == 0 ? "active" : "";
+        <div class="item @cssClass">
+          <img src="@Url.ContentVersioned(img)" class="img-responsive" />
+          <div class="carousel-caption">
+            <h3>@item.Name</h3>
+            <h5>From: @item.Price.ToString("C")</h5>
+            <dl class="dl-horizontal">
+              <dt>@MINI.Resources.Models.VehicleSpecsViewModelStrings.OutputLabel:</dt>
+              <dd>@item.Specs.Output</dd>  
+              <dt>@MINI.Resources.Models.VehicleSpecsViewModelStrings.AccelerationLabel:</dt>
+              <dd>@item.Specs.Acceleration</dd>  
+              <dt>@MINI.Resources.Models.VehicleSpecsViewModelStrings.TopSpeedLabel:</dt>
+              <dd>@item.Specs.TopSpeed</dd>
+            </dl>
+          </div>
+        </div>
+        
+        {count++;}
+      }
+    </div>
+    <a class="left carousel-control" href="#carousel-variant" data-slide="prev"><span class="icon-prev"></span></a>
+    <a class="right carousel-control" href="#carousel-variant" data-slide="next"><span class="icon-next"></span></a>
+  </div>
+
+</div>
+<div class="in-page-nav">
+  <ul class="list-inline">
+    <li><a href="#bookTestDrive" data-toggle="modal" class="mr3em">@MINI.Resources.Vehicle.Index.BookTestDriveBtnLabel</a></li>
+    <li><a href="#findRetailer" data-toggle="modal" class="ml3em">@MINI.Resources.Vehicle.Index.FindRetailerBtnLabel</a></li>
+  </ul>
+</div>
+
+<div id="@Model.ModelFamily.ECode-highlights" class="model-panel">
+  <div class="panel-title">
+    <h6 class="ml3em">@MINI.Resources.Vehicle.Index.HighlightsTitle</h6>
+
+    <div class="dropdown highlight-dropdown">
+      <a data-toggle="dropdown" href="#">@Model.Vehicles[0].ShortName</a>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+        @for (int i = 1; i < Model.Vehicles.Count; i++) {
+          <li><a href="#">@Model.Vehicles[i].ShortName</a></li>  
+        }
+        
+      </ul>
+    </div>    
+  </div>
+</div>
+
+@{Html.RenderPartial("_Features");}
+@{Html.RenderPartial("_BookTestDrive");}
+@{Html.RenderPartial("_FindRetailer");}
+
+@if (Model != null) {
+  @section AdditionalScripts {
+    var vehicle = window.VehicleData = window.VehicleData || {};
+    vehicle.Data = JSON.parse('@Html.Raw(Model.ToJson())');
+
+    // fake it so the carousel looks like it never auto changes.
+    $('.carousel').carousel({
+      interval: 200000000
+    });
+  }
+}

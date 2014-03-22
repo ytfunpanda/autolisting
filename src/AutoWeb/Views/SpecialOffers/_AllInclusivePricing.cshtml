@@ -1,0 +1,63 @@
+﻿@model MINI.Models.SpecialOffersDisplayViewModel
+@using MINI
+@using MINI.Models
+
+@{
+  AllInclusivePricingViewModel allInPricing = Model.Vehicle.AllInclusivePricing.FirstOrDefault(p => p.ProvinceShort == MINI.App.CurrentUserProvince.ToUpperInvariant());
+}
+<!-- Modal -->
+<div class="modal fade allInclusiveModal" id="allInclusivePricing-@Model.CACode" tabindex="-1" role="dialog" aria-labelledby="vehicleFeaturesLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header clearfix">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">@MINI.Resources.SpecialOffers.AllInclusivePricing.PageTitle</h4>
+      </div>
+      <div class="modal-body">
+<table width="90%">
+	<tr>
+		<td width="70%"><h4>MSRP:</h4></td>
+		<td width="30%" align="right"><h4>@Model.Vehicle.Price.ToString("C")</h4></td>
+	</tr>
+	<tr>
+		<td>@MINI.Resources.SpecialOffers.AllInclusivePricing.FreightPdiLbl</td>
+		<td align="right">@allInPricing.FreightAndPDI.ToString("C")</td>
+	</tr>
+	<tr>
+		<td>@MINI.Resources.SpecialOffers.AllInclusivePricing.AcLbl</td>
+		<td align="right">@allInPricing.AirConditioningTax.ToString("C")</td>
+	</tr>
+	<tr>
+		<td>@MINI.Resources.SpecialOffers.AllInclusivePricing.MvcLbl</td>
+		<td align="right">@allInPricing.MotorVehicleIndustryCouncilFee.ToString("C")</td>
+	</tr>
+	<tr>
+		<td>@MINI.Resources.SpecialOffers.AllInclusivePricing.AdminFeeLbl</td>
+		<td align="right">@allInPricing.RetailAdministrationFee.ToString("C")</td>
+	</tr>
+	<tr>
+		<td>@MINI.Resources.SpecialOffers.AllInclusivePricing.TireTaxLbl</td>
+		<td align="right">@allInPricing.TireTax.ToString("C")</td>
+	</tr>
+	<tr>
+		<td>@MINI.Resources.SpecialOffers.AllInclusivePricing.PPSALbl</td>
+		<td align="right">@allInPricing.RegistrationFeePPSA.ToString("C")</td>
+	</tr>
+	<tr>
+		<td><strong>@MINI.Resources.SpecialOffers.AllInclusivePricing.TotalFeesLbl</strong></td>
+		<td align="right"><strong>
+      @{ decimal fees =  allInPricing.AirConditioningTax + allInPricing.FreightAndPDI + allInPricing.MotorVehicleIndustryCouncilFee + allInPricing.RegistrationFeePPSA + allInPricing.RetailAdministrationFee + allInPricing.TireTax; }
+      @fees.ToString("C")
+      </strong></td>
+	</tr>
+	<tr>
+		<td><h4 style="margin-top:10px;">@MINI.Resources.SpecialOffers.AllInclusivePricing.AllInLbl</h4></td>
+		<td align="right"><h4 style="margin-top:10px;">@{ decimal allIn = Model.Vehicle.Price + allInPricing.AirConditioningTax + allInPricing.FreightAndPDI + allInPricing.MotorVehicleIndustryCouncilFee + allInPricing.RegistrationFeePPSA + allInPricing.RetailAdministrationFee + allInPricing.TireTax;}
+      @allIn.ToString("C")
+    </h4></td>
+	</tr>
+</table>        
+      </div>
+    </div>
+  </div>
+</div>

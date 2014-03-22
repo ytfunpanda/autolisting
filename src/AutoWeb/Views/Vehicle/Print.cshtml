@@ -1,0 +1,123 @@
+﻿@model MINI.Models.ModelIndexViewModel
+@{
+    ViewBag.Title = "Print";
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+}
+
+<header>
+    <h2>@MINI.Resources.Vehicle.Features.PageTitle</h2>
+    <img src="@Url.ContentVersioned("~/Public/img/print/logo-print.png")" id="logo" />
+    <ul class="list-unstyled">
+        <li><img src="@Url.ContentVersioned("~/Public/img/print/ico-standard.png")" width="15" height="16" /> @MINI.Resources.Vehicle.Features.PackageStandardLbl</li>
+        <li><img src="@Url.ContentVersioned("~/Public/img/print/ico-optional.png")" width="16" height="16" /> @MINI.Resources.Vehicle.Features.OptionalLbl    </li>
+    </ul>
+</header>
+
+<table class="table borderless mb0">
+<thead>
+    <tr>
+    <th width="290" style="vertical-align:bottom;">
+    <h3>@DisplayHelpers.ModelNameWithYear(Model)</h3>
+    </th>
+    @foreach (var item in Model.Vehicles) {
+        <th width="185" style="text-align:center;">
+        <img src="@Url.ContentVersioned(string.Format("~/Public/img/v/{0}/build_{1}.png", Model.ModelFamily.ECode, item.CACode))" />
+        <h5 style="width:84%" class="white">@item.TrimName</h5>
+        </th>  
+    }
+    </tr>
+</thead>
+</table>
+
+<div id="print-body">
+    <h3 class="group-title">@MINI.Resources.Vehicle.Features.SpecLabel</h3>
+    @foreach (var item in Model.SpecGroups) {
+        <h4>@DisplayHelpers.SpecCategory(item)</h4>
+        <table class="table">
+            <tbody>
+            @foreach (var specLabel in item.SpecLabels) {
+                <tr>
+                <td width="290">
+                    @DisplayHelpers.DisplayLabel(Model.Vehicles, specLabel)
+                </td>
+                @foreach (var vehicle in Model.Vehicles) {
+                    <td width="185"  align="center">@DisplayHelpers.DisplayValue(vehicle, specLabel)</td>  
+                }
+                </tr>
+            }
+            </tbody>
+        </table>    
+    }
+
+    <h3 class="group-title">@MINI.Resources.Vehicle.Features.StandardFeaturesLabel</h3>
+    @foreach (var item in Model.Vehicles[0].GroupedStandardFeatures) {
+        <h4>@DisplayHelpers.StandardFeatureCategory(item)</h4>
+        <table class="table">
+          <tbody>
+            @foreach (var featureLabel in item.StandardFeatures) {
+              <tr>
+                <td width="290"> @featureLabel.Name.Replace('\\', ' ') </td>
+                @foreach (var vehicle in Model.Vehicles) {
+                    string value = DisplayHelpers.DisplayFeatureValue(vehicle, featureLabel.Name, featureLabel.Code).ToString();
+                  <td width="185"  align="center">
+                    @if (!string.IsNullOrEmpty(value)) {
+                        <img src="@Url.ContentVersioned("~/Public/img/print/" + value)" width="16" height="16" />
+                    } else {
+                        @:&nbsp;
+                    }
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>        
+    }
+
+
+    @{
+        List<MINI.Models.PackageViewModel> allPackages = new List<MINI.Models.PackageViewModel>();
+        foreach (var item in Model.Vehicles) {
+            foreach (var package in item.Packages) {
+                if (allPackages.Where(p => p.Code == package.Code).Count() == 0) {
+                    allPackages.Add(package);
+                }
+            }
+        }
+    }
+    @foreach (var item in allPackages.OrderBy(p => p.FullName)) {
+        <table class="table" style="border-bottom:2px solid #000;">
+            <tbody>
+                <tr>
+                    <td width="280" style="border:none;"><h4 style="border:0;padding:0;">@item.FullName</h4></td>                
+                    @foreach (var vehicle in Model.Vehicles) {
+                        <td width="185"align="center" style="border:none;vertical-align:middle;">
+                        @if (vehicle.Packages.Where(vp => vp.Code == item.Code).Count() > 0) {
+                            <img src="@Url.ContentVersioned("~/Public/img/print/ico-standard.png")" />
+                        } else {
+                            @:&nbsp;
+                        }                  
+                        </td>  
+                    }
+                </tr>
+            </tbody>
+        </table>
+        <table class="table">
+            <tbody>
+            @foreach (var option in item.PackageOptions) {
+                <tr>
+                    <td width="280">@option.FullName</td>
+                    @foreach (var vehicle in Model.Vehicles) {
+                        <td width="185"align="center">
+                        @if (vehicle.Packages.Where(vp => vp.Code == item.Code).Count() > 0) {
+                            <img src="@Url.ContentVersioned("~/Public/img/print/ico-standard.png")" />
+                        } else {
+                            @:&nbsp;
+                        }                  
+                        </td>  
+                    }
+                </tr>
+            }
+            </tbody>
+        </table>    
+    }
+</div>

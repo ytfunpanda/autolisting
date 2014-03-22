@@ -1,0 +1,137 @@
+﻿@model MINI.Models.FormSubmissionViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>#body{ width:100% !important}</style>
+<h2>@MINI.Resources.Shared.BookTestDrive.PageTitle</h2>
+@using (Html.BeginForm("SaveTestDrive", "Form", FormMethod.Post, new { id = "formSaveBookTestDrive", @class = "booktestdrive-form booktestdrive-form-page" }))
+{
+    @Html.HiddenFor(x => x.RetailerNumber)
+    <div>
+        @Html.HiddenFor(x => x.OpportunityType)
+        <div class="alert alert-danger" style="display: none;">
+            <div id="ResultMsg">
+            </div>
+        </div>
+        <fieldset id="fields">
+            <div class="col">
+                <legend>
+                    <h4>@MINI.Resources.Forms.Index.Title_SelectRetailer</h4>
+                </legend>
+                <div class="form-group">
+                    <div class="testdrive-select">
+                        @Html.DropDownListFor(m => m.Province, Model.Provinces, MINI.Resources.Forms.Index.ProvinceLbl, new { id = "ddlProvince", @class = "form-control" })
+                        *
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="testdrive-select">
+                        @Html.DropDownListFor(m => m.RetailerNumber, Model.RetailerList, MINI.Resources.Forms.Index.Title_SelectRetailer, new { id = "ddlRetailer", @class = "form-control" })
+                        *
+                    </div>
+                </div>
+                <legend>
+                    <h4>@MINI.Resources.Forms.Index.Title_TestDriveInfo</h4>
+                </legend>
+                <div class="form-group">
+                    <div class="testdrive-select">
+                        @Html.DropDownListFor(m => m.Vehicle, Model.VehicleList, MINI.Resources.Forms.Index.VehicleLbl, new { id = "ddlVehicle", @class = "form-control" })
+                        *
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Comments, new { @class = "form-control testdrive-input", @placeholder = MINI.Resources.Forms.Index.CommentsLbl, @rows = "8" })
+                </div>
+                <div class="form-group">
+                    <div class="radio-inline" style="padding-left: 0;">
+                        @Html.CheckBoxFor(m => m.HasValidDriversLicense, new { @class = "pull-left" }) @Html.LabelFor(x => x.HasValidDriversLicense, new { @class = "control-label pull-left", @style = "width:240px;padding-top:0;text-align:left;margin-left: 10px;" })
+                    </div>
+                </div>
+                @MINI.Resources.Forms.Index.Note_TestDrive<br />
+            </div>
+            <div class="col right-col">
+                <legend>
+                    <h4>@MINI.Resources.Forms.Index.Title_PersonalInfo</h4>
+                </legend>
+                <div class="form-group">
+                    <div class="testdrive-select">
+                        @Html.DropDownListFor(m => m.Salutation, Model.Salutations, MINI.Resources.Forms.Index.SalutationLbl, new { id = "ddlSalutation", @class = "form-control" })
+                        *
+                    </div>
+                </div>
+                <div class="form-group required">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control testdrive-input", @placeholder = MINI.Resources.Forms.Index.FirstNameLbl })
+                </div>
+                <div class="form-group required">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control testdrive-input", @placeholder = MINI.Resources.Forms.Index.LastNameLbl })
+                </div>
+                <legend>
+                    <h4>@MINI.Resources.Forms.Index.Title_Contact</h4>
+                </legend>
+                <div class="form-group">
+                    <div class="testdrive-select">
+                        @Html.DropDownListFor(m => m.PreferredContactMethod, Model.PreferredContactMethods, MINI.Resources.Forms.Index.PreferredContactMethodLbl, new { id = "ddlPreferredContactMethod", @class = "form-control" })
+                        *
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="testdrive-select" style="width: 300px">
+                        @foreach (var phoneType in Model.PhoneTypes)
+                        {
+                            <div class="radio-inline">
+                                <label>@Html.RadioButtonFor(m => m.PhoneType, phoneType.Value) @phoneType.Text</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control testdrive-input", @placeholder = MINI.Resources.Forms.Index.PhoneNumberLbl })
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control testdrive-input", @placeholder = MINI.Resources.Forms.Index.EmailAddressLbl })
+                </div>
+                <div class="form-group">
+                    <div class="testdrive-select">
+                        @Html.DropDownListFor(m => m.PreferredContactTime, Model.PreferredContactTimes, MINI.Resources.Forms.Index.PreferredContactTimeLbl, new { id = "ddlPreferredContactTime", @class = "form-control" })
+                        *
+                    </div>
+                </div>
+                <div class="InfoLbl">
+                    @MINI.Resources.Forms.Index.IWouldLikeToReceiveLbl
+                </div>
+                <div class="form-group">
+                    <div class="radio-inline" style="padding-left: 0;">
+                        @Html.CheckBoxFor(m => m.ReceiveEvents, new { @class = "pull-right" })
+                        @Html.LabelFor(x => x.ReceiveEvents, new { @class = "control-label pull-left", @style = "width:240px;padding-top:0;text-align:left;" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="radio-inline" style="padding-left: 0;">
+                        @Html.CheckBoxFor(m => m.ReceivePromotions, new { @class = "pull-right" })
+                        @Html.LabelFor(x => x.ReceivePromotions, new { @class = "control-label pull-left", @style = "width:240px;padding-top:0;text-align:left;" })
+                    </div>
+                </div>
+                <div class="form-group" style="display: none">
+                    <div class="radio-inline" style="padding-left: 0;">
+                        @Html.CheckBoxFor(m => m.CommercialEmailOptIn, new { @class = "pull-right" }) @Html.LabelFor(x => x.CommercialEmailOptIn, new { @class = "control-label pull-left", @style = "width:240px;padding-top:0;text-align:left;" })
+                    </div>
+                </div>
+                <button class="btn btn-primary gradient-grey shadow" type="submit">
+                    <img src="@Url.ContentVersioned("~/Public/img/transp-shadow-double-chevron.png")" width="16" height="12" />
+                    @MINI.Resources.Forms.Index.SubmitLbl</button>
+                <div class="reqmsg">@Html.Raw(MINI.Resources.Forms.Index.AllFieldsMarkedRequired)</div>
+            </div>
+            <div id="address-info" class="col">
+            <br />
+       
+
+        <p>
+         @{Html.RenderPartial("_FormFooter");}
+        </p>
+
+    </div>
+        </fieldset>
+    </div>
+
+}

@@ -1,0 +1,43 @@
+﻿@model MINI.Models.VehicleViewModel
+@{
+    
+    int coloursPerRow = ViewData["coloursPerRow"] != null ? Int32.Parse(ViewData["coloursPerRow"].ToString()) :  9;
+    int wheelsPerRow = ViewData["wheelsPerRow"] != null ? Int32.Parse(ViewData["wheelsPerRow"].ToString()) : 4;
+}
+<div id="mini-config">
+    <div id="config-actions" class="clearfix">
+        <div id="colours">
+            <h5>@MINI.Resources.Vehicle.Index.AvailableColoursTitle</h5>
+            @{ int count = 0;}
+            @foreach (var item in Model.Colours) {
+                <img data-id="@item.Code" src="@Url.ContentVersioned(string.Format("~/Public/img/v/ico/colour/{0}.png", item.Code))" data-trigger="hover"  placement="top" rel="popover" data-content="" data-original-title="@DisplayHelpers.ColourDescription(item)" width="30" height="30" />
+                if (count == coloursPerRow - 1) {
+                    @:<br />
+                    count = 0;
+                } else {
+                    count++;
+                }
+            }
+        </div>
+        <div id="wheels">
+            <h5>@MINI.Resources.Vehicle.Index.AvailableWheelsTitle</h5>
+            @{  count = 0;}
+            @foreach (var item in Model.Options) {
+                if (item != null && item.Category == "WHEEL") {
+                    <img data-item="@item.Code" src="@Url.ContentVersioned(string.Format("~/Public/img/v/ico/wheel/{0}.png", item.Code))" data-trigger="hover"  placement="top" rel="popover" data-content="" data-original-title="@DisplayHelpers.OptionDescription(item)"  width="30" height="30" />
+                    if (count == wheelsPerRow - 1) {
+                        @:<br />
+                        count = 0;
+                    } else {
+                        count++;
+                    }
+                }
+            }
+        </div>
+        <div id="rotate">
+            <h5><a href="">@MINI.Resources.Vehicle.Index.ClickHere360Lbl</a></h5>
+            <a class="rt-img" href=""><img src="@Url.ContentVersioned(string.Format("~/Public/img/model/360-{0}.png", MINI.App.CurrentUserLanguage))" /></a>
+        </div>
+    </div>
+
+</div>

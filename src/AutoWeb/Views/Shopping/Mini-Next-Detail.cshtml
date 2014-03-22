@@ -1,0 +1,336 @@
+﻿@model MINI.Models.NextVehicleDetailViewModel
+@{
+    ViewBag.Title = "";
+}
+<link href="~/Public/css/liquidcarousel.css" rel="stylesheet" type="text/css" />
+<link href="~/Public/css/next.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<script src="/Public/js/vendor/jquery.cookie.js" type="text/javascript"></script>
+<script src="/Public/js/vendor/galleria-1.3.3.min.js" type="text/javascript"></script>
+<div><h3>@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.HeadTitle)</h3></div>
+
+
+<div id="mininext-detail-header" class="">
+</div>
+<div id="nextdetail">
+    <div id="next-container">
+        <div id="nextdetail-box-left">
+            <div class="clear item">
+                <div class="btn-group">
+@Html.ButtonLink(HtmlHelperExtensions.ButtonLinkType.BACK, "/en/shopping/mini-next#next-main", MINI.Resources.Shopping.MININext.BackToMatches, "btn-default", new { @id = "btn-clear" })
+
+                </div>
+            </div>
+             <div class="clear item">
+                <div class="btn-group">
+@Html.ButtonLink(HtmlHelperExtensions.ButtonLinkType.NEWSEARCH, "/en/shopping/mini-next#newsearch", MINI.Resources.Shopping.MININext.NewSearchButton, "btn-default", null)
+
+                </div>
+            </div>
+        </div>
+        <div id="nextdetail-box-right">
+            @*<div class="topBan">
+                <a href="/en/shopping/mini-next"><span class="back-to-matches">@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.BackToMatches)</span></a>
+                <a id="btn-new-search-detail" href="javascript:void(0)"><span class="new-mini-search">
+                    @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.NewMINIMatchSearch)</span></a>
+            </div>*@
+            @{ string nameFix = Model.NextVehicle.Model + " " + Model.NextVehicle.Trim;
+               if (MINI.App.CurrentUserLanguage == "fr")
+               {
+                   nameFix = nameFix.ToUpper().Replace("CONVERTIBLE", "CABRIOLET").Replace("EDITION", "ÉDITIONS");
+               }
+            }
+            <div style="padding: 10px 0 50px 0">
+                <div class="title">@Model.NextVehicle.Year @Model.NextVehicle.Make @nameFix</div>
+                <div class="price">@Model.NextVehicle.Price.ToString("C0", new System.Globalization.CultureInfo(MINI.App.Lang+"-CA"))</div>
+            </div>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #000">
+                <tr valign="top">
+                    <td>
+                        <div id="gallery">
+                            <div class="content">
+                                <div id="galleria">
+                                    @{
+                                        if (Model.NextVehicle.PhotoList != null)
+                                        {
+                                            foreach (string photo in Model.NextVehicle.PhotoList)
+                                            {
+                                                if (!String.IsNullOrEmpty(photo))
+                                                {
+                                        <a href="@photo">
+                                            <img class="nextPhoto" src="@photo" data-big="@photo"></a>
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                        <a href="@MINI.Resources.Shopping.MININext.ImageCameraShyLarge">
+                                            <img class="nextPhoto" src="@MINI.Resources.Shopping.MININext.ImageCameraShyLarge" data-big="@MINI.Resources.Shopping.MININext.ImageCameraShyLarge"></a>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        @*<div class="CurrentSpecials">
+                            <img src="/public/img/next/current-special-holder.png" />
+                        </div>*@
+                        <div class="RequestInfoForm">
+                            <a class="btn-RequestForMoreInformation" href="javascript:void(0)"><i class="icon-plus">
+                            </i>
+                                <h4>@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.RequestForInfo)</h4>
+                            </a>
+                            <div id="form-RequestForMoreInformation">
+                                @{ Html.RenderAction("PreownedLocator", "Form", new { lang = @MINI.App.Lang, VIN = @Model.NextVehicle.VIN });}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div style="clear: both; margin-top: 30px">
+            </div>
+            <div class="header">
+                <h4>
+                    @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.DetailsLabel)</h4>
+            </div>
+            <div class="details">
+                <ul>
+                    <li class="detailHeader">@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.YearLabel)
+                        <div class="detailItem">
+                            <div class="detailIcon">
+                                <img src="/Public/img/next/icon-year.png" /></div>@Model.NextVehicle.Year</div>
+                    </li>
+                    <li class="detailHeader">@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.InteriorLabel)
+                        <div class="detailItem">
+                            <div class="detailIcon">
+                                <img src="/Public/img/next/icon-colour.png" /></div>@Model.NextVehicle.InteriorColour</div>
+                    </li>
+                    <li class="detailHeader">@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.ExteriorColourLabel)
+                        <div class="detailItem">
+                            <div class="detailIcon">
+                                <img src="/Public/img/next/icon-exterior-colour.png" /></div>@Model.NextVehicle.BodyColour</div>
+                    </li>
+                    <li class="detailHeader">@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.KMShortLabel)
+                        <div class="detailItem">
+                            <div class="detailIcon">
+                                <img src="/Public/img/next/icon-km.png" /></div>@Model.NextVehicle.KM</div>
+                    </li>
+                    <li class="detailHeader">@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.TransmissionLabel)
+                        <div class="detailItem">
+                            <div class="detailIcon">
+                                <img src="/Public/img/next/icon-transmission.png" /></div>@Model.NextVehicle.Transmission</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="header">
+                <h4>@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.ImportantInformationLabel)</h4>
+            </div>
+            <div>
+            <span class="DataItem">@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.MINIRetailerLabel):</span>
+<span class="DataValue">@Model.Retailer.Name</span><br />
+
+<span class="DataItem">@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.AddressLabel):</span>
+<span class="DataValue">@Model.Retailer.Address, @Model.Retailer.City, @Model.Retailer.ProvinceShort @Model.Retailer.Postal  </span><br />
+
+<span class="DataItem">@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.PhoneLabel):</span>
+<span class="DataValue">@Model.Retailer.SalesPhone</span><br />
+
+<span class="DataItem">@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.EmailLabel):</span>
+<span class="DataValue">@Model.Retailer.Email</span><br /><br />
+
+
+<span class="DataItem">@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.VINLabel):</span>
+<span class="DataValue">
+@{
+    if (Model.NextVehicle.VIN != null && Model.NextVehicle.VIN.Length > 7)
+    {
+        Model.NextVehicle.VIN.Substring(Model.NextVehicle.VIN.Length - 7);
+    }
+    }
+</span><br />
+<span class="DataItem">@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.StockLabel):</span>
+<span class="DataValue">@Model.NextVehicle.StockNumber</span>
+
+
+            </div>
+            <div class="header">
+                <h4>
+                    @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.DescriptionLabel)</h4>
+            </div>
+            <div>
+            @{
+                @Model.NextVehicle.ShortDetails
+                if (MINI.App.Lang == "en")
+                {
+                @Model.NextVehicle.InstalledGoodiesEN
+                }
+                else
+                {
+                @Model.NextVehicle.InstalledGoodiesFR
+                }
+            }
+                
+            </div>
+            @*<div class="header">
+                <h4>
+                    Specifications</h4>
+            </div>*@ @*<div>
+                [SPECIFICATIONS]
+            </div>*@
+            <div class="header">
+                <h4>@MvcHtmlString.Create(MINI.Resources.Shopping.MININext.SimilarVehiclesLabel)</h4>
+            </div>
+            <div>
+                <div id="liquid1" class="liquid">
+                    @{
+                        if (Model.SimilarVehicleList.Count() > 3)
+                        {
+                            <span class="previous"></span>
+                        }
+                    }
+                    <div class="liquidcarouselwrapper">
+                        <ul>
+                            @{ 
+                                foreach (var vehicle in Model.SimilarVehicleList)
+                                {
+                                <li>
+                                    <table style="background-color: #000; padding: 0 5px 0 5px" width="250" border="0"
+                                        cellspacing="0" cellpadding="0" align="center">
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="SimilarTitle">
+                                                    @{ string name = Model.NextVehicle.Model + " " + Model.NextVehicle.Trim;
+                                                       if (MINI.App.CurrentUserLanguage == "fr")
+                                                       {
+                                                           name = nameFix.ToUpper().Replace("CONVERTIBLE", "CABRIOLET").Replace("EDITION", "ÉDITIONS");
+                                                       }
+                                                    }
+                                                    <a href="/en/shopping/mini-next/detail/@vehicle.StockNumber">@vehicle.Year @vehicle.Make
+                                                        @name</a></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div align="center" style="min-height: 198px">
+                                                    @{
+               string photo = "";
+               if (vehicle.Photo.Length != 0)
+               {
+                   photo = vehicle.Photo.IndexOf(",") > 0 ? vehicle.Photo.Substring(0, vehicle.Photo.IndexOf(",")) : vehicle.Photo;
+               }
+               photo = vehicle.Photo.Length != 0 ? photo : MINI.Resources.Shopping.MININext.ImageCameraShySmall;
+                                    
+                                                    }
+                                                    <a href="/en/shopping/mini-next/detail/@vehicle.StockNumber">
+                                                        <img src="@photo" alt="" /></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="40%">
+                                                <div class="DataItem">
+                                                    @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.PriceLabel):</div>
+                                            </td>
+                                            <td>
+                                                <div class="DataValue">
+                                                    @vehicle.Price.ToString("C0", new System.Globalization.CultureInfo(MINI.App.Lang + "-CA"))
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="40%">
+                                                <div class="DataItem">
+                                                    @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.KMLongLabel):</div>
+                                            </td>
+                                            <td>
+                                                <div class="DataValue">
+                                                    @vehicle.KM
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="DataItem">
+                                                    @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.TransmissionLabel):</div>
+                                            </td>
+                                            <td>
+                                                <div class="DataValue">
+                                                    @vehicle.Transmission
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="DataItem">
+                                                    @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.ExteriorLabel):</div>
+                                            </td>
+                                            <td>
+                                                <div class="DataValue">
+                                                    @vehicle.BodyColour
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="DataItem">
+                                                    @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.InteriorLabel):</div>
+                                            </td>
+                                            <td>
+                                                <div class="DataValue">
+                                                    @vehicle.InteriorColour
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="DataItem">
+                                                    @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.VINLabel):</div>
+                                            </td>
+                                            <td>
+                                                <div class="DataValue">
+                                                @{
+               if (vehicle.VIN != null && vehicle.VIN.Length > 7)
+               {
+                                        @vehicle.VIN.Substring(@vehicle.VIN.Length - 7)
+               }
+                                }
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                    @{
+                        if (Model.SimilarVehicleList.Count() > 3)
+                        {
+                            <span class="next"></span>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section AdditionalScripts {
+    @{
+        int retailerID = 0;
+        try { retailerID = @MINI.App.CurrentRetailerSite.Retailer.InternalRetailerID; }
+        catch { }
+    }
+    var nextPage = new MINI.MININext({
+        RetailerID: '@retailerID'
+    });
+    $(document).ready(function () {
+        $('#liquid1').liquidcarousel({
+            height: 350,
+            duration: 100,
+            hidearrows: false
+        });
+        Galleria.loadTheme('/Public/js/vendor/galleria.classic.min.js');
+        Galleria.run('#galleria');
+    });
+}

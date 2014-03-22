@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = @MINI.Resources.Discover.NotNormal.PageTitle;
+}
+
+@{
+    string url = "http://notnormal.ca/#/noLogo";
+    if (MINI.App.CurrentUserLanguage.ToUpperInvariant() == "FR") {
+        url = "http://pasnormal.ca/#/noLogo";
+    }
+}
+<div id="mini-101" class="content-section content-offset content-indent" style="height:1820px;">
+    <iframe src="@url" width="1170" height="1820" style="background: #000000;" frameborder="0" scrolling="no" style="padding-top:20px;"></iframe>
+</div>

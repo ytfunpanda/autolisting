@@ -1,0 +1,121 @@
+﻿@model MINI.Models.BaseCalculatorViewModel
+<div id="calculator">
+    @Html.ValidationSummary()
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(m => @Model.CACode)
+        <fieldset>
+            <h3>
+                MINI Payment Calculator</h3>
+            <div style="padding-left: 23px;">
+                <label>
+                    Price:</label>
+                @Html.EditorFor(m => m.Price)
+            </div>
+        </fieldset>
+    
+        for (int d = 0; d < Model.Calculators.Count; d++)
+        { 
+        <div class="item">
+            <fieldset>
+                <div class="calc-wrapper modal-body">
+                    <h4 class="calc">
+                        @Model.Calculators[d].FinanceOrLease @Html.HiddenFor(m => @Model.Calculators[d].FinanceOrLease)
+                        <span class="pull-right">
+                            <button class="remove-calc" type="submit" name="DeleteCalculator[@(d)]">
+                                Remove</button>
+                        </span>
+                    </h4>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td valign="bottom">
+                                    Term:
+                                    @{
+            for (int i = 0; i <= Model.Calculators[d].Terms.Count - 1; i++)
+            {
+                int term = Model.Calculators[d].Terms[i];
+                                        <button class="term btn" type="submit" name="UpdateTerm[@(d)]" value="@term">@term</button>
+                                        @Html.HiddenFor(m => Model.Calculators[d].Terms[i])
+            }
+                                    }
+                                </td>
+                                <td align="right">
+                                    @Model.Calculators[d].Term @Html.HiddenFor(m => @Model.Calculators[d].Term)
+                                </td>
+                            </tr>
+                            @{
+            if (Model.Calculators[d].FinanceOrLease == "Lease")
+            {
+                                <tr>
+                                    <td valign="bottom">
+                                        KM/Year
+                                        @{
+                for (int i = 0; i <= Model.Calculators[d].KMYears.Count - 1; i++)
+                {
+                    int km = Model.Calculators[d].KMYears[i];
+                                            <button class="term btn" type="submit" name="UpdateKM[@(d)]" value="@km">
+                                                @km</button>
+                                            @Html.HiddenFor(m => Model.Calculators[d].KMYears[i])
+                }
+                                        }
+                                    </td>
+                                    <td align="right">
+                                        @Model.Calculators[d].KMYear @Html.HiddenFor(m => @Model.Calculators[d].KMYear)
+                                    </td>
+                                </tr>
+            }
+            else
+            {
+                                <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                </tr>
+            }
+                            }
+                            <tr>
+                                <td valign="middle" colspan="2">
+                                    Down payment: <span class="pull-right">$@Html.TextBoxFor(m => m.Calculators[d].DownPayment, null, new { @class = "downPayment" })</span>
+                                </td>
+                                <tr>
+                                    <td colspan="2">
+                                        <br />
+                                        <button class="term btn pull-right" type="submit" name="CalculatePayment[@(d)]">
+                                            Calculate</button>
+                                    </td>
+                                </tr>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr class="dotted">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td width="50%" valign="middle" align="center">
+                                    Monthly Payment:
+                                    <h1>
+                                        @Model.Calculators[d].MonthlyPayment.ToString("C2") @Html.HiddenFor(m => @Model.Calculators[d].MonthlyPayment)<sup>*</sup></h1>
+                                </td>
+                                <td width="50%" valign="middle" align="center">
+                                    Interest Rate:
+                                    <h1>
+                                        @Model.Calculators[d].InterestRate @Html.HiddenFor(m => @Model.Calculators[d].InterestRate)
+                                        <sup>%</sup></h1>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr class="dotted">
+                </div>
+            </fieldset>
+        </div>
+        }
+        <div class="item" style="padding-top: 100px">
+            <button type="submit" name="AddLeaseCalculator">
+                Add Lease Calculator</button>
+            <button type="submit" name="AddFinanceCalculator">
+                Add Finance Calculator</button>
+        </div>
+    }
+</div>

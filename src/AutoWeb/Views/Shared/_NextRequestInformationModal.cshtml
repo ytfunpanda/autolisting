@@ -1,0 +1,111 @@
+﻿@model MINI.Models.FormSubmissionViewModel
+<script type="text/javascript">
+    $('#formSavePreownedLocator').submit(function () {
+        $.ajax({
+            url: this.action,
+            type: this.method,
+            data: $(this).serialize(),
+            success: function (result) {
+                if (result.success) {
+                    $('#formSavePreownedLocator .btn-primary').hide();
+                    $('#fields').hide();
+                    $('#ResultMsg').html(result.OnScreenMessage);
+                    $('.alert').removeClass('alert-danger').addClass('alert-success').show();
+                } else {
+                    $('#ResultMsg').html();
+                    var msg = '';
+                    $.each(result.Errors, function () {
+                        msg += "<li>" + this.Value + "</li>"
+                    })
+
+                    $('#ResultMsg').html(msg);
+                    $('.alert').show();
+                }
+            }
+        });
+        return false;
+    });
+</script>
+<div class="modal fade" id="nextRequestInformationModal" tabindex="-1" role="dialog"
+    aria-labelledby="nextRequestInformationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><div class="close-text">@MINI.Resources.Forms.Index.CloseLbl</div>&times;</button>
+                <h4 class="modal-title">
+                    @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.FormTitle)</h4>
+            </div>
+            <div class="modal-body" style="padding: 20px;">
+                @*  <input name="VIN" id="VIN" value="" />
+                @{ Html.RenderAction("PreownedLocator", "Form", new { lang = @MINI.App.Lang});}*@
+                @using (Html.BeginForm("SavePreownedLocator", "Form", FormMethod.Post, new { id = "formSavePreownedLocator" }))
+                {
+                        @Html.HiddenFor(m => m.VIN);
+                        @Html.HiddenFor(m => m.HiddenRetailerID);
+                        @Html.HiddenFor(m => m.RetailerNumber);
+                    <div class="next-request-info-form">
+                        <div class="alert alert-danger" style="display:none;">
+                            <div id="ResultMsg">
+                            </div>
+                        </div>
+                        <fieldset id="fields">
+                            <div class="col">
+                                <div class="form-group">
+                                    <div class="testdrive-select required">
+                                        @Html.DropDownListFor(m => m.Salutation, Model.Salutations, MINI.Resources.Forms.Index.SalutationLbl, new { id = "ddlSalutation", @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control generalinquory-input next-FirstName", @placeholder = @MINI.Resources.Forms.Index.FirstNameLbl })
+                                </div>
+                                <div class="form-group required">
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control generalinquory-input next-LastName", @placeholder = @MINI.Resources.Forms.Index.LastNameLbl })
+                                </div>
+                                <div class="form-group">
+                                    <div class="testdrive-select required">
+                                        @Html.DropDownListFor(m => m.PreferredContactMethod, Model.PreferredContactMethods, MINI.Resources.Forms.Index.PreferredContactMethodLbl, new { id = "ddlPreferredContactMethod", @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="testdrive-select" style="width: 300px">
+                                        @foreach (var phoneType in Model.PhoneTypes)
+                                        {
+                                            <div class="radio-inline">
+                                                <label>@Html.RadioButtonFor(m => m.PhoneType, phoneType.Value) @phoneType.Text</label>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control generalinquory-input", @placeholder = @MINI.Resources.Forms.Index.PhoneNumberLbl })
+                                </div>
+                                <div class="form-group required">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control generalinquory-input", @placeholder = @MINI.Resources.Forms.Index.EmailAddressLbl })
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="testdrive-select required">
+                                        @Html.DropDownListFor(m => m.PreferredContactTime, Model.PreferredContactTimes, MINI.Resources.Forms.Index.PreferredContactTimeLbl, new { id = "ddlPreferredContactTime", @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    @Html.TextAreaFor(m => m.Comments, new { @class = "form-control generalinquory-input", @placeholder = @MINI.Resources.Forms.Index.CommentsLbl, @rows = "6" })
+                                </div>
+                                <br />
+                                <div class="pull-left">
+                                    <button class="btn btn-primary gradient-grey shadow" type="submit">
+                                        <img src="@Url.ContentVersioned("~/Public/img/transp-shadow-double-chevron.png")" width="16" height="12" />
+                                        @MINI.Resources.Forms.Index.SubmitLbl</button>
+                                    <div class="reqmsg">@Html.Raw(MINI.Resources.Forms.Index.AllFieldsMarkedRequired)</div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+            @{Html.RenderPartial("_FormFooter");}
+            </div>
+        </div>
+    </div>
+</div>

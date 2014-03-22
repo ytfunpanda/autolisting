@@ -1,0 +1,112 @@
+﻿@model List<MINI.Models.NextVehicleResultItemViewModel>
+<style>
+    table
+    {
+    }
+</style>
+@if (ViewData["TotalResults"] != null)
+{<h4 class="pull-left">@MvcHtmlString.Create(@ViewData["TotalResults"].ToString())</h4>}
+<div class="pull-right">@MvcHtmlString.Create(@ViewData["Paging"].ToString())</div>
+<div style="clear: both; margin-bottom: 10px">
+</div>
+<div id="ResultList" class="clearfix">
+    @if (ViewData["SearchResultTitle"] != null)
+    {
+        <h4 class="pull-left">@ViewData["SearchResultTitle"].ToString()</h4>
+    }
+    @foreach (var item in Model)
+    {
+        <div class="result-item">
+            <table class="ResultItemTable">
+                <tr>
+                    <td width="250" valign="top">
+                        <div align="center">
+                            <a href="/en/shopping/mini-next/detail/@item.StockNumber">
+                                <img src="@item.Photo" style="max-width:234px; max-height:154px"></a></div>
+                    </td>
+                    <td valign="top">
+                        <div class="header">
+                            <a href="/en/shopping/mini-next/detail/@item.StockNumber">
+                            @{ string nameFix = item.Model +" "+ item.Trim;
+                               if (MINI.App.CurrentUserLanguage == "fr")
+                               {
+                                   nameFix = nameFix.ToUpper().Replace("CONVERTIBLE", "CABRIOLET").Replace("EDITION", "ÉDITIONS");   
+                               }
+                               }
+                                <div class="title">@item.Year MINI @nameFix</div>
+                            </a>
+                            <div class="price">@item.Price.ToString("C0", new System.Globalization.CultureInfo(MINI.App.Lang+"-CA"))</div>
+                            <br />
+                        </div>
+                        <table class="ResultDataTable">
+                            <tr>
+                                <td valign="top" width="66%">
+                                    <table class="ResultDataTable">
+                                        <tr>
+                                            <td>
+                                                @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.KMShortLabel):
+                                            </td>
+                                            <td align="right">
+                                                @item.KM
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.TransmissionLabel):
+                                            </td>
+                                            <td align="right">
+                                                @item.Transmission
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.ExteriorColourLabel):
+                                            </td>
+                                            <td align="right">
+                                                @item.BodyColour
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.InteriorLabel):
+                                            </td>
+                                            <td align="right">
+                                                @item.InteriorColour
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.VINLabel):
+                                            </td>
+                                            <td align="right">
+                                                @item.VIN
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @MvcHtmlString.Create(MINI.Resources.Shopping.MININext.MINIRetailerLabel):
+                                            </td>
+                                            <td align="right">
+                                                @item.RetailerName
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td valign="top" align="right">
+                                    <div class="list-btn-area">
+                                        @Html.ButtonLink(HtmlHelperExtensions.ButtonLinkType.VIEWDETAILS, "/en/shopping/mini-next/detail/" + @item.StockNumber + "", MINI.Resources.Shopping.MININext.ViewDetailsButton, "btn-md btn-block pull-right", null)
+                                        @Html.ButtonLink(HtmlHelperExtensions.ButtonLinkType.REQUESTDETAILS, "#nextRequestInformationModal", MINI.Resources.Shopping.MININext.RequestForDetailButton, "btn-md btn-block pull-right btn-request-more-details", new { data_toggle = "modal", data_id = item.VIN })
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </div>
+    }
+</div>
+<div class="pull-right">@MvcHtmlString.Create(@ViewData["Paging"].ToString())</div>
+
+@{ Html.RenderAction("PreownedLocatorModal", "Form", new { lang = @MINI.App.Lang });}
