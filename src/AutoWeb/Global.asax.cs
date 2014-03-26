@@ -174,7 +174,7 @@ namespace AutoWeb {
           Application_End();
           Application_Start();
       }
-      App.CurrentRetailerSite = retailerSites.FindByDomain(App.BaseUrl);
+      //App.CurrentRetailerSite = retailerSites.FindByDomain(App.BaseUrl);
     }
   }
 }

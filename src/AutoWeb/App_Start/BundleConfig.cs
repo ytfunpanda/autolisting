@@ -9,6 +9,21 @@ namespace AutoWeb
         public static void RegisterBundles(BundleCollection bundles)
         {
              bundles.Add(new ScriptBundle("~/bundles/base-js").Include(
+                 "~/Public/js/vendor/jquery-1.10.2.min.js",
+              "~/Public/js/vendor/jquery.easing.1.3.js",
+              "~/Public/js/vendor/underscore-min.js",
+              "~/Public/js/vendor/backbone-min.js",
+              "~/Public/js/vendor/bootstrap.min.js",
+			  
+              "~/Public/js/auto-app.js",
+              "~/Public/js/auto-global.js",
+
+              "~/Public/js/vendor/jquery.cookie.js",
+              "~/Public/js/vendor/jquery.liquidcarousel.js",
+			  "~/Public/js/vendor/ui.js",
+
+              "~/Public/js/plugin/console.log.js"
+
                  ));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
