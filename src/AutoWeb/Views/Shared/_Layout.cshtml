@@ -13,8 +13,8 @@
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/Public/img/favicon.ico" type="image/x-icon" />
     <script>var isDebug = false;</script>
-    @Styles.Render("~/Public/css/base-css")
-    @Styles.Render("~/Public/css/site-css")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
     @if (AutoWeb.App.CurrentUserLanguage.ToUpperInvariant() == "FR")
     {
         @Styles.Render("~/Public/css/french-css")

@@ -8,33 +8,41 @@ namespace AutoWeb
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-             bundles.Add(new ScriptBundle("~/bundles/base-js").Include(
-                 "~/Public/js/vendor/jquery-1.10.2.min.js",
-              "~/Public/js/vendor/jquery.easing.1.3.js",
-              "~/Public/js/vendor/underscore-min.js",
-              "~/Public/js/vendor/backbone-min.js",
-              "~/Public/js/vendor/bootstrap.min.js",
-			  
-              "~/Public/js/auto-app.js",
-              "~/Public/js/auto-global.js",
+            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            //            "~/Scripts/jquery-{version}.js"));
 
-              "~/Public/js/vendor/jquery.cookie.js",
-              "~/Public/js/vendor/jquery.liquidcarousel.js",
-			  "~/Public/js/vendor/ui.js",
+            //bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+            //            "~/Scripts/jquery-ui-{version}.js"));
 
-              "~/Public/js/plugin/console.log.js"
+            //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+            //            "~/Scripts/jquery.unobtrusive*",
+            //            "~/Scripts/jquery.validate*"));
 
-                 ));
+            // add on JS
+            // ordering of the following JS includes matters!
+            bundles.Add(new ScriptBundle("~/bundles/base-js").Include(
 
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                // vendor
+             "~/Scripts/jquery-{version}.js",
+             "~/Public/js/vendor/jquery.easing.1.3.js",
+             "~/Public/js/vendor/underscore-min.js",
+             "~/Public/js/vendor/backbone-min.js",
+             "~/Public/js/vendor/bootstrap.min.js",
+             "~/Public/js/vendor/ui.js",
+             "~/Public/js/vendor/jquery.cookie.js",
+             //"~/Public/js/vendor/jquery.liquidcarousel.js",
+             
+             // base
+             "~/Public/js/auto-app.js",
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-{version}.js"));
+             // plugins
+             "~/Public/js/plugin/jquery.browser.js",
+             "~/Public/js/plugin/console.log.js",
+              "~/Public/js/plugin/followwindow.js",
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.unobtrusive*",
-                        "~/Scripts/jquery.validate*"));
+             "~/Public/js/auto-global.js"
+
+            ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

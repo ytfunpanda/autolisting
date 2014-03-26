@@ -342,19 +342,8 @@
     <Content Include="Public\Images\orderedList7.png" />
     <Content Include="Public\Images\orderedList8.png" />
     <Content Include="Public\Images\orderedList9.png" />
-    <Content Include="Public\js\findretailer-maphelpers.js" />
     <Content Include="Public\js\auto-app.js" />
     <Content Include="Public\js\auto-global.js" />
-    <Content Include="Public\js\plugin\console.log.js" />
-    <Content Include="Public\js\plugin\html5shiv.js" />
-    <Content Include="Public\js\plugin\jquery.browser.min.js" />
-    <Content Include="Public\js\plugin\jquery.odometer.js" />
-    <Content Include="Public\js\plugin\jquery.prettyPhoto.js" />
-    <Content Include="Public\js\plugin\loadImages.js" />
-    <Content Include="Public\js\plugin\main-navigation.js" />
-    <Content Include="Public\js\plugin\mobile-navigation.js" />
-    <Content Include="Public\js\plugin\progress.js" />
-    <Content Include="Public\js\plugin\readmore.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
