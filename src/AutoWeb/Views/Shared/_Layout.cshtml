@@ -57,6 +57,6 @@
         @*ga('create', '@AnalyticsHelpers.GetGoogleAnalyticsCode()', '@AnalyticsHelpers.GetDomainForAnalytics()');*@
         ga('send', 'pageview');
     </script>
+    @RenderSection("featured", required: false)
 </body>
-@RenderSection("featured", required: false)
 </html>
