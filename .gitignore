@@ -12,8 +12,11 @@
 [Rr]elease/
 x64/
 build/
-[Bb]in/
+#[Bb]in/
 [Oo]bj/
+Deploy/
+Web.Release.config
+Web.Debug.config
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/

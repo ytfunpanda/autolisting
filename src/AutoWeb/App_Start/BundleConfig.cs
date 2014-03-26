@@ -62,7 +62,9 @@ namespace AutoWeb
                         "~/Content/themes/base/jquery.ui.slider.css",
                         "~/Content/themes/base/jquery.ui.tabs.css",
                         "~/Content/themes/base/jquery.ui.datepicker.css",
-                        "~/Content/themes/base/jquery.ui.progressbar.css",
+                        "~/Content/themes/base/jquery.ui.menu.css",
+                        "~/Content/themes/base/jquery.ui.spinner.css",
+                        "~/Content/themes/base/jquery.ui.tooltip.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
         }
     }
