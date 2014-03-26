@@ -1,7 +1,7 @@
 ﻿(function () {
 
     // watch for specific hash's in the url and react accordingly.
-    var watcher = new Auto.URLWatcher();
+    //var watcher = new Auto.URLWatcher();
 
     var isMobile = {
         Android: function () {
@@ -37,8 +37,8 @@
         window.location = '/sorry';
     } else {
         var followWindow = new Auto.FollowWindow();
-        var configLauncher = new Auto.ConfigLauncher();
-        var ccrcLauncher = new Auto.CCRCLauncher();
+        //var configLauncher = new Auto.ConfigLauncher();
+        //var ccrcLauncher = new Auto.CCRCLauncher();
     }
 
     // IF IE 8 -- FILL IN PLACEHOLDER TEXT 
