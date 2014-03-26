@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace AutoWeb.Controllers
 {
-    public class AboutController : Controller
+    public class ContactController : Controller
     {
         public ActionResult Index()
         {
