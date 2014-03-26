@@ -12,10 +12,11 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/Public/img/favicon.ico" type="image/x-icon" />
-    <script>        var isDebug = false;</script>
+    <script>var isDebug = false;</script>
     @Styles.Render("~/Public/css/base-css")
     @Styles.Render("~/Public/css/site-css")
-    @if (AutoWeb.App.CurrentUserLanguage.ToUpperInvariant() == "FR") {
+    @if (AutoWeb.App.CurrentUserLanguage.ToUpperInvariant() == "FR")
+    {
         @Styles.Render("~/Public/css/french-css")
     }
     <!--[if gte IE 8]>
@@ -23,40 +24,25 @@
     <![endif]-->
 </head>
 <body>
-    <!--[if lt IE 7]> <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p> <![endif]-->
-    @*@{ Html.RenderAction("RenderNavigation", "Navigation", new { lang = @AutoWeb.App.CurrentUserLanguage, showNav = true });}*@
+    <!--[if lt IE 7]><p>Browser Outdated. Please upgrade your browser.</p> <![endif]-->
     <div class="container">
         <div class="clearfix">
             <div id="body">
                 @RenderBody()
             </div>
         </div>
-        @*@{ Html.RenderAction("RenderFooter", "Navigation", new { lang = @AutoWeb.App.CurrentUserLanguage });}*@
-        @*@{ Html.RenderPartial("_DebugInfo"); }*@
     </div>
-    @*@{ Html.RenderAction("BookTestDrive", "Form", new { lang = @AutoWeb.App.CurrentUserLanguage });}
-    @{ Html.RenderAction("ServiceAppointmentModal", "Form", new { lang = @AutoWeb.App.CurrentUserLanguage });}
-    @{ Html.RenderAction("Subscribe", "Form", new { lang = @AutoWeb.App.CurrentUserLanguage });}
-    @{ Html.RenderAction("Unsubscribe", "Form", new { lang = @AutoWeb.App.CurrentUserLanguage });}
-    @{Html.RenderPartial("_ConfigWindow");}*@
     <script src="@Url.ContentVersioned("~/Public/js/plugin/html5shiv.js")"></script>
-    @if (HttpContext.Current.IsDebuggingEnabled) {
+    @if (HttpContext.Current.IsDebuggingEnabled)
+    {
         @Scripts.Render("~/bundles/base-js")
-    } else {
+    }
+    else
+    {
         <script src="@Scripts.Url("~/bundles/base-js")"></script>
     }
     <script>
-        var addthis_config = addthis_config||{};
-        addthis_config.pubid = '54308427';
-        addthis_config.ui_use_css= 'false';
-        
-        var addthisScript = document.createElement('script');
-        addthisScript.setAttribute('src', 'http://s7.addthis.com/js/300/addthis_widget.js#domready=1')
-        document.body.appendChild(addthisScript)
-
         $(function () {
-
-            
             @RenderSection("AdditionalScripts", false)
         });
     </script>
@@ -65,21 +51,12 @@
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o), 
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
             m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
         @*ga('create', '@AnalyticsHelpers.GetGoogleAnalyticsCode()', '@AnalyticsHelpers.GetDomainForAnalytics()');*@
         ga('send', 'pageview');
-
     </script>
-    @*<script type="text/javascript">
-        document.write(unescape("%3Cscript src='//munchkin.marketo.net/munchkin.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>*@
-    @*<script>        Munchkin.init('607-REG-838');</script>*@
 </body>
-@*@if (AutoWeb.App.CurrentRetailerSite != null && AutoWeb.App.CurrentRetailerSite.Retailer.InternalRetailerID == 10124) {
-    <script async src="http://i.simpli.fi/dpx.js?cid=1705&action=100&segment=105361&m=1"></script>
-}*@
-    @RenderSection("featured", required: false)
+@RenderSection("featured", required: false)
 </html>

@@ -204,6 +204,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\AutoDB.Context.cs">
@@ -254,16 +255,13 @@
     <Compile Include="Infrastructure\StandardContextFactory.cs" />
     <Compile Include="Infrastructure\UrlExtensions.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\GroupedRetailerViewModel_2.cs" />
-    <Compile Include="Models\RetailerSiteViewModel.cs" />
-    <Compile Include="Models\RetailerTeamViewModel.cs" />
-    <Compile Include="Models\RetailerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Shared\Global.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Global.resx</DependentUpon>
     </Compile>
+    <Compile Include="Models\RetailerSiteViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -322,6 +320,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Public\css\bootstrap.min.css" />
+    <Content Include="Public\css\mobile\bootstrap-overrides.css" />
     <Content Include="Public\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Public\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Public\fonts\glyphicons-halflings-regular.woff" />
@@ -341,8 +341,8 @@
     <Content Include="Public\Images\orderedList8.png" />
     <Content Include="Public\Images\orderedList9.png" />
     <Content Include="Public\js\findretailer-maphelpers.js" />
-    <Content Include="Public\js\mini-app.js" />
-    <Content Include="Public\js\mini-global.js" />
+    <Content Include="Public\js\auto-app.js" />
+    <Content Include="Public\js\auto-global.js" />
     <Content Include="Public\js\plugin\console.log.js" />
     <Content Include="Public\js\plugin\html5shiv.js" />
     <Content Include="Public\js\plugin\jquery.browser.min.js" />
@@ -385,7 +385,6 @@
     <Content Include="Views\Public\Mobile\Index.Mobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Admin\" />
     <Folder Include="Infrastructure\Resolvers\" />
     <Folder Include="Public\js\vendor\" />
   </ItemGroup>
@@ -435,9 +434,9 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>8887</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:49325/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

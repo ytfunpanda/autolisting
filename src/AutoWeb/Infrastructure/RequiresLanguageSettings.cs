@@ -31,21 +31,21 @@ public class RequiresLanguageSettings : ActionFilterAttribute {
 
         if (!filterContext.IsChildAction) {
             
-            if (App.CurrentRetailerSite != null && App.CurrentRetailerSite.Retailer != null) {
-                if (App.CurrentRetailerSite.Retailer.ProvinceShort == "QC" && string.IsNullOrEmpty(App.CurrentUserLanguage)) {
-                    Cookies.Set("__auto", "uprov", App.CurrentRetailerSite.Retailer.ProvinceShort, DateTime.Now.AddYears(1));
-                    App.CurrentUserProvince = App.CurrentRetailerSite.Retailer.ProvinceShort;
+            if (App.CurrentRetailerSite != null) {
+                //if (App.CurrentRetailerSite.Retailer.ProvinceShort == "QC" && string.IsNullOrEmpty(App.CurrentUserLanguage)) {
+                //    Cookies.Set("__auto", "uprov", App.CurrentRetailerSite.Retailer.ProvinceShort, DateTime.Now.AddYears(1));
+                //    App.CurrentUserProvince = App.CurrentRetailerSite.Retailer.ProvinceShort;
 
-                    Cookies.Set("__auto", "ulang", "fr", DateTime.Now.AddYears(1));
-                    App.CurrentUserLanguage = "fr";
-                }
-                if (App.CurrentRetailerSite.Retailer.ProvinceShort != "QC" && string.IsNullOrEmpty(App.CurrentUserLanguage)) {
-                    Cookies.Set("__auto", "uprov", App.CurrentRetailerSite.Retailer.ProvinceShort, DateTime.Now.AddYears(1));
-                    App.CurrentUserProvince = App.CurrentRetailerSite.Retailer.ProvinceShort;
+                //    Cookies.Set("__auto", "ulang", "fr", DateTime.Now.AddYears(1));
+                //    App.CurrentUserLanguage = "fr";
+                //}
+                //if (App.CurrentRetailerSite.Retailer.ProvinceShort != "QC" && string.IsNullOrEmpty(App.CurrentUserLanguage)) {
+                //    Cookies.Set("__auto", "uprov", App.CurrentRetailerSite.Retailer.ProvinceShort, DateTime.Now.AddYears(1));
+                //    App.CurrentUserProvince = App.CurrentRetailerSite.Retailer.ProvinceShort;
 
-                    Cookies.Set("__auto", "ulang", "en", DateTime.Now.AddYears(1));
-                    App.CurrentUserLanguage = "en";
-                }
+                //    Cookies.Set("__auto", "ulang", "en", DateTime.Now.AddYears(1));
+                //    App.CurrentUserLanguage = "en";
+                //}
 
                 // require to set the culture here
                 CultureInfo ci = (CultureInfo)new CultureInfo(App.Lang + "-ca");

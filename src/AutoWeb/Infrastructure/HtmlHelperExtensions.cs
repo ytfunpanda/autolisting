@@ -22,60 +22,18 @@ namespace System.Web.Mvc {
             }
 
             if(AutoWeb.App.CurrentRetailerSite != null) {
-                string retailer = AutoWeb.App.CurrentRetailerSite.Retailer.RetailerID.ToString();
-                configUrlMask = "{0}/?p={1}&r={2}/#/{3}/{4}/colours";
-                returnValue = string.Format(configUrlMask, domain, province, retailer, modelSlug, vehicleSlug);
+                //string retailer = AutoWeb.App.CurrentRetailerSite.Retailer.RetailerID.ToString();
+                //configUrlMask = "{0}/?p={1}&r={2}/#/{3}/{4}/colours";
+                //returnValue = string.Format(configUrlMask, domain, province, retailer, modelSlug, vehicleSlug);
 
-                if (string.IsNullOrEmpty(modelSlug) && string.IsNullOrEmpty(vehicleSlug)) {
-                    configUrlMask = "{0}/?p={1}&r={2}";
-                    returnValue = string.Format(configUrlMask, domain, province, retailer);
-                }
+                //if (string.IsNullOrEmpty(modelSlug) && string.IsNullOrEmpty(vehicleSlug)) {
+                //    configUrlMask = "{0}/?p={1}&r={2}";
+                //    returnValue = string.Format(configUrlMask, domain, province, retailer);
+                //}
             }
 
             return returnValue;
         }
-
-        //public static MvcHtmlString GroupDropList(this HtmlHelper helper, string name, IEnumerable<GroupDropListItem> data, int? SelectedValue, object htmlAttributes, string optionLabel) {
-        //    if (data == null && helper.ViewData != null)
-        //        data = helper.ViewData.Eval(name) as IEnumerable<GroupDropListItem>;
-        //    if (data == null) return MvcHtmlString.Empty;
-
-        //    var select = new TagBuilder("select");
-
-        //    if (htmlAttributes != null)
-        //        select.MergeAttributes(new RouteValueDictionary(htmlAttributes));
-
-        //    select.GenerateId(name);
-        //    select.MergeAttribute("name", name);
-
-        //    var optgroupHtml = new StringBuilder();
-        //    if (!string.IsNullOrEmpty(optionLabel)) {
-        //        var startItem = new TagBuilder("option");
-        //        startItem.Attributes["value"] = "null";
-        //        startItem.SetInnerText(optionLabel);
-        //        optgroupHtml.Append(startItem);
-        //    }
-        //    var groups = data.ToList();
-        //    foreach (var group in data) {
-        //        var groupTag = new TagBuilder("optgroup");
-        //        groupTag.Attributes.Add("label", helper.Encode(group.Name));
-
-        //        var optHtml = new StringBuilder();
-
-        //        foreach (var item in group.Items) {
-        //            var option = new TagBuilder("option");
-        //            option.Attributes.Add("value", helper.Encode(item.Value));
-        //            if (SelectedValue != 0 && item.Value == SelectedValue)
-        //                option.Attributes.Add("selected", "selected");
-        //            option.InnerHtml = helper.Encode(item.Text);
-        //            optHtml.AppendLine(option.ToString(TagRenderMode.Normal));
-        //        }
-        //        groupTag.InnerHtml = optHtml.ToString();
-        //        optgroupHtml.AppendLine(groupTag.ToString(TagRenderMode.Normal));
-        //    }
-        //    select.InnerHtml = optgroupHtml.ToString();
-        //    return MvcHtmlString.Create(select.ToString(TagRenderMode.Normal));
-        //}
 
         public static MvcHtmlString ButtonLink(this HtmlHelper helper, ButtonLinkType type, string url, string label, string additionalCss, object htmlAttributes) {
             TagBuilder container = new TagBuilder("div");
@@ -126,58 +84,16 @@ namespace System.Web.Mvc {
             img.MergeAttribute("height", "23");
             string imgSrc = "";
             switch (type) {
-                case ButtonLinkType.STD:
-                    imgSrc = "~/Public/img/transp-shadow-double-chevron.png";
-                    break;
-                case ButtonLinkType.BUILD:
-                    imgSrc = "~/Public/img/ico/buttons/build.png";
-                    break;
-                case ButtonLinkType.TESTDRIVE:
-                    imgSrc = "~/Public/img/ico/buttons/testdrive.png";
-                    break;
-                case ButtonLinkType.HIGHLIGHTS:
-                    imgSrc = "~/Public/img/ico/buttons/highlights.png";
-                    break;
-                case ButtonLinkType.INVENTORY:
-                    imgSrc = "~/Public/img/ico/buttons/inventory.png";
-                    break;
-                case ButtonLinkType.LEARNMORE:
-                    imgSrc = "~/Public/img/ico/buttons/learnmore.png";
-                    break;
-                case ButtonLinkType.FIND:
-                    imgSrc = "~/Public/img/ico/buttons/find.png";
-                    break;
-                case ButtonLinkType.CONTACTLOOP:
-                    imgSrc = "~/Public/img/ico/buttons/intheloop.png";
-                    break;
-                case ButtonLinkType.SCHEDULESERVICE:
-                    imgSrc = "~/Public/img/ico/buttons/scheduleservice.png";
-                    break;
-                case ButtonLinkType.CCRC:
-                    imgSrc = "~/Public/img/ico/buttons/ccrc.png";
-                    break;
-                case ButtonLinkType.TIREWHEEL:
-                    imgSrc = "~/Public/img/ico/buttons/tirewheel.png";
-                    break;
-                case ButtonLinkType.CONTACT:
-                    imgSrc = "~/Public/img/ico/buttons/contact.png";
-                    break;
-                case ButtonLinkType.VIEWDETAILS:
-                    imgSrc = "~/Public/img/ico/buttons/viewdetails.png";
-                    break;
-                case ButtonLinkType.REQUESTDETAILS:
-                    imgSrc = "~/Public/img/ico/buttons/scheduleservice.png";
-                    break;
-                case ButtonLinkType.SUBMIT:
-                    imgSrc = "~/Public/img/ico/buttons/submit.png";
-                    break;
-                case ButtonLinkType.NEWSEARCH:
-                    imgSrc = "~/Public/img/ico/buttons/newsearch.png";
+                case ButtonLinkType.BACK:
+                    imgSrc = "~/Public/img/ico/buttons/clearall.png";
                     break;
                 case ButtonLinkType.CLEAR:
                     imgSrc = "~/Public/img/ico/buttons/clearall.png";
                     break;
-                case ButtonLinkType.BACK:
+                case ButtonLinkType.NEXT:
+                    imgSrc = "~/Public/img/ico/buttons/clearall.png";
+                    break;
+                case ButtonLinkType.PREVIOUS:
                     imgSrc = "~/Public/img/ico/buttons/back.png";
                     break;
                 default:
@@ -189,24 +105,10 @@ namespace System.Web.Mvc {
         }
 
         public enum ButtonLinkType {
-            STD,
-            BUILD,
-            TESTDRIVE,
-            HIGHLIGHTS,
-            INVENTORY,
-            LEARNMORE,
-            FIND,
-            CONTACTLOOP,
-            SCHEDULESERVICE,
-            CCRC,
-            TIREWHEEL,
-            CONTACT,
-            VIEWDETAILS,
-            REQUESTDETAILS,
-            SUBMIT,
-            NEWSEARCH,
-            CLEAR,
-            BACK
+            NEXT,
+            PREVIOUS,
+            BACK,
+            CLEAR
         }
     }
 }
