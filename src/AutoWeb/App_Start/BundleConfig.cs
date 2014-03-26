@@ -30,8 +30,8 @@ namespace AutoWeb
              "~/Public/js/vendor/bootstrap.min.js",
              "~/Public/js/vendor/ui.js",
              "~/Public/js/vendor/jquery.cookie.js",
-             //"~/Public/js/vendor/jquery.liquidcarousel.js",
-             
+                //"~/Public/js/vendor/jquery.liquidcarousel.js",
+
              // base
              "~/Public/js/auto-app.js",
 
