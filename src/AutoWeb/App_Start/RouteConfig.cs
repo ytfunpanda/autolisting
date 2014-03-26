@@ -14,9 +14,19 @@ namespace AutoWeb
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
+                name: "Home",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "About",
+                url: "{controller}/{action}",
+                defaults: new { controller = "About", action = "Index"}
+            );
+            routes.MapRoute(
+                name: "Contact",
+                url: "{controller}/{action}",
+                defaults: new { controller = "Contact", action = "Index" }
             );
         }
     }
