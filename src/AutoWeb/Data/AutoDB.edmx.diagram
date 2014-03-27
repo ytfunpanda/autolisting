@@ -4,10 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8c157a245d9a4f908f9c0474bf890fd6" Name="Diagram1">
-        <EntityTypeShape EntityType="Auto.StatusType" Width="1.5" PointX="10.238651654794184" PointY="26.894967285401638" />
-        <EntityTypeShape EntityType="Auto.VehicleType" Width="1.5" PointX="3.8315071593185457" PointY="4.6193916968160273" />
-        <EntityTypeShape EntityType="Auto.Listing" Width="1.5" PointX="0.24172876786521111" PointY="8.5882907698807731" />
+      <Diagram DiagramId="8c157a245d9a4f908f9c0474bf890fd6" Name="Diagram1" ShowGrid="false" ZoomLevel="71">
+        <EntityTypeShape EntityType="Auto.StatusType" Width="1.5" PointX="14.375" PointY="12" />
+        <EntityTypeShape EntityType="Auto.VehicleType" Width="1.5" PointX="7.625" PointY="10.25" />
+        <EntityTypeShape EntityType="Auto.Listing" Width="1.5" PointX="11.75" PointY="5.75" />
+        <AssociationConnector Association="Auto.FK_Listing_StatusType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

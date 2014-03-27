@@ -257,6 +257,8 @@
     <Compile Include="Infrastructure\StandardContextFactory.cs" />
     <Compile Include="Infrastructure\UrlExtensions.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\VehicleTypeViewModel.cs" />
+    <Compile Include="Models\ListingModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Shared\Global.Designer.cs">
       <AutoGen>True</AutoGen>

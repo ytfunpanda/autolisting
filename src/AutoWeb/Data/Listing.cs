@@ -41,5 +41,7 @@ namespace AutoWeb.Data
         public Nullable<int> FuelTypeID { get; set; }
         public Nullable<int> StatusTypeID { get; set; }
         public string Location { get; set; }
+    
+        public virtual StatusType StatusType { get; set; }
     }
 }

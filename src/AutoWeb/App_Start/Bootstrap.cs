@@ -12,8 +12,11 @@ namespace AutoWeb {
 
         public static void Step1() {
             AutoEntities stdCtx = StandardContextFactory.GetContextPerRequest();
-            //List<ModelViewModel> models = Mapper.Map<List<ModelViewModel>>(ctx.Models.Where(m => m.Lang == "en"));
-            //App.Cache.Add(string.Format(App._cacheKeyEn, "MODELS", "en"), models, DateTime.Today.AddHours(App._cacheExpiry));
+            List<VehicleTypeViewModel> VehicleTypes = Mapper.Map<List<VehicleTypeViewModel>>(stdCtx.VehicleTypes.Where(x=>x.VehicleTypeID>0).OrderBy(x=>x.SortOrder));
+            App.Cache.Add(string.Format(App._cacheKeyEn, "VEHICLETYPES", "en"), VehicleTypes, DateTime.Today.AddHours(App._cacheExpiry));
+
+            //List<ListingViewModel> listings = Mapper.Map<List<ListingViewModel>>(stdCtx.Listings.Where(m => m.ListingID > 0));
+            //App.Cache.Add(string.Format(App._cacheKeyEn, "LISTINGS", "en"), listings, DateTime.Today.AddHours(App._cacheExpiry));
         }
 
         public static void Step2() {
