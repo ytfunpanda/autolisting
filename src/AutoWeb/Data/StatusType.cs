@@ -14,7 +14,14 @@ namespace AutoWeb.Data
     
     public partial class StatusType
     {
+        public StatusType()
+        {
+            this.Listings = new HashSet<Listing>();
+        }
+    
         public int StatusTypeID { get; set; }
         public string Name { get; set; }
+    
+        public virtual ICollection<Listing> Listings { get; set; }
     }
 }

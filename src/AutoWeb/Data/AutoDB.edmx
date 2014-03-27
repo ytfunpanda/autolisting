@@ -9,12 +9,16 @@
           <EntitySet Name="Listing" EntityType="Auto.Store.Listing" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="StatusType" EntityType="Auto.Store.StatusType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="VehicleType" EntityType="Auto.Store.VehicleType" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Listing_StatusType" Association="Auto.Store.FK_Listing_StatusType">
+            <End Role="StatusType" EntitySet="StatusType" />
+            <End Role="Listing" EntitySet="Listing" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Listing">
           <Key>
             <PropertyRef Name="ListingID" />
           </Key>
-          <Property Name="ListingID" Type="int" Nullable="false" />
+          <Property Name="ListingID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="int" />
           <Property Name="DateAdd" Type="datetime" />
           <Property Name="Title" Type="varchar" MaxLength="200" />
@@ -58,6 +62,18 @@
           <Property Name="SortOrder" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Listing_StatusType">
+          <End Role="StatusType" Type="Auto.Store.StatusType" Multiplicity="0..1" />
+          <End Role="Listing" Type="Auto.Store.Listing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusType">
+              <PropertyRef Name="StatusTypeID" />
+            </Principal>
+            <Dependent Role="Listing">
+              <PropertyRef Name="StatusTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -66,6 +82,10 @@
           <EntitySet Name="StatusTypes" EntityType="Auto.StatusType" />
           <EntitySet Name="VehicleTypes" EntityType="Auto.VehicleType" />
           <EntitySet Name="Listings" EntityType="Auto.Listing" />
+          <AssociationSet Name="FK_Listing_StatusType" Association="Auto.FK_Listing_StatusType">
+            <End Role="StatusType" EntitySet="StatusTypes" />
+            <End Role="Listing" EntitySet="Listings" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="StatusType">
           <Key>
@@ -73,6 +93,7 @@
           </Key>
           <Property Type="Int32" Name="StatusTypeID" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Listings" Relationship="Auto.FK_Listing_StatusType" FromRole="StatusType" ToRole="Listing" />
         </EntityType>
         <EntityType Name="VehicleType">
           <Key>
@@ -114,7 +135,20 @@
           <Property Type="Int32" Name="FuelTypeID" />
           <Property Type="Int32" Name="StatusTypeID" />
           <Property Type="String" Name="Location" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StatusType" Relationship="Auto.FK_Listing_StatusType" FromRole="Listing" ToRole="StatusType" />
         </EntityType>
+        <Association Name="FK_Listing_StatusType">
+          <End Type="Auto.StatusType" Role="StatusType" Multiplicity="0..1" />
+          <End Type="Auto.Listing" Role="Listing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusType">
+              <PropertyRef Name="StatusTypeID" />
+            </Principal>
+            <Dependent Role="Listing">
+              <PropertyRef Name="StatusTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
