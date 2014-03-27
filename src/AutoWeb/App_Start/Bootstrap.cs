@@ -7,21 +7,32 @@ using AutoMapper;
 using AutoWeb.Data;
 using AutoWeb.Models;
 
-namespace AutoWeb {
-    public class Bootstrap {
+namespace AutoWeb
+{
+    public class Bootstrap
+    {
 
-        public static void Step1() {
+        public static void Step1()
+        {
             AutoEntities stdCtx = StandardContextFactory.GetContextPerRequest();
-            List<VehicleTypeViewModel> VehicleTypes = Mapper.Map<List<VehicleTypeViewModel>>(stdCtx.VehicleTypes.Where(x=>x.VehicleTypeID>0).OrderBy(x=>x.SortOrder));
+            List<VehicleTypeViewModel> VehicleTypes = Mapper.Map<List<VehicleTypeViewModel>>(stdCtx.VehicleTypes.Where(x => x.VehicleTypeID > 0).OrderBy(x => x.SortOrder));
             App.Cache.Add(string.Format(App._cacheKeyEn, "VEHICLETYPES", "en"), VehicleTypes, DateTime.Today.AddHours(App._cacheExpiry));
+
+            List<VehicleTypeViewModel> StatusType = Mapper.Map<List<VehicleTypeViewModel>>(stdCtx.VehicleTypes.Where(x => x.VehicleTypeID > 0).OrderBy(x => x.SortOrder));
+            App.Cache.Add(string.Format(App._cacheKeyEn, "STATUSTYPE", "en"), StatusType, DateTime.Today.AddHours(App._cacheExpiry));
 
             //List<ListingViewModel> listings = Mapper.Map<List<ListingViewModel>>(stdCtx.Listings.Where(m => m.ListingID > 0));
             //App.Cache.Add(string.Format(App._cacheKeyEn, "LISTINGS", "en"), listings, DateTime.Today.AddHours(App._cacheExpiry));
         }
 
-        public static void Step2() {
+        public static void Step2()
+        {
             AutoEntities stdCtx = StandardContextFactory.GetContextPerRequest();
-           
+
         }
     }
 }
+
+            //VehicleType vehicleType = new VehicleType{ Name="Test", SortOrder=0, IsActive=true };
+            //stdCtx.VehicleTypes.Add(vehicleType);
+            //stdCtx.SaveChanges();
