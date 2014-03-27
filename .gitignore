@@ -8,8 +8,10 @@
 
 # Build results
 
-src/AutoWeb/Web.Release.config
-src/AutoWeb/Web.Debug.config
+/src/AutoWeb/Web.config
+/src/AutoWeb/Web.Debug.config
+/src/AutoWeb/Web.Release.config
+
 [Dd]ebug/
 [Rr]elease/
 x64/
