@@ -14,7 +14,7 @@ namespace Auto.Web.Models
     {
         public UsersContext()
             : base("AutoDBContext")
-        {
+        { 
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
