@@ -26,7 +26,10 @@ namespace Auto.Web
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Content/site.css",
+                "~/Content/app.css"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
@@ -42,7 +45,9 @@ namespace Auto.Web
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css",
                         "~/Content/css/bootstrap.css",
-                        "~/Content/css/bootstrap-theme.css"
+                        "~/Content/css/bootstrap-theme.css",
+                        "~/Content/header.css"
+
                         ));
         }
     }
