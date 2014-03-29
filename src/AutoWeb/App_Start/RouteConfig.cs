@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace AutoWeb
+namespace Auto.Web
 {
     public class RouteConfig
     {
@@ -14,19 +14,10 @@ namespace AutoWeb
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Home",
+                name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
-            routes.MapRoute(
-                name: "About",
-                url: "{controller}/{action}",
-                defaults: new { controller = "About", action = "Index"}
-            );
-            routes.MapRoute(
-                name: "Contact",
-                url: "{controller}/{action}",
-                defaults: new { controller = "Contact", action = "Index" }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new string[] { "Auto.Web.Controllers" }
             );
         }
     }

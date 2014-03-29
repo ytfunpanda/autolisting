@@ -1,38 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Auto.Web;
+using Auto.Web.Data;
 
-using AutoMapper;
-
-using AutoWeb.Data;
-using AutoWeb.Models;
-
-namespace AutoWeb
+public class Bootstrap
 {
-    public class Bootstrap
+    
+    public static void Step1()
     {
+        AutoDBEntities db = new AutoDBEntities();
 
-        public static void Step1()
-        {
-            AutoEntities stdCtx = StandardContextFactory.GetContextPerRequest();
-            List<VehicleTypeViewModel> VehicleTypes = Mapper.Map<List<VehicleTypeViewModel>>(stdCtx.VehicleTypes.Where(x => x.VehicleTypeID > 0).OrderBy(x => x.SortOrder));
-            App.Cache.Add(string.Format(App._cacheKeyEn, "VEHICLETYPES", "en"), VehicleTypes, DateTime.Today.AddHours(App._cacheExpiry));
+        var VehicleTypes = db.VehicleTypes.Where(x => x.VehicleTypeID > 0).OrderBy(x => x.SortOrder).ToList();
 
-            List<VehicleTypeViewModel> StatusType = Mapper.Map<List<VehicleTypeViewModel>>(stdCtx.VehicleTypes.Where(x => x.VehicleTypeID > 0).OrderBy(x => x.SortOrder));
-            App.Cache.Add(string.Format(App._cacheKeyEn, "STATUSTYPE", "en"), StatusType, DateTime.Today.AddHours(App._cacheExpiry));
+        App.Cache.Add(string.Format(App._cacheKeyEn, "VEHICLETYPES", "en"), VehicleTypes.Where(x => x.Lang == "en").ToList(), DateTime.Today.AddHours(App._cacheExpiry));
+        App.Cache.Add(string.Format(App._cacheKeyEn, "VEHICLETYPES", "fr"), VehicleTypes.Where(x => x.Lang == "fr").ToList(), DateTime.Today.AddHours(App._cacheExpiry));
+        App.Cache.Add(string.Format(App._cacheKeyEn, "VEHICLETYPES", "zh"), VehicleTypes.Where(x => x.Lang == "zh").ToList(), DateTime.Today.AddHours(App._cacheExpiry));
+        App.Cache.Add(string.Format(App._cacheKeyEn, "VEHICLETYPES", "de"), VehicleTypes.Where(x => x.Lang == "de").ToList(), DateTime.Today.AddHours(App._cacheExpiry));
+        App.Cache.Add(string.Format(App._cacheKeyEn, "VEHICLETYPES", "it"), VehicleTypes.Where(x => x.Lang == "it").ToList(), DateTime.Today.AddHours(App._cacheExpiry));
 
-            //List<ListingViewModel> listings = Mapper.Map<List<ListingViewModel>>(stdCtx.Listings.Where(m => m.ListingID > 0));
-            //App.Cache.Add(string.Format(App._cacheKeyEn, "LISTINGS", "en"), listings, DateTime.Today.AddHours(App._cacheExpiry));
-        }
+        //List<StatusType> StatusTypes = stdCtx.StatusTypes.Where(x => x.StatusTypeID > 0).OrderBy(x => x.Name).ToList();
+        //App.Cache.Add(string.Format(App._cacheKeyEn, "VEHICLETYPES", "en"), StatusTypes, DateTime.Today.AddHours(App._cacheExpiry));
 
-        public static void Step2()
-        {
-            AutoEntities stdCtx = StandardContextFactory.GetContextPerRequest();
+        //List<ListingViewModel> listings = stdCtx.Listings.Where(m => m.ListingID > 0).ToList();
+        //App.Cache.Add(string.Format(App._cacheKeyEn, "LISTINGS", "en"), listings, DateTime.Today.AddHours(App._cacheExpiry));
+    }
 
-        }
+    public static void Step2()
+    {
     }
 }
-
-            //VehicleType vehicleType = new VehicleType{ Name="Test", SortOrder=0, IsActive=true };
-            //stdCtx.VehicleTypes.Add(vehicleType);
-            //stdCtx.SaveChanges();

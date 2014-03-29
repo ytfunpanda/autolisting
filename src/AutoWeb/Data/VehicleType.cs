@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AutoWeb.Data
+namespace Auto.Web.Data
 {
     using System;
     using System.Collections.Generic;
@@ -15,6 +15,7 @@ namespace AutoWeb.Data
     public partial class VehicleType
     {
         public int VehicleTypeID { get; set; }
+        public string Lang { get; set; }
         public string Name { get; set; }
         public int SortOrder { get; set; }
         public bool IsActive { get; set; }

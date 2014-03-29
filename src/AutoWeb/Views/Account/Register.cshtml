@@ -1,19 +1,21 @@
-﻿@model AutoWeb.Models.RegisterModel
+﻿@model Auto.Web.Models.RegisterModel
 @{
     ViewBag.Title = "Register";
 }
 
 <hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>Create a new account.</h2>
+    <h1>@Auto.Web.Resources.Global.Register</h1>
+    @*<h1>@ViewBag.Title.</h1>*@
+    @*<h2>Create a new account.</h2>*@
 </hgroup>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
 
     <fieldset>
-        <legend>Registration Form</legend>
+        <legend></legend>
         <ol>
             <li>
                 @Html.LabelFor(m => m.UserName)

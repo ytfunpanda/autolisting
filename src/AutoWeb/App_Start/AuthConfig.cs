@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Web.WebPages.OAuth;
-using AutoWeb.Models;
+using Auto.Web.Models;
 
-namespace AutoWeb
+namespace Auto.Web
 {
     public static class AuthConfig
     {

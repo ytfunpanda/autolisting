@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AutoWeb.Data
+namespace Auto.Web.Data
 {
     using System;
     using System.Collections.Generic;

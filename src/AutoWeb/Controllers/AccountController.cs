@@ -8,10 +8,10 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using AutoWeb.Filters;
-using AutoWeb.Models;
+using Auto.Web.Filters;
+using Auto.Web.Models;
 
-namespace AutoWeb.Controllers
+namespace Auto.Web.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]
@@ -79,6 +79,7 @@ namespace AutoWeb.Controllers
                 // Attempt to register the user
                 try
                 {
+                    //WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
@@ -189,9 +190,9 @@ namespace AutoWeb.Controllers
                         WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
                         return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
-                        ModelState.AddModelError("", String.Format("Unable to create local account. An account with the name \"{0}\" may already exist.", User.Identity.Name));
+                        ModelState.AddModelError("", e);
                     }
                 }
             }

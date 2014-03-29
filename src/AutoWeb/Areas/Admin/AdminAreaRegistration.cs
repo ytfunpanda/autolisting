@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace AutoWeb.Areas.Admin
+namespace Auto.Web.Areas.Admin
 {
     public class AdminAreaRegistration : AreaRegistration
     {
@@ -16,9 +16,23 @@ namespace AutoWeb.Areas.Admin
         {
             context.MapRoute(
                 "Admin_default",
-                "admin/{controller}/{action}/{id}",
-                new { action = "index", controller = "dashboard", id = UrlParameter.Optional }
-                );
+                "Admin/{controller}/{action}/{id}",
+                new { action = "Index", id = UrlParameter.Optional },
+                new string[] { "Auto.Web.Areas.Admin.Controllers" }
+            );
+
+            //LocalizedViewEngine: this is to support views also when named e.g. Index.de.cshtml
+            context.MapRoute(
+                "Admin_Default2",
+                "{culture}/Admin/{controller}/{action}/{id}",
+                new
+                {
+                    culture = "en",
+                    controller = "Account",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                }
+            ).RouteHandler = new LocalizedMvcRouteHandler();
         }
     }
 }
