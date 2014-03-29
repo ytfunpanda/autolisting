@@ -4,14 +4,16 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
+using System.Web.Mvc;
 using System.Web.Security;
+using Auto.Web.Resources;
 
-namespace AutoWeb.Models
+namespace Auto.Web.Models
 {
     public class UsersContext : DbContext
     {
         public UsersContext()
-            : base("DefaultConnection")
+            : base("AutoDBContext")
         {
         }
 
@@ -30,7 +32,7 @@ namespace AutoWeb.Models
     public class RegisterExternalLoginModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(ResourceType = typeof(Global), Name = "Username")]
         public string UserName { get; set; }
 
         public string ExternalLoginData { get; set; }
@@ -51,40 +53,40 @@ namespace AutoWeb.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [System.Web.Mvc.Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 
     public class LoginModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(ResourceType = typeof(Global), Name = "Username")]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(ResourceType = typeof(Global), Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(ResourceType = typeof(Global), Name = "RememberMe")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(ResourceType = typeof(Global), Name = "Username")]
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "ValidationLengthError", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(ResourceType = typeof(Global), Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(ResourceType = typeof(Global), Name = "PasswordConfirm")]
+        [System.Web.Mvc.Compare("Password", ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "ValidationPasswordsDontMatch")]
         public string ConfirmPassword { get; set; }
     }
 

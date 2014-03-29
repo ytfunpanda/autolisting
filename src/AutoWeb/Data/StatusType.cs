@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AutoWeb.Data
+namespace Auto.Web.Data
 {
     using System;
     using System.Collections.Generic;
@@ -20,6 +20,7 @@ namespace AutoWeb.Data
         }
     
         public int StatusTypeID { get; set; }
+        public string Lang { get; set; }
         public string Name { get; set; }
     
         public virtual ICollection<Listing> Listings { get; set; }

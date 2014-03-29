@@ -1,9 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoWeb", "AutoWeb\AutoWeb.csproj", "{9B172723-766A-469E-B39A-3EF2086785AB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoWeb.Tests", "AutoWeb.Tests\AutoWeb.Tests.csproj", "{DD54E501-D20E-4354-99C7-3AF3831D43BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoWeb", "AutoWeb\AutoWeb.csproj", "{04B5E6D2-2140-4370-83EB-5981495B8376}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,14 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9B172723-766A-469E-B39A-3EF2086785AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B172723-766A-469E-B39A-3EF2086785AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B172723-766A-469E-B39A-3EF2086785AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B172723-766A-469E-B39A-3EF2086785AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DD54E501-D20E-4354-99C7-3AF3831D43BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD54E501-D20E-4354-99C7-3AF3831D43BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DD54E501-D20E-4354-99C7-3AF3831D43BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DD54E501-D20E-4354-99C7-3AF3831D43BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04B5E6D2-2140-4370-83EB-5981495B8376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04B5E6D2-2140-4370-83EB-5981495B8376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04B5E6D2-2140-4370-83EB-5981495B8376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04B5E6D2-2140-4370-83EB-5981495B8376}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

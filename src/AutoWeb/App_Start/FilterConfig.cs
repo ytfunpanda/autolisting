@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace AutoWeb
+namespace Auto.Web
 {
     public class FilterConfig
     {

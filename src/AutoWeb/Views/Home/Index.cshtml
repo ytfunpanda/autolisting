@@ -1,6 +1,21 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using Auto.Web.Resources
+
+@{
+    ViewBag.Title = Global.Home;
 }
 @section featured {
-    Hello World! This is your new home!
+    @*<section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+            </hgroup>
+            <p>
+                @Global.LearnMore
+            </p>
+        </div>
+    </section>*@
 }
+
+<h2>@Html.Raw(@ViewBag.Message)</h2>
+
+
