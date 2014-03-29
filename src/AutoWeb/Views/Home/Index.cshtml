@@ -16,6 +16,22 @@
     </section>*@
 }
 
+<p>
+    Date:
+    <input type="text" id="datepicker">
+</p>
+
+
+
 <h2>@Html.Raw(@ViewBag.Message)</h2>
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+}
+
 
 
