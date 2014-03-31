@@ -39,8 +39,8 @@
 	color: #bbb;
 }
 
-/*Lenguages*/
-.top ul.lenguages {
+/*languages*/
+.top ul.languages {
 	top: 25px;
 	left: -5px;
 	display: none;
@@ -52,11 +52,11 @@
 	background: #f0f0f0;
 }
 
-.top li:hover ul.lenguages {
+.top li:hover ul.languages {
 	display: block;
 }
 
-.top ul.lenguages:after {
+.top ul.languages:after {
 	top: -4px;
 	width: 0; 
 	height: 0;
@@ -71,7 +71,7 @@
 	border-right-style: inset; /*FF fixes*/
 }
 
-.top ul.lenguages li a {
+.top ul.languages li a {
 	color: #555;
 	display: block;
 	font-size: 10px;
@@ -81,18 +81,18 @@
 	font-family:'Open Sans', sans-serif;	
 }
 
-.top ul.lenguages li.active a i {
+.top ul.languages li.active a i {
 	color: #999;
 	float: right;
 	margin-top: 2px;
 }
 
-.top ul.lenguages li a:hover, 
-.top ul.lenguages li.active a {
+.top ul.languages li a:hover, 
+.top ul.languages li.active a {
 	background: #fafafa;
 }
 
-.top ul.lenguages li a:hover {
+.top ul.languages li a:hover {
 	text-decoration: none; 
 }
 

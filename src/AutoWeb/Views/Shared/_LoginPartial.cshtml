@@ -5,14 +5,14 @@
         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
         {
             <li>
-            @Html.AntiForgeryToken()
-            <a href="javascript:document.getElementById('logoutForm').submit()">@Auto.Web.Resources.Global.LogOff</a>
-                </li>
+                @Html.AntiForgeryToken()
+                <a href="javascript:document.getElementById('logoutForm').submit()">@Auto.Web.Resources.Global.LogOff</a>
+            </li>
         }
     </text>
 }
 else
 {
-        <li>@Html.ActionLink(@Auto.Web.Resources.Global.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink(@Auto.Web.Resources.Global.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <li>@Html.ActionLink(@Auto.Web.Resources.Global.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    <li>@Html.ActionLink(@Auto.Web.Resources.Global.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 }

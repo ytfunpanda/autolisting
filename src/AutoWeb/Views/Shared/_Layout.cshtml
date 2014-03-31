@@ -1,76 +1,44 @@
 ﻿@using MvcGlobalisationSupport;
-@using Auto.Web.Resources
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title - @Html.Raw(Global.Title)</title>
+    <title>@ViewBag.Title - @Html.Raw(Auto.Web.Resources.Global.Title)</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
-
     @Styles.Render("~/Content/themes/base/css")
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
-    <!--=== Top ===-->    
-<div class="top">
-    <div class="container">         
-        <ul class="loginbar pull-right">
-            <li>
-                <i class="glyphicon glyphicon-globe"></i>
-                <a>Languages</a>
-                <ul class="lenguages">
-                    @*<li class="active">
-                        <a href="http://htmlstream.com/preview/unify/page_registration.html#">English <i class="icon-ok"></i></a> 
-                    </li>*@
-                    <li>@Html.GlobalisedRouteLink(Global.LangEnglish, "en", ViewContext.RouteData)</li>
-                        <li>@Html.GlobalisedRouteLink(Global.LangFrench, "fr", ViewContext.RouteData)</li>
-                        <li>@Html.GlobalisedRouteLink(Global.LangChinese, "zh", ViewContext.RouteData)</li>
-                    @*<li><a href="http://htmlstream.com/preview/unify/page_registration.html#">Spanish</a></li>
-                    <li><a href="http://htmlstream.com/preview/unify/page_registration.html#">Russian</a></li>
-                    <li><a href="http://htmlstream.com/preview/unify/page_registration.html#">German</a></li>*@
-            <li class="devider"></li>   
-                
-
-                </ul>
+    <div class="top">
+        <div class="container">
+            <ul class="loginbar pull-right">
+                <li>
+                    <i class="glyphicon glyphicon-globe"></i>
+                    <a>Languages</a>
+                    <ul class="languages">
+                        <li @*class="active"*@>@Html.GlobalisedRouteLink(Auto.Web.Resources.Global.LangEnglish, "en", ViewContext.RouteData)</li>
+                        <li>@Html.GlobalisedRouteLink(Auto.Web.Resources.Global.LangFrench, "fr", ViewContext.RouteData)</li>
+                        <li>@Html.GlobalisedRouteLink(Auto.Web.Resources.Global.LangChinese, "zh", ViewContext.RouteData)</li>
+                        <li class="devider"></li>
+                    </ul>
                     @Html.Partial("_LoginPartial")
-                    
-
-            </li>
-            @*<li class="devider"></li>*@   
-            @*<li><a href="http://htmlstream.com/preview/unify/page_faq.html">Help</a></li>*@  
-            @*<li class="devider"></li>*@   
-            @*<li><a href="http://htmlstream.com/preview/unify/page_login.html">Login</a></li>*@   
-        </ul>
-    </div>      
-</div><!--/top-->
-<!--=== End Top ===-->  
+                </li>
+            </ul>
+        </div>
+    </div>
     <header>
         <div class="content-wrapper">
             <div class="float-left">
                 <p class="site-title">@Html.ActionLink("logo", "Index", "Home")</p>
             </div>
             <div class="float-right">
-                @*<nav>
-                    <ul id="languages">
-                        <li>@Html.GlobalisedRouteLink(Global.LangEnglish, "en", ViewContext.RouteData)</li>
-                        <li>@Html.GlobalisedRouteLink(Global.LangFrench, "fr", ViewContext.RouteData)</li>
-                        <li>@Html.GlobalisedRouteLink(Global.LangChinese, "zh", ViewContext.RouteData)</li>
-                        <li>@Html.GlobalisedRouteLink(Global.LangGerman, "de", ViewContext.RouteData)</li>
-                        <li>@Html.GlobalisedRouteLink(Global.LangItalian, "it", ViewContext.RouteData)</li>
-                    </ul>
-                </nav>*@
-                @*<section id="login">
-                    @Html.Partial("_LoginPartial")
-                </section>*@
                 <nav>
                     <ul id="menu">
-                        <li>@Html.ActionLink(@Auto.Web.Resources.Global.Home, "Index", "Home")</li>
-                        <li>@Html.ActionLink(@Auto.Web.Resources.Global.About, "About", "Home")</li>
-                        <li>@Html.ActionLink(@Auto.Web.Resources.Global.Contact, "Contact", "Home")</li>
+                        <li>@Html.ActionLink(Auto.Web.Resources.Global.Home, "Index", "Home")</li>
+                        <li>@Html.ActionLink(Auto.Web.Resources.Global.About, "About", "Home")</li>
+                        <li>@Html.ActionLink(Auto.Web.Resources.Global.Contact, "Contact", "Home")</li>
                     </ul>
                 </nav>
             </div>
@@ -89,10 +57,10 @@
             </div>
         </div>
     </footer>
-
+    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
