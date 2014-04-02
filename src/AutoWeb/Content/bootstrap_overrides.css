@@ -1,1 +1,35 @@
-﻿
+﻿.navbar-toggle
+{
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-right:0px;
+}
+
+.navbar-fixed-top
+{
+     z-index:999999999;
+}
+.navbar-fixed-top-level-two {
+    margin-top:27px;
+    top: 0;
+    border-width: 0 0 1px;
+}
+.navbar-fixed-top-level-two {
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+.navbar
+{min-height:35px}
+.navbar-brand
+{ height:35px; padding:0px
+}
+
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+     padding-top: 0px; 
+     padding-bottom: 0px; 
+  }
+}

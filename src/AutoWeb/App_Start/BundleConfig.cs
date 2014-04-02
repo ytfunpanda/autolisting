@@ -27,7 +27,7 @@ namespace Auto.Web
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/site.css",
+                //"~/Content/site.css",
                 "~/Content/app.css"
                 ));
 
