@@ -46,6 +46,7 @@ namespace Auto.Web
                         "~/Content/themes/base/jquery.ui.theme.css",
                         "~/Content/css/bootstrap.css",
                         "~/Content/css/bootstrap-theme.css",
+                        "~/Content/bootstrap_overrides.css",
                         "~/Content/header.css"
 
                         ));

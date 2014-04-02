@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace MvcGlobalisationSupport
+namespace GlobalisationSupport
 {
 public class GlobalisationRouteHandler : MvcRouteHandler
 {

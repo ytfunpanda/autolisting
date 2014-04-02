@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MvcGlobalisationSupport
+namespace GlobalisationSupport
 {
     public static class CultureFormatChecker
     {

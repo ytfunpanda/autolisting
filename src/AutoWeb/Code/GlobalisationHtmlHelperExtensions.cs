@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 
-namespace MvcGlobalisationSupport
+namespace GlobalisationSupport
 {
     public static class GlobalisationHtmlHelperExtensions
     {

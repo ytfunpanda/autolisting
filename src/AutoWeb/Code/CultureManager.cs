@@ -5,7 +5,7 @@ using System.Text;
 using System.Globalization;
 using System.Threading;
 
-namespace MvcGlobalisationSupport
+namespace GlobalisationSupport
 {
     public static class CultureManager
     {
