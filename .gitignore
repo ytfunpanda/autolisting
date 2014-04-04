@@ -20,6 +20,9 @@ build/
 [Oo]bj/
 /Deploy
 /working
+/src/AutoWeb/bin/Auto.Web.dll
+/src/AutoWeb/bin/fr/Auto.Web.resources.dll
+/src/AutoWeb/bin/zh/Auto.Web.resources.dll
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
