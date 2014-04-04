@@ -59,6 +59,10 @@ public class CacheHelper : ICacheHelper
     {
         try
         {
+            // need to improve this, this will load all cache which can be slow!
+            var cachedData  = _cache.Get(keyName);
+            if(cachedData==null)
+                Bootstrap.Step1();
             return _cache.Get(keyName);
         }
         catch { return null; }
