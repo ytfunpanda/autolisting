@@ -227,6 +227,7 @@
     <Compile Include="Infrastucture\Cache\CacheHelper.cs" />
     <Compile Include="Infrastucture\Cache\ICacheHelper.cs" />
     <Compile Include="Infrastucture\Cookies.cs" />
+    <Compile Include="Infrastucture\Helpers\CookieHelper.cs" />
     <Compile Include="Models\ListingModels.cs" />
     <Compile Include="Resources\Global.fr.Designer.cs">
       <DependentUpon>Global.fr.resx</DependentUpon>
