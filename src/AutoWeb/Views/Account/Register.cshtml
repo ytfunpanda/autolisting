@@ -1,4 +1,5 @@
 ﻿@model Auto.Web.Models.RegisterModel
+@using Recaptcha;
 @{
     ViewBag.Title = "Register";
 }
@@ -28,6 +29,15 @@
             <li>
                 @Html.LabelFor(m => m.ConfirmPassword)
                 @Html.PasswordFor(m => m.ConfirmPassword)
+            </li>
+            <li>
+                <div class="editor-label">
+                    Are you a human?
+                </div>
+                <div class="editor-field">
+                    @Html.Raw(Html.GenerateCaptcha("captcha", "clean"))
+                    @Html.ValidationMessage("captcha","Invalid reCAPTCHA validation!")
+                </div>
             </li>
         </ol>
         <input type="submit" value="Register" />

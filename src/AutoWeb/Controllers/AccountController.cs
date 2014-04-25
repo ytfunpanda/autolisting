@@ -10,7 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using Auto.Web.Filters;
 using Auto.Web.Models;
-
+using Recaptcha;
 namespace Auto.Web.Controllers
 {
     [Authorize]
@@ -69,11 +69,17 @@ namespace Auto.Web.Controllers
         //
         // POST: /Account/Register
 
-        [HttpPost]
+        [HttpPost, RecaptchaControlMvc.CaptchaValidator]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(RegisterModel model,
+             bool captchaValid,
+            string captchaErrorMessage)
         {
+            if (!captchaValid)
+                ModelState.AddModelError("captcha", captchaErrorMessage);
+
+
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
