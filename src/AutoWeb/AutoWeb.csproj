@@ -351,6 +351,7 @@
     <Content Include="Areas\Admin\Views\Test\Index.fr.cshtml" />
     <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
+    <Content Include="Images\logo.jpg" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.js" />
