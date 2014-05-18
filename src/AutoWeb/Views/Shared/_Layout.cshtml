@@ -8,71 +8,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title - @Html.Raw(Auto.Web.Resources.Global.Title)</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    @Styles.Render("~/Content/themes/base/css")
+    <!--Styles.Render("~/Content/themes/base/css")-->
     @Styles.Render("~/Content/css")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @*<a class="" href="#"></a>*@
-                @Html.ActionLink("auto listing", "Index", "Home", new { @class="navbar-brand" })
+    <div id="page">
+
+        <header>
+            <div id="header">
+            <div id="logo"><img src="~/Images/logo.jpg" alt="Autolisting Logo"/></div>
+            <div id="headerlinks">
+                <ul>@Html.Partial("_LoginPartial")</ul>
             </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink(Auto.Web.Resources.Global.Home, "Index", "Home")</li>
-                    <li>@Html.ActionLink(Auto.Web.Resources.Global.About, "About", "Home")</li>
-                    <li>@Html.ActionLink(Auto.Web.Resources.Global.Contact, "Contact", "Home")</li>
-                </ul>
             </div>
-        </div>
-    </div>
-    <div class="navbar-fixed-top-level-two" role="navigation">
-    <header>
-        <div class="content-wrapper">
-            <div class="float-right">
-                <div class="top">
-                    <div class="container">
-                        <ul class="loginbar pull-right">
-                            <li>
-                                <i class="glyphicon glyphicon-globe"></i>
-                                <a>Languages</a>
-                                <ul class="languages">
-                                    <li @*class="active"*@>@Html.GlobalisedRouteLink(Auto.Web.Resources.Global.LangEnglish, "en", ViewContext.RouteData)</li>
-                                    <li>@Html.GlobalisedRouteLink(Auto.Web.Resources.Global.LangFrench, "fr", ViewContext.RouteData)</li>
-                                    <li>@Html.GlobalisedRouteLink(Auto.Web.Resources.Global.LangChinese, "zh", ViewContext.RouteData)</li>
-                                    <li class="devider"></li>
-                                </ul>
-                                @Html.Partial("_LoginPartial")
-                            </li>
-                        </ul>
-                    </div>
+        </header>
+		<div class="clear"></div>
+        
+        <div id="headermenu" role="navigation">							
+				<ul>				
+					<li>@Html.ActionLink(Auto.Web.Resources.Global.Home, "Index", "Home")</li>
+					<li>@Html.ActionLink(Auto.Web.Resources.Global.About, "About", "Home")</li>
+					<li>@Html.ActionLink(Auto.Web.Resources.Global.Contact, "Contact", "Home")</li>                    
+				</ul>			
+		</div>		
+        <div class="clear"></div>
+                    
+        <div id="content">
+		    <div id="leftNav">Left Nav Pane: Filters</div>
+            
+            <div id="rightContent">            
+                @RenderSection("featured", required: false)
+                <section class="content-wrapper main-content clear-fix">
+                    @RenderBody()
+                </section>
+               
+            </div>
+	    </div>		
+        <div class="clear"></div>
+
+        <footer>
+             <div id="footer">
+        	    <div id="footercopyright">
+			    &copy; @DateTime.Now.Year Autolisting
                 </div>
-            </div>
-        </div>
-    </header>
-        </div>
-    <div id="body">
-        <div class="container">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
+                <div id="footerlinks">
+			    <ul>
+				    <li>@Html.ActionLink(Auto.Web.Resources.Global.Home, "Index", "Home")</li>
+				    <li>@Html.ActionLink(Auto.Web.Resources.Global.About, "About", "Home")</li>
+				    <li>@Html.ActionLink(Auto.Web.Resources.Global.Contact, "Contact", "Home")</li>				
+			    </ul>
+                </div>
+		    </div>        
+        </footer>
+
     </div>
-    <footer>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p>&copy; @DateTime.Now.Year</p>
-            </div>
-        </div>
-    </footer>
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
