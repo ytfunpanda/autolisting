@@ -25,7 +25,6 @@ namespace Auto.Web.Infrastucture.Helpers
             SetCookie(key, val);
         }
 
-
         /// <summary>
         /// SetTripleDESEncryptedCookie - overloaded method with expires parameter
         /// </summary>
@@ -39,7 +38,6 @@ namespace Auto.Web.Infrastucture.Helpers
 
             SetCookie(key, val, expires);
         }
-
 
         /// <summary>
         /// Set encrypted cookie with key & value
@@ -84,7 +82,6 @@ namespace Auto.Web.Infrastucture.Helpers
             SetCookie(cookie);
         }
 
-
         /// <summary>
         /// SetCookie - overloaded with expires parameter
         /// </summary>
@@ -115,7 +112,6 @@ namespace Auto.Web.Infrastucture.Helpers
             //HttpContext.Current.Response.Cookies.Set(cookie);
             HttpContext.Current.Response.Cookies.Add(cookie);
         }
-
 
         #endregion
         #region GET COOKIE FUNCTION
@@ -187,15 +183,15 @@ namespace Auto.Web.Infrastucture.Helpers
         //8 bytes randomly selected for both the Key and the Initialization Vector
         //the IV is used to encrypt the first block of text so that any repetitive 
         //patterns are not apparent
-        private static byte[] KEY_64 = { 99, 16, 216, 156, 78, 4, 18, 92 };
-        private static byte[] IV_64 = { 52, 203, 246, 179, 6, 79, 17, 203 };
+        private static byte[] KEY_64 = { 93, 26, 116, 126, 78, 4, 18, 92 };
+        private static byte[] IV_64 = { 52, 203, 246, 189, 6, 79, 17, 203 };
 
         //24 byte or 192 bit key and IV for TripleDES
-        private static byte[] KEY_192 = {12, 160, 93, 240, 78, 25, 218, 32, 15, 
-											167, 44, 80, 126, 50, 155, 112, 
+        private static byte[] KEY_192 = {12, 160, 93, 241, 78, 25, 218, 32, 15, 
+											167, 44, 80, 125, 50, 155, 112, 
 											2, 94, 11, 204, 119, 35, 184, 197};
-        private static byte[] IV_192 = {55, 103, 26, 179, 36, 199, 167, 3, 42, 
-										   250, 62, 83, 14, 17, 209, 13,145, 
+        private static byte[] IV_192 = {55, 103, 26, 179, 38, 199, 167, 3, 42, 
+										   250, 62, 83, 19, 17, 209, 13,145, 
 										   123, 20, 58, 13, 10, 121, 202};
 
         #endregion
