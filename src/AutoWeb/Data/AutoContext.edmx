@@ -4,12 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AutoDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AutoDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="AutoDBModelStoreContainer">
+          <EntitySet Name="FuelTypes" EntityType="AutoDBModel.Store.FuelTypes" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Language" EntityType="AutoDBModel.Store.Language" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Listing" EntityType="AutoDBModel.Store.Listing" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="StatusType" EntityType="AutoDBModel.Store.StatusType" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserProfile" EntityType="AutoDBModel.Store.UserProfile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="AutoDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfiles" EntityType="AutoDBModel.Store.UserProfiles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="VehicleType" EntityType="AutoDBModel.Store.VehicleType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="webpages_Membership" EntityType="AutoDBModel.Store.webpages_Membership" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="webpages_OAuthMembership" EntityType="AutoDBModel.Store.webpages_OAuthMembership" store:Type="Tables" Schema="dbo" />
@@ -19,15 +21,21 @@
             <End Role="StatusType" EntitySet="StatusType" />
             <End Role="Listing" EntitySet="Listing" />
           </AssociationSet>
-          <AssociationSet Name="fk_RoleId" Association="AutoDBModel.Store.fk_RoleId">
+          <AssociationSet Name="FK_webpages_UsersInRoles_UserProfile" Association="AutoDBModel.Store.FK_webpages_UsersInRoles_UserProfile">
+            <End Role="UserProfiles" EntitySet="UserProfiles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_webpages_UsersInRoles_webpages_Roles" Association="AutoDBModel.Store.FK_webpages_UsersInRoles_webpages_Roles">
             <End Role="webpages_Roles" EntitySet="webpages_Roles" />
             <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
           </AssociationSet>
-          <AssociationSet Name="fk_UserId" Association="AutoDBModel.Store.fk_UserId">
-            <End Role="UserProfile" EntitySet="UserProfile" />
-            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
-          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="FuelTypes">
+          <Key>
+            <PropertyRef Name="FuelTypeID" />
+          </Key>
+          <Property Name="FuelTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
         <EntityType Name="Language">
           <Key>
             <PropertyRef Name="LanguageID" />
@@ -77,12 +85,23 @@
           <Property Name="Lang" Type="char" MaxLength="2" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="UserProfile">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserProfiles">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="56" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="VehicleType">
           <Key>
@@ -128,11 +147,11 @@
         </EntityType>
         <EntityType Name="webpages_UsersInRoles">
           <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="webpages_Roles_RoleId" />
+            <PropertyRef Name="UserProfiles_UserId" />
           </Key>
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="webpages_Roles_RoleId" Type="int" Nullable="false" />
+          <Property Name="UserProfiles_UserId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Listing_StatusType">
           <End Role="StatusType" Type="AutoDBModel.Store.StatusType" Multiplicity="0..1" />
@@ -146,7 +165,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_RoleId">
+        <Association Name="FK_webpages_UsersInRoles_UserProfile">
+          <End Role="UserProfiles" Type="AutoDBModel.Store.UserProfiles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="AutoDBModel.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfiles">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserProfiles_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_webpages_UsersInRoles_webpages_Roles">
           <End Role="webpages_Roles" Type="AutoDBModel.Store.webpages_Roles" Multiplicity="1" />
           <End Role="webpages_UsersInRoles" Type="AutoDBModel.Store.webpages_UsersInRoles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -154,31 +185,20 @@
               <PropertyRef Name="RoleId" />
             </Principal>
             <Dependent Role="webpages_UsersInRoles">
-              <PropertyRef Name="RoleId" />
+              <PropertyRef Name="webpages_Roles_RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_UserId">
-          <End Role="UserProfile" Type="AutoDBModel.Store.UserProfile" Multiplicity="1" />
-          <End Role="webpages_UsersInRoles" Type="AutoDBModel.Store.webpages_UsersInRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserProfile">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="webpages_UsersInRoles">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AutoDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="AutoDBEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="FuelTypes" EntityType="AutoDBModel.FuelType" />
           <EntitySet Name="Languages" EntityType="AutoDBModel.Language" />
           <EntitySet Name="Listings" EntityType="AutoDBModel.Listing" />
           <EntitySet Name="StatusTypes" EntityType="AutoDBModel.StatusType" />
+          <EntitySet Name="sysdiagrams" EntityType="AutoDBModel.sysdiagram" />
           <EntitySet Name="UserProfiles" EntityType="AutoDBModel.UserProfile" />
           <EntitySet Name="VehicleTypes" EntityType="AutoDBModel.VehicleType" />
           <EntitySet Name="webpages_Membership" EntityType="AutoDBModel.webpages_Membership" />
@@ -189,115 +209,132 @@
             <End Role="Listing" EntitySet="Listings" />
           </AssociationSet>
           <AssociationSet Name="webpages_UsersInRoles" Association="AutoDBModel.webpages_UsersInRoles">
-            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
             <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="FuelType">
+          <Key>
+            <PropertyRef Name="FuelTypeID" />
+          </Key>
+          <Property Type="Int32" Name="FuelTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
         <EntityType Name="Language">
           <Key>
             <PropertyRef Name="LanguageID" />
           </Key>
-          <Property Name="LanguageID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Lang" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
-          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="English" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="LanguageID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Lang" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="English" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Listing">
           <Key>
             <PropertyRef Name="ListingID" />
           </Key>
-          <Property Name="ListingID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" />
-          <Property Name="DateAdd" Type="DateTime" Precision="3" />
-          <Property Name="Title" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <Property Name="VIN" Type="Int32" />
-          <Property Name="Year" Type="Int32" />
-          <Property Name="MakeID" Type="Int32" />
-          <Property Name="ModelID" Type="Int32" />
-          <Property Name="Trim" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="BodyStyleID" Type="Int32" />
-          <Property Name="TransmissionID" Type="Int32" />
-          <Property Name="ShowVIN" Type="Boolean" />
-          <Property Name="IsCertified" Type="Boolean" />
-          <Property Name="IsETested" Type="Boolean" />
-          <Property Name="StatusID" Type="Int32" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="KM" Type="Int32" />
-          <Property Name="BodyColorID" Type="Int32" />
-          <Property Name="InteriorColorID" Type="Int32" />
-          <Property Name="DoorCountID" Type="Int32" />
-          <Property Name="PassengerCountID" Type="Int32" />
-          <Property Name="DriveTrainID" Type="Int32" />
-          <Property Name="Engine" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="CylinderCount" Type="Int32" />
-          <Property Name="FuelTypeID" Type="Int32" />
-          <Property Name="StatusTypeID" Type="Int32" />
-          <Property Name="Location" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="ListingID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserID" />
+          <Property Type="DateTime" Name="DateAdd" Precision="3" />
+          <Property Type="String" Name="Title" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="VIN" />
+          <Property Type="Int32" Name="Year" />
+          <Property Type="Int32" Name="MakeID" />
+          <Property Type="Int32" Name="ModelID" />
+          <Property Type="String" Name="Trim" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="BodyStyleID" />
+          <Property Type="Int32" Name="TransmissionID" />
+          <Property Type="Boolean" Name="ShowVIN" />
+          <Property Type="Boolean" Name="IsCertified" />
+          <Property Type="Boolean" Name="IsETested" />
+          <Property Type="Int32" Name="StatusID" />
+          <Property Type="Decimal" Name="Price" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="KM" />
+          <Property Type="Int32" Name="BodyColorID" />
+          <Property Type="Int32" Name="InteriorColorID" />
+          <Property Type="Int32" Name="DoorCountID" />
+          <Property Type="Int32" Name="PassengerCountID" />
+          <Property Type="Int32" Name="DriveTrainID" />
+          <Property Type="String" Name="Engine" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CylinderCount" />
+          <Property Type="Int32" Name="FuelTypeID" />
+          <Property Type="Int32" Name="StatusTypeID" />
+          <Property Type="String" Name="Location" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="StatusType" Relationship="AutoDBModel.FK_Listing_StatusType" FromRole="Listing" ToRole="StatusType" />
         </EntityType>
         <EntityType Name="StatusType">
           <Key>
             <PropertyRef Name="StatusTypeID" />
           </Key>
-          <Property Name="StatusTypeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Lang" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
-          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="StatusTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Lang" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Listings" Relationship="AutoDBModel.FK_Listing_StatusType" FromRole="StatusType" ToRole="Listing" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="56" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EmailAddress" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="webpages_Roles" Relationship="AutoDBModel.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
         </EntityType>
         <EntityType Name="VehicleType">
           <Key>
             <PropertyRef Name="VehicleTypeID" />
           </Key>
-          <Property Name="VehicleTypeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Lang" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="SortOrder" Type="Int32" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Type="Int32" Name="VehicleTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Lang" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="ConfirmationToken" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="IsConfirmed" Type="Boolean" />
-          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
-          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
-          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Precision="3" />
+          <Property Type="String" Name="ConfirmationToken" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsConfirmed" />
+          <Property Type="DateTime" Name="LastPasswordFailureDate" Precision="3" />
+          <Property Type="Int32" Name="PasswordFailuresSinceLastSuccess" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="PasswordChangedDate" Precision="3" />
+          <Property Type="String" Name="PasswordSalt" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PasswordVerificationToken" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="PasswordVerificationTokenExpirationDate" Precision="3" />
         </EntityType>
         <EntityType Name="webpages_OAuthMembership">
           <Key>
             <PropertyRef Name="Provider" />
             <PropertyRef Name="ProviderUserId" />
           </Key>
-          <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
-          <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Type="String" Name="Provider" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ProviderUserId" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Roles">
           <Key>
             <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="RoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="RoleId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="UserProfiles" Relationship="AutoDBModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
         </EntityType>
         <Association Name="FK_Listing_StatusType">
-          <End Role="StatusType" Type="AutoDBModel.StatusType" Multiplicity="0..1" />
-          <End Role="Listing" Type="AutoDBModel.Listing" Multiplicity="*" />
+          <End Type="AutoDBModel.StatusType" Role="StatusType" Multiplicity="0..1" />
+          <End Type="AutoDBModel.Listing" Role="Listing" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StatusType">
               <PropertyRef Name="StatusTypeID" />
@@ -308,131 +345,149 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="webpages_UsersInRoles">
-          <End Role="webpages_Roles" Type="AutoDBModel.webpages_Roles" Multiplicity="*" />
-          <End Role="UserProfile" Type="AutoDBModel.UserProfile" Multiplicity="*" />
+          <End Type="AutoDBModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+          <End Type="AutoDBModel.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AutoDBModelStoreContainer" CdmEntityContainer="AutoDBEntities">
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AutoDBModelStoreContainer" CdmEntityContainer="AutoDBEntities">
+          <EntitySetMapping Name="FuelTypes">
+            <EntityTypeMapping TypeName="AutoDBModel.FuelType">
+              <MappingFragment StoreEntitySet="FuelTypes">
+                <ScalarProperty Name="FuelTypeID" ColumnName="FuelTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Languages">
             <EntityTypeMapping TypeName="AutoDBModel.Language">
               <MappingFragment StoreEntitySet="Language">
-                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
-                <ScalarProperty Name="Lang" ColumnName="Lang" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="English" ColumnName="English" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Lang" ColumnName="Lang" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Listings">
             <EntityTypeMapping TypeName="AutoDBModel.Listing">
               <MappingFragment StoreEntitySet="Listing">
-                <ScalarProperty Name="ListingID" ColumnName="ListingID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="VIN" ColumnName="VIN" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="MakeID" ColumnName="MakeID" />
-                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
-                <ScalarProperty Name="Trim" ColumnName="Trim" />
-                <ScalarProperty Name="BodyStyleID" ColumnName="BodyStyleID" />
-                <ScalarProperty Name="TransmissionID" ColumnName="TransmissionID" />
-                <ScalarProperty Name="ShowVIN" ColumnName="ShowVIN" />
-                <ScalarProperty Name="IsCertified" ColumnName="IsCertified" />
-                <ScalarProperty Name="IsETested" ColumnName="IsETested" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="KM" ColumnName="KM" />
-                <ScalarProperty Name="BodyColorID" ColumnName="BodyColorID" />
-                <ScalarProperty Name="InteriorColorID" ColumnName="InteriorColorID" />
-                <ScalarProperty Name="DoorCountID" ColumnName="DoorCountID" />
-                <ScalarProperty Name="PassengerCountID" ColumnName="PassengerCountID" />
-                <ScalarProperty Name="DriveTrainID" ColumnName="DriveTrainID" />
-                <ScalarProperty Name="Engine" ColumnName="Engine" />
-                <ScalarProperty Name="CylinderCount" ColumnName="CylinderCount" />
-                <ScalarProperty Name="FuelTypeID" ColumnName="FuelTypeID" />
-                <ScalarProperty Name="StatusTypeID" ColumnName="StatusTypeID" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="StatusTypeID" ColumnName="StatusTypeID" />
+                <ScalarProperty Name="FuelTypeID" ColumnName="FuelTypeID" />
+                <ScalarProperty Name="CylinderCount" ColumnName="CylinderCount" />
+                <ScalarProperty Name="Engine" ColumnName="Engine" />
+                <ScalarProperty Name="DriveTrainID" ColumnName="DriveTrainID" />
+                <ScalarProperty Name="PassengerCountID" ColumnName="PassengerCountID" />
+                <ScalarProperty Name="DoorCountID" ColumnName="DoorCountID" />
+                <ScalarProperty Name="InteriorColorID" ColumnName="InteriorColorID" />
+                <ScalarProperty Name="BodyColorID" ColumnName="BodyColorID" />
+                <ScalarProperty Name="KM" ColumnName="KM" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="IsETested" ColumnName="IsETested" />
+                <ScalarProperty Name="IsCertified" ColumnName="IsCertified" />
+                <ScalarProperty Name="ShowVIN" ColumnName="ShowVIN" />
+                <ScalarProperty Name="TransmissionID" ColumnName="TransmissionID" />
+                <ScalarProperty Name="BodyStyleID" ColumnName="BodyStyleID" />
+                <ScalarProperty Name="Trim" ColumnName="Trim" />
+                <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+                <ScalarProperty Name="MakeID" ColumnName="MakeID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ListingID" ColumnName="ListingID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StatusTypes">
             <EntityTypeMapping TypeName="AutoDBModel.StatusType">
               <MappingFragment StoreEntitySet="StatusType">
-                <ScalarProperty Name="StatusTypeID" ColumnName="StatusTypeID" />
-                <ScalarProperty Name="Lang" ColumnName="Lang" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Lang" ColumnName="Lang" />
+                <ScalarProperty Name="StatusTypeID" ColumnName="StatusTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AutoDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserProfiles">
             <EntityTypeMapping TypeName="AutoDBModel.UserProfile">
-              <MappingFragment StoreEntitySet="UserProfile">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              <MappingFragment StoreEntitySet="UserProfiles">
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VehicleTypes">
             <EntityTypeMapping TypeName="AutoDBModel.VehicleType">
               <MappingFragment StoreEntitySet="VehicleType">
-                <ScalarProperty Name="VehicleTypeID" ColumnName="VehicleTypeID" />
-                <ScalarProperty Name="Lang" ColumnName="Lang" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Lang" ColumnName="Lang" />
+                <ScalarProperty Name="VehicleTypeID" ColumnName="VehicleTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_Membership">
             <EntityTypeMapping TypeName="AutoDBModel.webpages_Membership">
               <MappingFragment StoreEntitySet="webpages_Membership">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
-                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
-                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
-                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
-                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
-                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
                 <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_OAuthMembership">
             <EntityTypeMapping TypeName="AutoDBModel.webpages_OAuthMembership">
               <MappingFragment StoreEntitySet="webpages_OAuthMembership">
-                <ScalarProperty Name="Provider" ColumnName="Provider" />
-                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_Roles">
             <EntityTypeMapping TypeName="AutoDBModel.webpages_Roles">
               <MappingFragment StoreEntitySet="webpages_Roles">
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="AutoDBModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
             <EndProperty Name="webpages_Roles">
-              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              <ScalarProperty Name="RoleId" ColumnName="webpages_Roles_RoleId" />
             </EndProperty>
             <EndProperty Name="UserProfile">
-              <ScalarProperty Name="UserId" ColumnName="UserId" />
+              <ScalarProperty Name="UserId" ColumnName="UserProfiles_UserId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">

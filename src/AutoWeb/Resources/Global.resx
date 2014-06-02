@@ -198,4 +198,7 @@
   <data name="IfNoAccount" xml:space="preserve">
     <value>if you don't have an account.</value>
   </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
 </root>

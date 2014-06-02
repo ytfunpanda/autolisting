@@ -203,6 +203,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AutoContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\FuelType.cs">
+      <DependentUpon>AutoContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Language.cs">
       <DependentUpon>AutoContext.tt</DependentUpon>
     </Compile>
@@ -210,6 +213,9 @@
       <DependentUpon>AutoContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\StatusType.cs">
+      <DependentUpon>AutoContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\sysdiagram.cs">
       <DependentUpon>AutoContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\UserProfile.cs">
@@ -231,6 +237,7 @@
     <Compile Include="Infrastucture\Cache\ICacheHelper.cs" />
     <Compile Include="Infrastucture\Cookies.cs" />
     <Compile Include="Infrastucture\Helpers\CookieHelper.cs" />
+    <Compile Include="Infrastucture\Helpers\EmailHelper.cs" />
     <Compile Include="Models\ListingModels.cs" />
     <Compile Include="Resources\Global.fr.Designer.cs">
       <DependentUpon>Global.fr.resx</DependentUpon>
@@ -329,6 +336,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Data\AutoContext.edmx.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Data\AutoContext.edmx">

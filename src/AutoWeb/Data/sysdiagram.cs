@@ -12,17 +12,12 @@ namespace Auto.Web.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class UserProfile
+    public partial class sysdiagram
     {
-        public UserProfile()
-        {
-            this.webpages_Roles = new HashSet<webpages_Roles>();
-        }
-    
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-        public string EmailAddress { get; set; }
-    
-        public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -79,6 +79,10 @@ namespace Auto.Web.Models
         public string UserName { get; set; }
 
         [Required]
+        [Display(ResourceType = typeof(Global), Name = "EmailAddress")]
+        public string EmailAddress { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessageResourceType = typeof(Global), ErrorMessageResourceName = "ValidationLengthError", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(ResourceType = typeof(Global), Name = "Password")]
