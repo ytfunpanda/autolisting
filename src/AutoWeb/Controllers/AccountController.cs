@@ -11,6 +11,8 @@ using WebMatrix.WebData;
 using Auto.Web.Filters;
 using Auto.Web.Models;
 using Recaptcha;
+using Auto.Web.Infrastucture.Helpers;
+using System.Configuration;
 namespace Auto.Web.Controllers
 {
     [Authorize]
@@ -87,6 +89,7 @@ namespace Auto.Web.Controllers
                 {
                     //WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    EmailHelper.SendMessage(ConfigurationManager.AppSettings["ToEmailAddress"].ToString(), "Welcome to " + ConfigurationManager.AppSettings["Site.Name"].ToString(), "Welcome message!");
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }

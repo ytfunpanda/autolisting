@@ -5,16 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5edcc0b157f64ba285f49c648ee3769a" Name="Diagram1">
-        <EntityTypeShape EntityType="AutoDBModel.Language" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDBModel.Listing" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDBModel.StatusType" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDBModel.UserProfile" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDBModel.VehicleType" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDBModel.webpages_Membership" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDBModel.webpages_OAuthMembership" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AutoDBModel.webpages_Roles" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="AutoDBModel.FK_Listing_StatusType" ManuallyRouted="false" />
-        <AssociationConnector Association="AutoDBModel.webpages_UsersInRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AutoDBModel.FuelType" Width="1.5" PointX="2.8852665828937973" PointY="16.576634966105519" />
+        <EntityTypeShape EntityType="AutoDBModel.Language" Width="1.5" PointX="3.7131419012849878" PointY="14.521728656497658" />
+        <EntityTypeShape EntityType="AutoDBModel.Listing" Width="1.5" PointX="1.4623732182487721" PointY="7.2208932820804854" />
+        <EntityTypeShape EntityType="AutoDBModel.StatusType" Width="1.5" PointX="4.3910576293203318" PointY="1.2846633350870866" />
+        <EntityTypeShape EntityType="AutoDBModel.sysdiagram" Width="1.5" PointX="5.0233528656062454" PointY="5.188620063098436" />
+        <EntityTypeShape EntityType="AutoDBModel.UserProfile" Width="1.5" PointX="6.8059580748928514" PointY="17.335637801017445" />
+        <EntityTypeShape EntityType="AutoDBModel.VehicleType" Width="1.5" PointX="8.523907697072211" PointY="9.0047270846575156" />
+        <EntityTypeShape EntityType="AutoDBModel.webpages_Membership" Width="1.5" PointX="11.607308540310388" PointY="12.998034453484246" />
+        <EntityTypeShape EntityType="AutoDBModel.webpages_OAuthMembership" Width="1.5" PointX="5.4732147946363376" PointY="28.984932585146712" />
+        <EntityTypeShape EntityType="AutoDBModel.webpages_Roles" Width="1.5" PointX="6.5979128678319574" PointY="29.069714798158834" />
+        <AssociationConnector Association="AutoDBModel.FK_Listing_StatusType" />
+        <AssociationConnector Association="AutoDBModel.webpages_UsersInRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

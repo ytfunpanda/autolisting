@@ -25,9 +25,11 @@ namespace Auto.Web.Data
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<FuelType> FuelTypes { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Listing> Listings { get; set; }
         public DbSet<StatusType> StatusTypes { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<VehicleType> VehicleTypes { get; set; }
         public DbSet<webpages_Membership> webpages_Membership { get; set; }
