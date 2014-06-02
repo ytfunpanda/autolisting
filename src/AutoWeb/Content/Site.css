@@ -112,16 +112,15 @@ h1  a{
 /* content */
 
 #content{
-	/*width:100%;*/
+	width: 99%;
 	float: left;
 	padding: 5px;
-	/*height: 500px; /*TO BE REMOVED LATER*/
 	margin-top: 5px;
 }
 
 #leftNav{
 	float: left;	
-	width: 300px;
+	width: 20%;
 	height: 100%;
 	border: 1px solid #fff;
 	background-color: #fff;
@@ -129,11 +128,11 @@ h1  a{
 }
 
 #rightContent{
-	float: left;
-	width: 975px;
+	float: right;
+	width: 75%;
 	height: 100%;
 	background-color: #fff;
-	margin: 0 0 0 20px;
+	margin: 0 0 0 0px;
 	padding: 10px 0 10px 10px;
 }
 
